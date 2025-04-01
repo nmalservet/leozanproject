@@ -1,0 +1,112 @@
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Topmenu-header {
+height: 10vh;
+
+}
+
+.footer--pin {
+  position: fixed;
+  padding-left: 0%;
+  bottom: 0;
+  height: 10vh;
+}
+
+
+.content-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-height: 80vh;
+}
+
+.sidebar{
+  max-height: 80vh;
+}
+
+.value-box{
+  width:250px;
+  height:50px;
+  margin:2px;
+  padding:2px;
+  text-align:center;
+}
+.button {
+  margin: 0px 10px;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: white;
+  background-color: rgb(118, 138, 222);
+  border: 1px solid black;
+}
+
+.datagrid-table{
+  padding :.1rem .0rem;
+}
+
+/* Custom styles */
+.datagrid-header-button {
+  background-color: transparent;
+  border: 0px solid #dee2e6;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #495057;
+  padding: 0.5rem;
+  text-align: left;
+  transition: background-color 0.15s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.datagrid-header-button:hover {
+  background-color: #e9ecef;
+}
+
+.datagrid-header {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #495057;
+  padding: 0.1rem;
+  border: 1px solid #dee2e6;
+}
+
+.datagrid-cell {
+  padding: 0.1rem;
+  border: 1px solid #dee2e6;
+}
+
+.datagrid-row:not(:last-child) {
+  border-bottom: 1px solid #dee2e6;
+}
+

@@ -53,8 +53,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	@Value("${authentication.local}")
 	boolean isAuthenticationLocalRequired;
 	
-	@Value("security.key")
-	public String KEY ;
 
 	public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService,
 			AuthenticationFailureHandler failureHandler) {
@@ -125,7 +123,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 		Date exp = new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME);
-		Key key = Keys.hmacShaKeyFor(KEY.getBytes());
+		Key key = Keys.hmacShaKeyFor(SecurityConstants.KEY.getBytes());
 		Claims claims = Jwts.claims().setSubject(((User) auth.getPrincipal()).getUsername());
 		String token = Jwts.builder().setClaims(claims).signWith(key, SignatureAlgorithm.HS512).setExpiration(exp)
 				.compact();

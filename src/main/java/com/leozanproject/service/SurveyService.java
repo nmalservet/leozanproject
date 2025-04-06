@@ -1,10 +1,13 @@
 package com.leozanproject.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.leozanproject.constants.SurveyStatus;
 import com.leozanproject.exceptions.MissingParameterException;
+import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Survey;
 import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.SurveyDTO;
@@ -20,6 +23,13 @@ public class SurveyService {
 
 	@Autowired
 	private SurveyRepository repository;
+	
+	@Autowired
+	private SurveyMapper mapper;
+	
+	public List<SurveyDTO> list(){
+		return mapper.map(repository.findAll());
+	}
 	
 	public boolean createSurvey(SurveyDTO dto) throws MissingParameterException {
 		

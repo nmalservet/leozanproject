@@ -29,10 +29,6 @@ import io.jsonwebtoken.security.Keys;
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 	Logger logger = LoggerFactory.getLogger(AuthorizationFilter.class);
-	
-	
-	@Value("security.key")
-	public String KEY ;
 
 	public AuthorizationFilter(AuthenticationManager authManager) {
 		super(authManager);
@@ -69,7 +65,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		if (token != null) {
 			Claims claims = null;
 			try {
-				claims = Jwts.parser().setSigningKey(Keys.hmacShaKeyFor(KEY.getBytes()))
+				claims = Jwts.parser().setSigningKey(Keys.hmacShaKeyFor(SecurityConstants.KEY.getBytes()))
 						.parseClaimsJws(token).getBody();
 			} catch (Exception e) {
 				logger.error("issue during jwt parsing" + e.getMessage());

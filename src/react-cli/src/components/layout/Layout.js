@@ -5,7 +5,6 @@ import { NotificationContext } from '../../context/notification-context';
 import NotificationPanel from "../common/NotificationPanel";
 import LeftMenuPanel from "./LeftMenuPanel";
 import {CurrentUserContext} from '../../context/user-context.js';
-import {ProjectsContext} from '../../context/projects-context.js';
 
 function Layout() {
 	const {currentUser} = useContext(CurrentUserContext);
@@ -15,8 +14,6 @@ function Layout() {
 		() => ({ notifications, setNotifications }),
 		[notifications]
 	);
-	const [projects, setProjects] = useState(); 
-	//const projects = useContext(ProjectsContext);
 
 	/**
 	 * We provide the message context to the page to pass notification mesages.
@@ -24,7 +21,6 @@ function Layout() {
 	return (
 		<div className="max-w-full min-h-screen bg-gradient-to-br from-secondary-100 to-primary-100 animate-gradient">
 			<NotificationContext.Provider value={value}>
-			<ProjectsContext.Provider value={{projects,setProjects}}>
 				<Navbar />
 				<div className="flex flex-1" >
 					<div>
@@ -35,7 +31,6 @@ function Layout() {
 						<div className="bg-white rounded-lg border border-gray-300"><Outlet /></div>
 					</div>
 				</div>
-				</ProjectsContext.Provider>
 			</NotificationContext.Provider>
 		</div>
 	)

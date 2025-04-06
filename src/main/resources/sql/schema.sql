@@ -131,4 +131,77 @@ CREATE TABLE SELECT_LIST_OPTION(
  adresse_pays varchar(200) NOT NULL
  );
  
- 
+-- 
+drop table survey;
+-- survey
+CREATE TABLE survey(
+id SERIAL PRIMARY KEY,
+name varchar(50) NOT null,
+uuid varchar(100) not null unique,
+target_object varchar(20),
+status int
+);
+
+drop table survey_object;
+--survey object is a part of a survey to display some data
+-- type can be : 0 = text, 1=question
+-- style can be a string corresponding to an html style : h1, h2, h3, label etc.
+CREATE TABLE survey_object(
+id SERIAL PRIMARY KEY,
+name varchar(50) NOT null,
+type int not null,
+style varchar(10),
+translation_id int not null,
+survey_id int not NULL,
+status int,
+position int
+);
+
+drop table question;
+-- question is a part of survey
+drop table question;
+-- question is a part of survey
+CREATE TABLE question(
+id SERIAL PRIMARY KEY,
+TYPE varchar(10) NOT null,
+name varchar(50) NOT null,
+survey_object_id int NOT NULL,
+translation_id int NOT null,
+position int
+);
+
+DROP TABLE value;
+CREATE TABLE value(
+id SERIAL PRIMARY KEY,
+name varchar(50) NOT null,
+question_id int NOT NULL,
+position int
+);
+
+CREATE TABLE survey_answer(
+id SERIAL PRIMARY KEY,
+uuid varchar(100) NOT NULL UNIQUE,
+name varchar(50) NOT null,
+survey_id int NOT NULL,
+appointment_id int,
+folder_id int,
+account_id int NOT null
+);
+drop table answer;
+
+CREATE TABLE answer(
+id SERIAL PRIMARY KEY,
+question_id int NOT null,
+value text
+);
+
+drop table translation;
+-- table to manage the translations
+CREATE TABLE translation(
+id SERIAL PRIMARY KEY,
+lb text NOT NULL,
+fr text NOT NULL,
+de text NOT NULL,
+en text NOT NULL,
+pt text NOT NULL
+)

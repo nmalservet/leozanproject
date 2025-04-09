@@ -11,6 +11,13 @@ public class SurveyDTO {
 	private Integer id;
 
 	private String name;
+	
+	private String description;
+	
+	
+	private int responsible;
+	
+	
 	private String uuid;
 
 	private String targetObject;
@@ -55,6 +62,22 @@ public class SurveyDTO {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getResponsible() {
+		return responsible;
+	}
+
+	public void setResponsible(int responsible) {
+		this.responsible = responsible;
 	}
 	
 	

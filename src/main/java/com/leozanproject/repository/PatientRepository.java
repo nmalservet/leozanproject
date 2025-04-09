@@ -14,6 +14,5 @@ import com.leozanproject.model.Patient;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
-	public Answer findByValue(String value);
 
 }

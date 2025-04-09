@@ -28,11 +28,12 @@ export default class Api {
 	 * Surveys management
 	 */
 	static addSurvey(survey) {return axios.post('/api/v1/surveys', survey);}
+	static updateSurvey(survey) {return axios.put('/api/v1/surveys/'+survey.id, survey);}
 	static deleteSurvey(id) {return axios.delete('/api/v1/surveys/' + id);}
 	static getSurvey(id) {return axios.get('/api/v1/surveys/' + id);}
 	static getSurveys(filter) {return axios.post('/api/v1/surveys/filter', filter);}
 	static getSurveyStatuses() {return axios.get('/api/v1/options/surveyStatuses');}
-	static updateSurvey(survey) {return axios.put('/api/v1/surveys/'+survey.id, survey);}
+	
 	
 	/**
 	 * User management

@@ -24,6 +24,9 @@ public class Survey {
 
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "description")
+	String description;
 
 	@Column(name = "uuid")
 	private String uuid;
@@ -33,6 +36,9 @@ public class Survey {
 
 	@Column(name = "status")
 	private Integer status;
+	
+	@Column(name = "responsible")
+	private int responsible;
 
 	public Integer getId() {
 		return id;
@@ -73,5 +79,23 @@ public class Survey {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getResponsible() {
+		return responsible;
+	}
+
+	public void setResponsible(int responsible) {
+		this.responsible = responsible;
+	}
+	
+	
 
 }

@@ -137,6 +137,8 @@ drop table survey;
 CREATE TABLE survey(
 id SERIAL PRIMARY KEY,
 name varchar(50) NOT null,
+responsible int,
+description text,
 uuid varchar(100) not null unique,
 target_object varchar(20),
 status int

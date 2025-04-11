@@ -1,10 +1,21 @@
 package com.leozanproject.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import com.leozanproject.constants.SurveyStatus;
@@ -13,6 +24,7 @@ import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Survey;
 import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.SurveyDTO;
+import com.leozanproject.resource.domain.SurveyFilterDTO;
 import com.leozanproject.tools.AttributesControlsTool;
 
 /**
@@ -71,5 +83,40 @@ public class SurveyService {
 
 	public boolean updateSurvey() {
 		return true;
+	}
+
+	public List<SurveyDTO> filter(SurveyFilterDTO filter) {
+		List<SurveyDTO> result = new ArrayList<>();
+		Pageable pageable = PageRequest.of(0, 1000, Sort.by(Sort.Direction.DESC, "id"));
+		List<Survey> tasks = retrieveSurveys(filter, pageable);
+		if (tasks != null) {
+			for (Survey task : tasks) {
+				result.add(mapper.map(task));
+			}
+		}
+		return result;
+	}
+
+	public List<Survey> retrieveSurveys(SurveyFilterDTO filter, Pageable pageable) {
+		Page<Survey> demandes = repository.findAll(new Specification<Survey>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Predicate toPredicate(Root<Survey> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+				List<Predicate> predicates = new ArrayList<>();
+				if (filter.getId() != null && filter.getId() > 0)
+					predicates.add(cb.equal(root.get("id"), new Integer(filter.getId())));
+				if (filter.getResponsibleId() != null)
+					predicates.add(cb.equal(root.get("responsible"), filter.getResponsibleId()));
+				if (filter.getTopic() != null)
+					predicates.add(cb.like(cb.upper(root.get("name")), "%" + filter.getTopic().toUpperCase() + "%"));
+				return cb.and(predicates.toArray(new Predicate[0]));
+			}
+		}, pageable);
+		return demandes.getContent();
 	}
 }

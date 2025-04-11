@@ -50,20 +50,20 @@ public class UserService {
 	@Autowired
 	EncryptionTool encryptionTool;
 
-	@PostConstruct
-	public void init() {
-		if (isAuthenticationLocal) {
-			User user = uRepository.findByUsername("admin");
-			if (user == null) {
-				user = new User();
-				user.setName("admin");
-				user.setFirstName("john");
-				user.setUsername("admin");
-				user.setPassword(encryptionTool.crypt("admin"));
-				uRepository.save(user);
-			}
-		}
-	}
+//	@PostConstruct
+//	public void init() {
+//		if (isAuthenticationLocal) {
+//			Optional<User> opt = uRepository.findByUsername("admin");
+//			if (!opt.isPresent()) {
+//				User user = new User();
+//				user.setName("admin");
+//				user.setFirstName("john");
+//				user.setUsername("admin");
+//				user.setPassword(encryptionTool.crypt("admin"));
+//				uRepository.save(user);
+//			}
+//		}
+//	}
 
 	/**
 	 * authenticate. Not yet plugged during dev mode.
@@ -140,8 +140,9 @@ public class UserService {
 
 		session.setToken(token);
 		if (isAuthenticationLocal) {
-			User user = uRepository.findByUsername(userName);
-			if (user != null) {
+			Optional<User> opt = uRepository.findByUsername(userName);
+			if (opt.isPresent()) {
+				User user = opt.get();
 				session.setInternalUserId(user.getId());
 				session.setLogin(user.getUsername());
 			} else {
@@ -256,8 +257,8 @@ public class UserService {
 			return user.getId();
 		} else {
 			// TODO check the username is unique
-			User user = uRepository.findByUsername(username);
-			if (user != null) {
+			Optional<User> opt2 = uRepository.findByUsername(username);
+			if (!opt2.isPresent()) {
 				throw new InvalidParameterException("username");
 			}
 			if (!skipPassword)
@@ -284,9 +285,9 @@ public class UserService {
 	 * @return
 	 */
 	public UserAccountDTO getUserAccount(String username) {
-		User entity = uRepository.findByUsername(username);
-		if (entity != null)
-			return mapper.toDTO(entity);
+		Optional<User> opt = uRepository.findByUsername(username);
+		if (opt.isPresent())
+			return mapper.toDTO(opt.get());
 		else
 			logger.error("no user account retrieved for username:" + username);
 		return null;

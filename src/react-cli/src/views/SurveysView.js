@@ -16,10 +16,8 @@ import LoadingPanel  from "../components/common/LoadingPanel.js";
 export default function SurveysView({ projectId }) {
 
 	const columns = [{ "name": "id", "displayed": "id" }, { "name": "project", "displayed": "project" },
-	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }, { "name": "priorityLabel", "displayed": "priority" }
-		, { "name": "responsible", "displayed": "responsible" }, { "name": "startDate", "displayed": "start" }
-		, { "name": "endDate", "displayed": "end" }, { "name": "estimatedTime", "displayed": "estimated(h)" }
-		, { "name": "progress", "displayed": "progress" }];
+	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
+		, { "name": "responsible", "displayed": "responsible" }];
 
 	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 
@@ -113,6 +111,7 @@ export default function SurveysView({ projectId }) {
 			nfilter.projectId = projId;
 			Api.getSurveys(nfilter)
 				.then((response) => {
+					console.log("response surveys");
 					if (response !== undefined) {
 						//we must create a new refernce for the array to be able to refresh the component
 						setSurveys([...response.data]);

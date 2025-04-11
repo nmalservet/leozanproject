@@ -77,9 +77,11 @@ function Survey({ initialSurvey, readOnly }) {
 						{survey.author && <label className="">created by <i>{survey.author}</i></label>}
 					</div>
 					<InputText name={"Name"} text={name} onTextChange={setName}/>
-					<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 					<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
+					<div className="grid grid-col-2 gap-1 m-1">
+						<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
+					</div>
 				</div>
 			</form>
 			<div>

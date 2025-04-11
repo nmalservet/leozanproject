@@ -8,9 +8,9 @@ import SecondaryActionButton from '../common/SecondaryActionButton.js';
  */
 function SurveyFilter({ onApplyFilter }) {
 	//we set the messages to an empty array if clicked.
-	const [id, setId] = useState(null);
-	const [topic, setTopic] = useState(null);
-	const [description, setDescription] = useState(null);
+	const [id, setId] = useState('');
+	const [topic, setTopic] = useState('');
+	const [description, setDescription] = useState('');
 	const [statuses, setStatuses] = useState([]);
 
 	/* on search click set the filter to the parent.*/

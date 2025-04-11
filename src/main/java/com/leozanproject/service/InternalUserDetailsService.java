@@ -2,6 +2,8 @@ package com.leozanproject.service;
 
 import static java.util.Collections.emptyList;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,11 +29,11 @@ public class InternalUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.leozanproject.model.User applicationUser = userRepository.findByUsername(username);
-		if (applicationUser == null) {
+		Optional<com.leozanproject.model.User> opt = userRepository.findByUsername(username);
+		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException(username);
 		}
-		return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+		return new User(opt.get().getUsername(), opt.get().getPassword(), emptyList());
 	}
 
 }

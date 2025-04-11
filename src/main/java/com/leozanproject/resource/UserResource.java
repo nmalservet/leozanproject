@@ -2,6 +2,7 @@ package com.leozanproject.resource;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -34,6 +35,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * Rest controller to expose API to manage internal users<br>
  * TODO We will deal later with an OAUTH2 authentication.
+ * 
  * @author nicolas malservet
  *
  */
@@ -66,12 +68,16 @@ public class UserResource {
 
 	@PostConstruct
 	public void initAdminUser() {
-		if (isAuthenticationLocalRequired == Boolean.TRUE && !userRepository.findById(1).isPresent()) {
-			User user = new User();
-			user.setUsername("ad00");
-			user.setPassword("administrator");
-			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-			userRepository.save(user);
+		
+		if (isAuthenticationLocalRequired == Boolean.TRUE) {
+			Optional<User> opt = userRepository.findByUsername("ad00");
+			if (!opt.isPresent()) {
+				User user = new User();
+				user.setUsername("ad00");
+				user.setPassword("administrator");
+				user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+				userRepository.save(user);
+			}
 		}
 	}
 

@@ -41,7 +41,7 @@ public class Survey {
 	private int responsible;
 	
 	@Column(name = "project")
-	private int project;
+	private Integer project;
 
 	public Integer getId() {
 		return id;
@@ -99,11 +99,11 @@ public class Survey {
 		this.responsible = responsible;
 	}
 
-	public int getProject() {
+	public Integer getProject() {
 		return project;
 	}
 
-	public void setProject(int project) {
+	public void setProject(Integer project) {
 		this.project = project;
 	}
 	

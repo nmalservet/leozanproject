@@ -15,7 +15,7 @@ import LoadingPanel  from "../components/common/LoadingPanel.js";
  */
 export default function SurveysView({ projectId }) {
 
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "project", "displayed": "project" },
+	const columns = [{ "name": "id", "displayed": "id" }, { "name": "projectName", "displayed": "project" },
 	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
 		, { "name": "responsible", "displayed": "responsible" }];
 

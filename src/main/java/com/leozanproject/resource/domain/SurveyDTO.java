@@ -23,6 +23,10 @@ public class SurveyDTO {
 	private String targetObject;
 
 	private Integer status;
+	
+	private int project;
+	
+	private String projectName;
 
 	public Integer getId() {
 		return id;
@@ -78,6 +82,22 @@ public class SurveyDTO {
 
 	public void setResponsible(int responsible) {
 		this.responsible = responsible;
+	}
+
+	public int getProject() {
+		return project;
+	}
+
+	public void setProject(int project) {
+		this.project = project;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 	
 	

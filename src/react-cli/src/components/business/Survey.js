@@ -3,6 +3,8 @@ import Api from '../../Api.js';
 import AlertsPanel from '../common/AlertsPanel';
 import InputText from '../common/InputText.js';
 import StatusSelectList from './StatusSelectList.js';
+
+import ProjectsSelectList from './ProjectsSelectList.js';
 import UsersSelectList from './UsersSelectList.js';
 import QuillTextArea from '../common/QuillTextArea.js';
 /**
@@ -13,6 +15,8 @@ function Survey({ initialSurvey, readOnly }) {
 	const [survey,setSurvey] = useState(initialSurvey);
 	const [name, setName] = useState(initialSurvey.name);
 	const [status, setStatus] = useState(initialSurvey.status);
+	
+	const [project, setProject] = useState(initialSurvey.project);
 	const [alerts, setAlerts] = useState([]);
 	const [hiddenAlert, setHiddenAlert] = useState(false);
 	const [description, setDescription] = useState(initialSurvey.description);
@@ -38,8 +42,14 @@ function Survey({ initialSurvey, readOnly }) {
 			survey.description = description;
 		if (responsible)
 			survey.responsible = responsible;
+		if (project)
+			survey.project = project;
 		if (!survey.name|| survey.name.length === 0) {
 					setAlerts([{ message: "The name is undefined", type: "error" }]);
+					errorsForm++;
+				}
+		if (!survey.project|| survey.project.length === 0) {
+					setAlerts([{ message: "The project is undefined", type: "error" }]);
 					errorsForm++;
 				}
 		if (errorsForm === 0) {
@@ -81,6 +91,7 @@ function Survey({ initialSurvey, readOnly }) {
 					<div className="grid grid-col-2 gap-1 m-1">
 						<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
+					<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
 					</div>
 				</div>
 			</form>

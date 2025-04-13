@@ -1,6 +1,7 @@
 package com.leozanproject.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,7 +22,9 @@ import org.springframework.stereotype.Component;
 import com.leozanproject.constants.SurveyStatus;
 import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.mapper.SurveyMapper;
+import com.leozanproject.model.Project;
 import com.leozanproject.model.Survey;
+import com.leozanproject.repository.ProjectRepository;
 import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.SurveyDTO;
 import com.leozanproject.resource.domain.SurveyFilterDTO;
@@ -40,6 +43,9 @@ public class SurveyService {
 	private SurveyRepository repository;
 
 	@Autowired
+	private ProjectRepository projectRepository;
+
+	@Autowired
 	private SurveyMapper mapper;
 
 	public List<SurveyDTO> list() {
@@ -51,6 +57,7 @@ public class SurveyService {
 		AttributesControlsTool.isEmpty("name", dto.getName());
 
 		Survey entity = new Survey();
+		
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());
 		UUID uuid = UUID.randomUUID();
@@ -75,6 +82,7 @@ public class SurveyService {
 			if (dto.getResponsible() != 0)
 				entity.setResponsible(dto.getResponsible());
 			entity.setStatus(dto.getStatus());
+			entity.setProject(dto.getProject());
 			repository.save(entity);
 		}
 
@@ -89,11 +97,22 @@ public class SurveyService {
 		List<SurveyDTO> result = new ArrayList<>();
 		Pageable pageable = PageRequest.of(0, 1000, Sort.by(Sort.Direction.DESC, "id"));
 		List<Survey> tasks = retrieveSurveys(filter, pageable);
+		List<Project> projects = projectRepository.findAll();
+		HashMap<Integer, Project> map = new HashMap<>();
+		projects.forEach(p -> {
+			map.put(p.getId(), p);
+		});
 		if (tasks != null) {
 			for (Survey task : tasks) {
 				result.add(mapper.map(task));
 			}
 		}
+		// add project name if necessary (not done via join to gain maintenance and
+		// reusability to extend it)
+		result.forEach(survey -> {
+			if (survey.getProject() > 0)
+				survey.setProjectName(map.get(survey.getProject()).getName());
+		});
 		return result;
 	}
 

@@ -6,7 +6,6 @@ import Checkbox from '../common/Checkbox.js';
 import StatusSelectList from './StatusSelectList.js';
 import UsersSelectList from './UsersSelectList.js';
 import QuillTextArea from '../common/QuillTextArea.js';
-import VersionsTable from './VersionsTable.js';
 /**
  * project component, to create or edit a projects
  */
@@ -85,12 +84,6 @@ function Project({ initialProject, readOnly }) {
 					<Checkbox name={"Disabled"} value={disabled} onValueChange={setDisabled}/>
 				</div>
 			</form>
-			<div>
-			{project.id&&<div className="ml-7">
-				<h4>Versions</h4>
-					<VersionsTable projectId={project.id}/>
-				</div>}
-			</div>
 			<hr/>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
 				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}

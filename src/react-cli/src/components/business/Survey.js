@@ -7,6 +7,8 @@ import StatusSelectList from './StatusSelectList.js';
 import ProjectsSelectList from './ProjectsSelectList.js';
 import UsersSelectList from './UsersSelectList.js';
 import QuillTextArea from '../common/QuillTextArea.js';
+import SurveyObjectsPanel from './SurveyObjectsPanel.js';
+
 /**
  * survey component, to create or edit a surveys
  */
@@ -90,13 +92,13 @@ function Survey({ initialSurvey, readOnly }) {
 					<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
 					<div className="grid grid-col-2 gap-1 m-1">
 						<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
-					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
-					<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
+						<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
+						<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
 					</div>
 				</div>
 			</form>
 			<div>
-			
+				{survey.id&&<SurveyObjectsPanel surveyId={survey.id}/>}
 			</div>
 			<hr/>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">

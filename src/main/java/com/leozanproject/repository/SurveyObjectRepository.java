@@ -1,5 +1,7 @@
 package com.leozanproject.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +16,7 @@ import com.leozanproject.model.SurveyObject;
 public interface SurveyObjectRepository extends JpaRepository<SurveyObject, Integer> {
 
 	public SurveyObject findByName(String name);
+	
+	public List<SurveyObject> findBySurveyId(int surveyId);
 
 }

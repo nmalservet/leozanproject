@@ -34,6 +34,15 @@ export default class Api {
 	static getSurveys(filter) {return axios.post('/api/v1/surveys/filter', filter);}
 	static getSurveyStatuses() {return axios.get('/api/v1/options/surveyStatuses');}
 	
+	/**
+	 * SurveyObjects management
+	 */
+	static addSurveyObject(so) {return axios.post('/api/v1/surveyobjects', so);}
+	static updateSurveyObject(so) {return axios.put('/api/v1/surveyobjects/'+so.id, so);}
+	static deleteSurveyObject(id) {return axios.delete('/api/v1/surveyobjects/' + id);}
+	static getSurveyObject(id) {return axios.get('/api/v1/surveyobjects/' + id);}
+	static getSurveyObjects(filter) {return axios.post('/api/v1/surveyobjects/filter', filter);}
+	static getSurveyObjectStatuses() {return axios.get('/api/v1/options/surveyObjectStatuses');}
 	
 	/**
 	 * User management

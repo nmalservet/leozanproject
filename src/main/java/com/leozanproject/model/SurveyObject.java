@@ -29,8 +29,11 @@ public class SurveyObject {
 	@Column(name = "name")
 	private String name;
 
+	/**
+	 * 0= question, 1=text
+	 */
 	@Column(name = "type")
-	private String type;
+	private Integer type;
 
 	@Column(name = "style")
 	private String style;
@@ -63,11 +66,11 @@ public class SurveyObject {
 		this.name = name;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 

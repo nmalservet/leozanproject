@@ -2,21 +2,22 @@ package com.leozanproject.resource.domain;
 
 /**
  * basic translation DTO.
+ * 
  * @author nicolas malservet
  *
  */
 public class TranslationDTO {
-	
+
 	Integer id;
-	
+
 	String fr;
-	
+
 	String de;
-	
+
 	String lb;
-	
+
 	String en;
-	
+
 	String pt;
 
 	public Integer getId() {
@@ -66,7 +67,17 @@ public class TranslationDTO {
 	public void setPt(String pt) {
 		this.pt = pt;
 	}
-	
-	
+
+	public TranslationDTO() {
+	}
+
+	public TranslationDTO(String fr, String de, String lb, String en, String pt) {
+		super();
+		this.fr = fr;
+		this.de = de;
+		this.lb = lb;
+		this.en = en;
+		this.pt = pt;
+	}
 
 }

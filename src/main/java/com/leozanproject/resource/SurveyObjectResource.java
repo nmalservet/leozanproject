@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
-import com.leozanproject.resource.domain.ProjectDTO;
-import com.leozanproject.resource.domain.SurveyDTO;
 import com.leozanproject.resource.domain.SurveyObjectDTO;
 import com.leozanproject.service.SurveyObjectService;
 
@@ -44,7 +42,7 @@ public class SurveyObjectResource {
 	
 	@PostMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public boolean createSurvey(@RequestBody SurveyObjectDTO dto) throws MissingParameterException {
+	public int createSurvey(@RequestBody SurveyObjectDTO dto) throws MissingParameterException {
 		return service.create(dto);
 	}
 	

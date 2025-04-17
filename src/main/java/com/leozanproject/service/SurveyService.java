@@ -88,6 +88,16 @@ public class SurveyService {
 
 		return true;
 	}
+	
+	public SurveyDTO getSurvey(int id) throws MissingParameterException {
+
+		Optional<Survey> opt = repository.findById(id);
+		if (opt.isPresent()) {
+			return mapper.map(opt.get());
+		}
+
+		return null;
+	}
 
 	public boolean updateSurvey() {
 		return true;

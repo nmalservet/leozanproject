@@ -11,6 +11,7 @@ import com.leozanproject.mapper.SurveyObjectMapper;
 import com.leozanproject.model.SurveyObject;
 import com.leozanproject.repository.SurveyObjectRepository;
 import com.leozanproject.resource.domain.SurveyObjectDTO;
+import com.leozanproject.resource.domain.TranslationDTO;
 import com.leozanproject.tools.AttributesControlsTool;
 
 @Component
@@ -18,6 +19,9 @@ public class SurveyObjectService {
 
 	@Autowired
 	SurveyObjectRepository repository;
+	
+	@Autowired
+	TranslationService service;
 
 	@Autowired
 	SurveyObjectMapper mapper;
@@ -29,10 +33,15 @@ public class SurveyObjectService {
 	 * @return
 	 * @throws MissingParameterException
 	 */
-	public boolean create(SurveyObjectDTO dto) throws MissingParameterException {
+	public int create(SurveyObjectDTO dto) throws MissingParameterException {
 
 		AttributesControlsTool.isEmpty("name", dto.getName());
+		//create the translation bw default
+		TranslationDTO translation = new TranslationDTO(dto.getName(),dto.getName(),dto.getName(),dto.getName(),dto.getName());
+		int translationId=service.create(translation);
+		
 		SurveyObject entity = new SurveyObject();
+		entity.setTranslationId(translationId);
 		entity.setName(dto.getName());
 		entity.setSurveyId(dto.getSurveyId());
 		entity.setPosition(dto.getPosition());
@@ -41,7 +50,7 @@ public class SurveyObjectService {
 		entity.setType(dto.getType()!=null?dto.getType():0);
 		
 		repository.save(entity);
-		return true;
+		return entity.getId();
 	}
 
 	/**

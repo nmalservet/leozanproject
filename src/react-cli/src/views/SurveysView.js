@@ -6,6 +6,7 @@ import { Modal } from '../components/common/Modal.js';
 import { CollapsiblePanel } from "../components/common/CollapsiblePanel.jsx";
 import SurveyModal from '../components/business/SurveyModal.js';
 import LoadingPanel  from "../components/common/LoadingPanel.js";
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -19,7 +20,7 @@ export default function SurveysView({ projectId }) {
 	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
 		, { "name": "responsible", "displayed": "responsible" }];
 
-	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
+	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "file-pen-line", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
 
 	const [surveys, setSurveys] = useState([]);
 
@@ -28,6 +29,7 @@ export default function SurveysView({ projectId }) {
 	const [filter, setFilter] = useState({});
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading,setIsLoading]=useState(false);
+	const navigate = useNavigate();
 
 	const handleYes = () => {
 		Api.deleteSurvey(surveyId).then((response) => {
@@ -60,6 +62,13 @@ export default function SurveysView({ projectId }) {
 				setEditedSurvey(survey);
 		})
 	}
+	/**
+	 * on edit, redirect to the view editorMode
+	 */
+	function editorModeSurvey(id) {
+		//
+		navigate('/editSurvey/'+id);
+	}
 
 	/**
 	 * on edit, redirect to the viez editsurvey
@@ -88,6 +97,8 @@ export default function SurveysView({ projectId }) {
 	function onCallButton(action, id) {
 		if (action === "edit")
 			editSurvey(id);
+			if (action === "editorMode")
+			editorModeSurvey(id);
 		if (action === "delete")
 			deleteSurvey(id);
 		if (action === "view")

@@ -43,6 +43,12 @@ public class SurveyResource {
 		return service.createSurvey(dto);
 	}
 	
+	@GetMapping(path = "/{id}", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public boolean getSurvey(@PathVariable int id) throws MissingParameterException {
+		return service.getSurvey(id);
+	}
+	
 	@PutMapping(path = "/{id}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public boolean updateSurvey(@PathVariable int id,@RequestBody SurveyDTO dto) throws MissingParameterException {

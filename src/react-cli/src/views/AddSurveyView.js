@@ -1,5 +1,5 @@
 import React from "react";
-import Survey from '../components/business/Survey';
+import Survey from '../components/business/survey/Survey';
 
 /**
  * 

@@ -19,8 +19,8 @@ export default function SurveysView({ projectId }) {
 	const columns = [{ "name": "id", "displayed": "id" }, { "name": "projectName", "displayed": "project" },
 	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
 		, { "name": "responsible", "displayed": "responsible" }];
-
-	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "file-pen-line", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
+//
+	const buttons = [{ 'image': "eye", 'action': 'view' },{ 'image': "pencil", 'action': 'edit' },  { 'image': "brick-wall", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
 
 	const [surveys, setSurveys] = useState([]);
 

@@ -28,7 +28,7 @@ export default function QuillTextArea({name,text,onTextChange,readOnly}) {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="rounded-lg overflow-hidden">
-        <div className="p-1"><label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{name}</label></div>
+        <div className="p-1"><label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">{name}</label></div>
         <div className="p-1">
           <ReactQuill
           	readOnly={readOnly}

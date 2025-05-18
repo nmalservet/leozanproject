@@ -1,5 +1,5 @@
 import React from 'react';
-import Survey from './Survey';
+import Survey from './survey/Survey';
 /**
  * Display the task into a modal box
  */

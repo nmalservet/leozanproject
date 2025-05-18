@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SelectList from '../common/SelectList';
+import SelectList from '../../common/SelectList';
 
 /**
  * select list for the types. Reusable component.

@@ -1,15 +1,15 @@
 /**
  * survey object view component, to display the survey object in compact mode without edition
  */
-function SurveyObjectView({ surveyObject }) {
+function SurveyComponentPreview({ surveyComponent }) {
 
 	return (
 		<div className="">
-		<h1>Survey Object #{surveyObject.id}</h1>
+		<h1>Survey Component #{surveyComponent.id}</h1>
 			<form >
 				<div className="grid grid-col-1 gap-1 m-2">
-				{surveyObject.name}
-				{surveyObject.style}
+				{surveyComponent.name}
+				{surveyComponent.style}
 					
 				</div>
 			</form>
@@ -17,4 +17,4 @@ function SurveyObjectView({ surveyObject }) {
 		</div>);
 }
 
-export default SurveyObjectView;
+export default SurveyComponentPreview;

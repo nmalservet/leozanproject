@@ -45,7 +45,7 @@ public class SurveyResource {
 	
 	@GetMapping(path = "/{id}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public boolean getSurvey(@PathVariable int id) throws MissingParameterException {
+	public SurveyDTO getSurvey(@PathVariable int id) throws MissingParameterException {
 		return service.getSurvey(id);
 	}
 	

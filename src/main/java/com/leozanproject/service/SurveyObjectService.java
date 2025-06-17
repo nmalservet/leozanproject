@@ -70,6 +70,7 @@ public class SurveyObjectService {
 		if (opt.isPresent()) {
 			SurveyObject entity = opt.get();
 			entity.setName(dto.getName());
+			entity.setType(dto.getType());
 			entity.setStyle(dto.getStyle());
 			entity.setStatus(dto.getStatus());
 			entity.setPosition(dto.getPosition());

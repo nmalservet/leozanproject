@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Api from '../Api.js';
 
-import SurveyComponentsPanel from '../components/business/survey/SurveyComponentsPanel.js';
+
+import SurveyEditor from '../components/business/survey/SurveyEditor';
 
 /**
  * edit survey mode. to edit component
  */
 export default function EditSurveyView() {
 	const { surveyId } = useParams();
-	const [survey, setSurvey] = useState(null)
+	const [survey, setSurvey] = useState(null);
+	
+	/*
+	
+	*/
 
 	function loadData(id) {
 		Api.getSurvey(id)
@@ -28,19 +33,17 @@ export default function EditSurveyView() {
 			loadData(surveyId);
 	}, [surveyId]);
 
-	return (<> {survey != null &&
+	/*return (<> {survey != null &&
 		<div>
-			<div className="width-1/2 border-r-4 float-left">
-				<div>
-					<div>Survey : {survey.name}</div>
-					<div>Responsible : {survey.responsible}</div>
-					
-					<div>id : {survey.id}</div>
-				</div>
+			<div >
+				
 				{survey.id && <SurveyComponentsPanel surveyId={survey.id} />}
+				<SurveyObjectModal surveyObject={editedSurveyObject} isOpen={editedSurveyObject != null} onClose={() => closeSurveyObjectModal()} readOnly={editedSurveyObject != null && editedSurveyObject.readOnly === true} />
+			
 			</div>
-			<div className="width-1/2 float-right">
+			<div>
 				<div><h1>Preview</h1></div>
+				<SurveyPreview survey={survey}/>
 			</div>
 			<div>
 
@@ -49,5 +52,9 @@ export default function EditSurveyView() {
 
 	}</>
 
-	);
+	);*/
+	return (<div>Edit Survey
+	{survey!=null&&<SurveyEditor survey={survey}/>}
+	</div>)
+	
 }

@@ -29,8 +29,8 @@ import io.swagger.annotations.Api;
 @Api(value = "Application")
 @RestController
 @Validated
-@RequestMapping("/api/v1/surveyobjects")
-public class SurveyObjectResource {
+@RequestMapping("/api/v1/surveycomponents")
+public class SurveyComponentResource {
 
 	@Autowired
 	SurveyObjectService service;

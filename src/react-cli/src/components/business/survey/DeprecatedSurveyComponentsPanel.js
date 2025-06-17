@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import SurveyComponent from './SurveyComponent';
 import SurveyComponentPreview from './SurveyComponentPreview';
-import ActionButton from '../../common/ActionButton';
+
 /**
  * Display the panel for survey objects
  */
@@ -22,7 +22,7 @@ export default function SurveyComponentsPanel({ surveyId,  onClose }) {
 			{surveyComponents.map(surveyComponent=><SurveyComponentPreview surveyComponent={surveyComponent} />)}
 			
 			{showForm&&<SurveyComponent surveyId={surveyId} initialSurveyComponent={{}}/>}
-			<ActionButton name={"addComponent"} text={"Add a component"} onClick={()=>openFormSurveyObject()}/>
+			
 		</div>
 	);
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leozanproject.config.security.UserSessionsSingleton;
 import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
+import com.leozanproject.exceptions.UnicityConstraintParameterException;
 import com.leozanproject.model.User;
 import com.leozanproject.repository.UserRepository;
 import com.leozanproject.resource.domain.UserAccountDTO;
@@ -87,7 +88,7 @@ public class UserResource {
 	}
 
 	@PostMapping(path = "", produces = "application/json")
-	public int create(@RequestBody UserAccountDTO user) throws MissingParameterException, InvalidParameterException {
+	public int create(@RequestBody UserAccountDTO user) throws MissingParameterException, InvalidParameterException, UnicityConstraintParameterException {
 		return service.save(user);
 	}
 
@@ -109,10 +110,11 @@ public class UserResource {
 	 * @return
 	 * @throws MissingParameterException
 	 * @throws InvalidParameterException
+	 * @throws UnicityConstraintParameterException 
 	 */
 	@PutMapping(path = "/{id}", produces = "application/json")
 	public int update(@PathVariable int id, @RequestBody UserAccountDTO user)
-			throws MissingParameterException, InvalidParameterException {
+			throws MissingParameterException, InvalidParameterException, UnicityConstraintParameterException {
 		if (id != user.getId())
 			throw new InvalidParameterException(" User id is not compliant");
 		return service.save(user);

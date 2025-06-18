@@ -59,7 +59,6 @@ filter varchar(500)
  label varchar(30) not null
  );
  
- drop table select_list_option;
 CREATE TABLE SELECT_LIST_OPTION(
  id serial PRIMARY KEY,
  name varchar(50) not null,
@@ -131,8 +130,7 @@ CREATE TABLE SELECT_LIST_OPTION(
  adresse_pays varchar(200) NOT NULL
  );
  
--- 
-drop table survey;
+
 -- survey
 CREATE TABLE survey(
 id SERIAL PRIMARY KEY,
@@ -141,10 +139,10 @@ responsible int,
 description text,
 uuid varchar(100) not null unique,
 target_object varchar(20),
-status int
+status int,
+project int
 );
 
-drop table survey_object;
 --survey object is a part of a survey to display some data
 -- type can be : 0 = text, 1=question
 -- style can be a string corresponding to an html style : h1, h2, h3, label etc.
@@ -159,9 +157,6 @@ status int,
 position int
 );
 
-drop table question;
--- question is a part of survey
-drop table question;
 -- question is a part of survey
 CREATE TABLE question(
 id SERIAL PRIMARY KEY,
@@ -172,7 +167,6 @@ translation_id int NOT null,
 position int
 );
 
-DROP TABLE value;
 CREATE TABLE value(
 id SERIAL PRIMARY KEY,
 name varchar(50) NOT null,
@@ -189,7 +183,6 @@ appointment_id int,
 folder_id int,
 account_id int NOT null
 );
-drop table answer;
 
 CREATE TABLE answer(
 id SERIAL PRIMARY KEY,
@@ -197,7 +190,6 @@ question_id int NOT null,
 value text
 );
 
-drop table translation;
 -- table to manage the translations
 CREATE TABLE translation(
 id SERIAL PRIMARY KEY,

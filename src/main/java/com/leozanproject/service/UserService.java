@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
+import com.leozanproject.exceptions.UnicityConstraintParameterException;
 import com.leozanproject.mapper.UserAccountMapper;
 import com.leozanproject.model.User;
 import com.leozanproject.model.UserSession;
@@ -23,6 +22,7 @@ import com.leozanproject.repository.UserRepository;
 import com.leozanproject.repository.UserSessionRepository;
 import com.leozanproject.resource.domain.UserAccountDTO;
 import com.leozanproject.tools.EncryptionTool;
+import com.leozanproject.tools.ParametersChecker;
 
 /**
  * User service to manage authentication and users.
@@ -219,8 +219,9 @@ public class UserService {
 	 * @param dto
 	 * @return
 	 * @throws InvalidParameterException
+	 * @throws UnicityConstraintParameterException 
 	 */
-	public int save(UserAccountDTO dto) throws InvalidParameterException {
+	public int save(UserAccountDTO dto) throws InvalidParameterException, UnicityConstraintParameterException {
 		return save(dto, false);
 	}
 
@@ -231,12 +232,17 @@ public class UserService {
 	 * @boolean skipPassord to skip the password rule, from ldap creation
 	 * @throws InvalidParameterException
 	 * @return the id
+	 * @throws UnicityConstraintParameterException 
 	 */
-	public int save(UserAccountDTO dto, boolean skipPassword) throws InvalidParameterException {
+	public int save(UserAccountDTO dto, boolean skipPassword) throws InvalidParameterException, UnicityConstraintParameterException {
 		if (dto == null)
 			throw new InvalidParameterException("dto empty");
+		ParametersChecker.isNotEmpty("username",dto.getUsername());
+		ParametersChecker.isNotEmpty("name",dto.getName());
+		ParametersChecker.isNotEmpty("firstName",dto.getFirstName());
+		ParametersChecker.isNotEmpty("email",dto.getEmail());
+		ParametersChecker.isNotEmpty("password",dto.getPassword());
 
-		// TODO check username and more
 		String username = dto.getUsername();
 
 		// case update existing with id
@@ -258,8 +264,8 @@ public class UserService {
 		} else {
 			// TODO check the username is unique
 			Optional<User> opt2 = uRepository.findByUsername(username);
-			if (!opt2.isPresent()) {
-				throw new InvalidParameterException("username");
+			if (opt2.isPresent()) {
+				throw new UnicityConstraintParameterException("username");
 			}
 			if (!skipPassword)
 				if (dto.getPassword() == null || dto.getPassword().isEmpty())
@@ -327,7 +333,10 @@ public class UserService {
 		if (id <= 0)
 			throw new MissingParameterException("id");
 
-		// Not yet implemented
+		Optional<User> opt = uRepository.findById(id);
+		if (opt.isPresent()) {
+			uRepository.deleteById(id);
+		}
 		return false;
 	}
 }

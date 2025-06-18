@@ -32,6 +32,8 @@ function Survey({ initialSurvey, readOnly }) {
 
 	function save() {
 		setHiddenAlert(false);
+		console.log("project:"+project);
+		setAlerts([]);
 		//checks
 		var errorsForm = 0;
 		//
@@ -92,7 +94,7 @@ function Survey({ initialSurvey, readOnly }) {
 						<div className="grid grid-col-2 gap-1 m-1">
 							<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 							<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
-							<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
+							<ProjectsSelectList selected={project} onSelection={()=>setProject} readOnly={readOnly} />
 						</div>
 					</div>
 				</form>

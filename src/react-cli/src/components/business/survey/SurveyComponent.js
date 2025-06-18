@@ -11,7 +11,7 @@ import SurveyObjectTypeSelectList from './SurveyObjectTypeSelectList.js';
  * onSave : action to process on save
  * onCancel action to process on cancel
  */
-function SurveyComponent({ surveyComponent, surveyId, readOnly ,onSave,onCancel}) {
+function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel }) {
 
 	const [sc, setSc] = useState(surveyComponent);
 	const [name, setName] = useState(surveyComponent.name ? surveyComponent.name : '');
@@ -32,21 +32,17 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly ,onSave,onCancel}
 	}
 
 	function save() {
-		console.log("save comp" + name);
 		setHiddenAlert(false);
 		//checks
 		var errorsForm = 0;
 		//
-		if(surveyId!=null)
+		if (surveyId != null)
 			sc.surveyId = surveyId;
-		if (name)
-			sc.name = name;
-		if (style)
-			sc.style = style;
-		if (position)
-			sc.position = position;
-		if (status)
-			sc.status = status;
+		sc.type = (type) ? type : 0;
+		sc.name = (name) ? name : '';
+		sc.style = (style) ? style : '';
+		sc.position = (position) ? position : '';
+		sc.status = (status) ? status : 0;
 		if (!sc.name || sc.name.length === 0) {
 			setAlerts([{ message: "The name is undefined", type: "error" }]);
 			errorsForm++;
@@ -84,15 +80,20 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly ,onSave,onCancel}
 			{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 			<form >
 				<div className="grid grid-col-1 gap-1 m-2">
-					<InputText name={"Name"} text={name} onTextChange={setName} />
-					<InputText name={"Style"} text={style} onTextChange={setStyle} />
 
-					<InputText name={"Position"} text={position} onTextChange={setPosition} />
+					<SurveyObjectTypeSelectList selected={type} onSelection={setType} readOnly={readOnly} />
+					<p className="italic">Component Type question will display a question. Component type Text will insert basic text, usefull for comments or descriptions. </p>
+
+					<InputText name={"Label"} text={name} onTextChange={setName} inline={true} />
+					<p className="italic">Label of the component.If the component type is a question, the label will be displayed.  </p>
+
+					<InputText name={"Style"} text={style} onTextChange={setStyle} inline={true} />
+					<p className="italic">Style is applied during the rendering. You can use basic CSS and Tailwind classes to improve the rendering on specific components.</p>
+					<InputText name={"Position"} text={position} onTextChange={setPosition} inline={true} />
 					<p className="italic"> Position is the display rank into the list of component. Integer value only.</p>
 					<div className="grid grid-col-2 gap-1 m-1">
 						<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
 
-						<SurveyObjectTypeSelectList selected={type} onSelection={setType} readOnly={readOnly} />
 					</div>
 				</div>
 			</form>

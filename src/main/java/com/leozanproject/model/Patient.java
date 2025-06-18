@@ -21,6 +21,9 @@ public class Patient {
 	@Column(name = "uuid")
 	String uuid;
 	
+	@Column(name = "mrn")
+	String mrn;
+	
 	@Column(name = "name")
 	String name;
 	
@@ -81,6 +84,14 @@ public class Patient {
 
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public String getMrn() {
+		return mrn;
+	}
+
+	public void setMrn(String mrn) {
+		this.mrn = mrn;
 	}
 	
 	

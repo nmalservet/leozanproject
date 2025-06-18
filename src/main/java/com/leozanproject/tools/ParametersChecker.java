@@ -30,6 +30,12 @@ public class ParametersChecker {
 		return true;
 	}
 	
+	public static boolean isValidId(String name, int id) throws InvalidParameterException {
+		if(id<=0)
+			throw new InvalidParameterException(name);
+		return true;
+	}
+	
 	public static boolean isValidBoolean(String name, Boolean bool) throws InvalidParameterException {
 		if(bool==null)
 			throw new InvalidParameterException(name);

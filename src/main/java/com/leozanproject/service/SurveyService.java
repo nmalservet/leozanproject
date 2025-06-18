@@ -20,6 +20,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import com.leozanproject.constants.SurveyStatus;
+import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Project;
@@ -29,6 +30,7 @@ import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.SurveyDTO;
 import com.leozanproject.resource.domain.SurveyFilterDTO;
 import com.leozanproject.tools.AttributesControlsTool;
+import com.leozanproject.tools.ParametersChecker;
 
 /**
  * survey management service.
@@ -52,10 +54,17 @@ public class SurveyService {
 		return mapper.map(repository.findAll());
 	}
 
-	public boolean createSurvey(SurveyDTO dto) throws MissingParameterException {
-
-		AttributesControlsTool.isEmpty("name", dto.getName());
-
+	/**
+	 * a project is mandatory for the survey
+	 * @param dto
+	 * @return
+	 * @throws MissingParameterException
+	 * @throws InvalidParameterException
+	 */
+	public boolean createSurvey(SurveyDTO dto) throws MissingParameterException, InvalidParameterException {
+		ParametersChecker.isNotEmpty("name", dto.getName());
+		ParametersChecker.isNotEmpty("description", dto.getDescription());
+		ParametersChecker.isValidId("project", dto.getProject());
 		Survey entity = new Survey();
 		
 		entity.setName(dto.getName());
@@ -65,6 +74,7 @@ public class SurveyService {
 		if (dto.getResponsible() != 0)
 			entity.setResponsible(dto.getResponsible());
 		entity.setStatus(SurveyStatus.NEW.getValue());
+		entity.setProject(dto.getProject());
 		repository.save(entity);
 
 		return true;

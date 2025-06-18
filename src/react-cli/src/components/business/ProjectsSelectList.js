@@ -6,7 +6,7 @@ import Api from '../../Api.js';
  * select list for the projects. Reusable component
  */
 
-export default function ProjectsSelectList({ onSelection }) {
+export default function ProjectsSelectList({selected, onSelection }) {
 
 	const [projects, setProjects] = useState([]);
 
@@ -26,7 +26,7 @@ export default function ProjectsSelectList({ onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Project"} values={projects} selected={""} handleSelection={onSelection} withFirstItem={false} emptyAllowed={true} />
+			<SelectList label={"Project"} values={projects} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

@@ -11,10 +11,7 @@ import SurveyEditor from '../components/business/survey/SurveyEditor';
 export default function EditSurveyView() {
 	const { surveyId } = useParams();
 	const [survey, setSurvey] = useState(null);
-	
-	/*
-	
-	*/
+
 
 	function loadData(id) {
 		Api.getSurvey(id)
@@ -33,28 +30,8 @@ export default function EditSurveyView() {
 			loadData(surveyId);
 	}, [surveyId]);
 
-	/*return (<> {survey != null &&
-		<div>
-			<div >
-				
-				{survey.id && <SurveyComponentsPanel surveyId={survey.id} />}
-				<SurveyObjectModal surveyObject={editedSurveyObject} isOpen={editedSurveyObject != null} onClose={() => closeSurveyObjectModal()} readOnly={editedSurveyObject != null && editedSurveyObject.readOnly === true} />
-			
-			</div>
-			<div>
-				<div><h1>Preview</h1></div>
-				<SurveyPreview survey={survey}/>
-			</div>
-			<div>
-
-			</div>
-		</div>
-
-	}</>
-
-	);*/
-	return (<div>Edit Survey
-	{survey!=null&&<SurveyEditor survey={survey}/>}
+	return (<div>
+		{survey != null && <SurveyEditor survey={survey} />}
 	</div>)
-	
+
 }

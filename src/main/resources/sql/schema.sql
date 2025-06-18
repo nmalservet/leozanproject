@@ -150,7 +150,7 @@ CREATE TABLE survey_object(
 id SERIAL PRIMARY KEY,
 name varchar(50) NOT null,
 type int not null,
-style varchar(10),
+style varchar(250),
 translation_id int not null,
 survey_id int not NULL,
 status int,
@@ -198,4 +198,21 @@ fr text NOT NULL,
 de text NOT NULL,
 en text NOT NULL,
 pt text NOT NULL
-)
+);
+
+-- creation_date : only for traceability, when the insert is done
+-- update date when the patient is updated
+-- ssn can be null or empty at the creation
+-- uuid to be used as external id
+CREATE TABLE patient (
+ id BIGSERIAL PRIMARY KEY,
+ uuid varchar(100) unique not null,
+ mrn varchar(100) unique not null,
+ name varchar(200) not null,
+ first_name varchar(200) not null,
+ gender varchar(1) not null,
+ birthdate date not null,
+ creation_date timestamp,
+ update_date timestamp,
+ ssn varchar(15)
+);

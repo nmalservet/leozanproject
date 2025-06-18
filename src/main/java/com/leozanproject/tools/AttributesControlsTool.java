@@ -4,6 +4,7 @@ import com.leozanproject.exceptions.MissingParameterException;
 
 /**
  * class to centralize check attributes accross services and ressources
+ * FixMe : redundant with ParametersChecker?
  * @author nicolas malservet
  *
  */

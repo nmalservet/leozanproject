@@ -3,15 +3,15 @@ import Patient from './Patient';
 /**
  * Display the patient into a modal box
  */
-export default function PatientModal({ patient, isOpen, onClose,readOnly }) {
-	if (!isOpen) return null;
+export default function PatientModal({ patient, onClose,readOnly }) {
+	if (patient===undefined||patient==null) return null;
 
 	return (
 		<div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Patient #{patient.id}</h5>
+						<h5 className="modal-title">Patient </h5>
 						<button
 							type="button"
 							className="btn-close"

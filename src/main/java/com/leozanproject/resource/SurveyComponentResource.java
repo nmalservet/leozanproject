@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leozanproject.exceptions.BusinessRuleValidationException;
 import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.resource.domain.SurveyObjectDTO;
@@ -42,7 +43,7 @@ public class SurveyComponentResource {
 	
 	@PostMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public int createSurvey(@RequestBody SurveyObjectDTO dto) throws MissingParameterException {
+	public int createSurvey(@RequestBody SurveyObjectDTO dto) throws MissingParameterException, BusinessRuleValidationException {
 		return service.create(dto);
 	}
 	
@@ -52,9 +53,10 @@ public class SurveyComponentResource {
 	 * @return
 	 * @throws MissingParameterException
 	 * @throws InvalidParameterException
+	 * @throws BusinessRuleValidationException 
 	 */
 	@PutMapping(path = "/{id}", produces = "application/json")
-	public int update(@RequestBody SurveyObjectDTO so,@PathVariable int id) throws MissingParameterException, InvalidParameterException {
+	public int update(@RequestBody SurveyObjectDTO so,@PathVariable int id) throws MissingParameterException, InvalidParameterException, BusinessRuleValidationException {
 		if(id!=so.getId())
 			throw new InvalidParameterException("Survey Object id uncompliant");
 		return service.update(so);

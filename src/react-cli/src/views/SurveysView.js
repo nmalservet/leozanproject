@@ -7,6 +7,7 @@ import { CollapsiblePanel } from "../components/common/CollapsiblePanel.jsx";
 import SurveyModal from '../components/business/SurveyModal.js';
 import LoadingPanel  from "../components/common/LoadingPanel.js";
 import { useNavigate } from "react-router-dom";
+import ActionButton from '../components/common/ActionButton.js';
 
 
 /**
@@ -19,11 +20,8 @@ export default function SurveysView({ projectId }) {
 	const columns = [{ "name": "id", "displayed": "id" }, { "name": "projectName", "displayed": "project" },
 	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
 		, { "name": "responsible", "displayed": "responsible" }];
-//
 	const buttons = [{ 'image': "eye", 'action': 'view' },{ 'image': "pencil", 'action': 'edit' },  { 'image': "brick-wall", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
-
 	const [surveys, setSurveys] = useState([]);
-
 	const [editedSurvey, setEditedSurvey] = useState(null);
 	const [surveyId, setSurveyId] = useState(null);//current survey, now for delete 
 	const [filter, setFilter] = useState({});
@@ -113,6 +111,10 @@ export default function SurveysView({ projectId }) {
 		setIsModalOpen(true);
 	}
 	
+	function addSurvey(){
+			navigate('/addSurvey');
+	}
+	
 	/**
 	 * we use async callback function to be used inside the useEffect properly
 	 */
@@ -141,6 +143,7 @@ export default function SurveysView({ projectId }) {
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the survey?" />
 			<Grid columns={columns} items={surveys} onCall={onCallButton} buttons={buttons} />
 			{isLoading&&<LoadingPanel/>}
+			<ActionButton name={"addSurvey"} text={"Add a survey"} onClick={()=>addSurvey()}/>
 		</div>
 	);
 }

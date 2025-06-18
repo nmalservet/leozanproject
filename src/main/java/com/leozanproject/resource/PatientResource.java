@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leozanproject.exceptions.InvalidParameterException;
 import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.resource.domain.PatientDTO;
+import com.leozanproject.resource.domain.PatientFilterDTO;
 import com.leozanproject.service.PatientService;
+
 
 /**
  * REST API for patients
+ * 
  * @author nicolas malservet
  *
  */
@@ -29,34 +32,35 @@ import com.leozanproject.service.PatientService;
 @Validated
 @RequestMapping("/api/v1/patients")
 public class PatientResource {
-	
+
 	@Autowired
 	PatientService service;
-	
 
-	@GetMapping(path = "", produces = "application/json")
-	public List<PatientDTO> list(){
-		return service.list();
+	@PostMapping(path = "/filter", produces = "application/json")
+	public List<PatientDTO> list(@RequestBody PatientFilterDTO filter) {
+
+		return service.list(filter);
 	}
-	
+
 	@PostMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public boolean createPatient(@RequestBody PatientDTO dto) throws MissingParameterException {
 		return service.createPatient(dto);
 	}
-	
+
 	@PutMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public boolean updatePatient(@RequestBody PatientDTO dto) throws MissingParameterException, InvalidParameterException {
+	public boolean updatePatient(@RequestBody PatientDTO dto)
+			throws MissingParameterException, InvalidParameterException {
 		return service.updatePatient(dto);
 	}
+
 	@GetMapping(path = "/{id}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public PatientDTO getPatient(@PathVariable int id) throws MissingParameterException, InvalidParameterException {
 		return service.getPatient(id);
 	}
-	
-	
+
 	@DeleteMapping(path = "/{id}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public boolean deletePatient(@PathVariable int id) throws MissingParameterException, InvalidParameterException {

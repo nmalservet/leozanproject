@@ -37,7 +37,6 @@ export default function UsersView() {
 	};
 
 	function deleteUser(id) {
-		console.log("delete user?");
 		setUserId(id);
 		setIsModalOpen(true);
 	}

@@ -37,14 +37,18 @@ function SurveyEditor({ survey }) {
 		refreshComponents();
 	}
 
-	return (<div><h1>Survey Editor</h1>
+	return (<div className="m-3 w-full"><h1>Survey Edition : {survey.name}</h1>
 
 		<div>
-			<div>Survey : {survey.name}</div>
-			<div>Responsible : {survey.responsible}</div>
-			<div>id : {survey.id}</div>
+			<hr />
+			<div className="m-3">
+				<div><b>Responsible :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}</div>
+				<div><b>Unique Id</b> : {survey.id}</div>
+			</div>
+			<hr />
 		</div>
-		<div>
+		{(surveyComponents == null || surveyComponents.length === 0) && <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">You must add your first component!</div>}
+		<div className="m-6">
 			{modalOpened === true && <SurveyComponentModal surveyId={survey.id} surveyComponent={{}} onClose={() => closeAddComponent()} />}
 
 			<ActionButton name={"addComponent"} text={"Add a component"} onClick={() => addComponent()} />

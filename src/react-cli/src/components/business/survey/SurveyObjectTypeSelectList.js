@@ -20,7 +20,7 @@ export default function SurveyObjectTypeSelectList({ selected, onSelection }) {
 	useEffect(() => { loadData({}); }, []);
 	return (
 		<>
-			<SelectList label={"Type"} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={"Type"} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true} />
 		</>
 	);
 }

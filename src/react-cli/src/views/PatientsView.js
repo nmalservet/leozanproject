@@ -6,6 +6,7 @@ import { Modal } from '../components/common/Modal.js';
 import { CollapsiblePanel } from "../components/common/CollapsiblePanel.jsx";
 import PatientModal from '../components/business/PatientModal.js';
 import LoadingPanel  from "../components/common/LoadingPanel.js";
+import ActionButton from '../components/common/ActionButton.js';
 
 
 /**
@@ -22,16 +23,16 @@ export default function PatientsView() {
 
 	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 
-	const [tasks, setPatients] = useState([]);
+	const [patients, setPatients] = useState([]);
 
 	const [editedPatient, setEditedPatient] = useState(null);
-	const [taskId, setPatientId] = useState(null);//current task, now for delete 
+	const [patientId, setPatientId] = useState(null);//current task, now for delete 
 	const [filter, setFilter] = useState({});
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading,setIsLoading]=useState(false);
 
 	const handleYes = () => {
-		Api.deletePatient(taskId).then((response) => {
+		Api.deletePatient(patientId).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
 				fetchData(filter);
@@ -56,7 +57,7 @@ export default function PatientsView() {
 	 * on edit, redirect to the viez edittask
 	 */
 	function editPatient(id) {
-		tasks.forEach((task) => {
+		patients.forEach((task) => {
 			if (task.id === id)
 				setEditedPatient(task);
 		})
@@ -66,7 +67,7 @@ export default function PatientsView() {
 	 * on edit, redirect to the viez edittask
 	 */
 	function viewPatient(id) {
-		tasks.forEach((task) => {
+		patients.forEach((task) => {
 			if (task.id === id) {
 				var taskR = task;
 				taskR.readOnly = true;
@@ -103,6 +104,11 @@ export default function PatientsView() {
 		setIsModalOpen(true);
 	}
 	
+	function addPatient(){
+		console.log("set edited patient");
+		setEditedPatient({});
+	}
+	
 	/**
 	 * we use async callback function to be used inside the useEffect properly
 	 */
@@ -124,10 +130,11 @@ export default function PatientsView() {
 	return (
 		<div className="">
 			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
-			<PatientModal task={editedPatient} isOpen={editedPatient != null} onClose={() => closePatientModal()} readOnly={editedPatient != null && editedPatient.readOnly === true} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the task?" />
-			<Grid columns={columns} items={tasks} onCall={onCallButton} buttons={buttons} />
+			{editedPatient!==undefined&&editedPatient!==null&&<PatientModal patient={editedPatient} onClose={() => closePatientModal()} readOnly={editedPatient != null && editedPatient.readOnly === true} />}
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the patient?" />
+			<Grid columns={columns} items={patients} onCall={onCallButton} buttons={buttons} />
 			{isLoading&&<LoadingPanel/>}
+			<ActionButton name={"addPatient"} text={"Add a patient"} onClick={()=>addPatient()}/>
 		</div>
 	);
 }

@@ -17,7 +17,7 @@ export default function SurveyComponentModal({ surveyComponent,surveyId,  onClos
 						></button>
 					</div>
 					<div className="modal-body">
-						<SurveyComponent surveyComponent={surveyComponent} surveyId={surveyId}/>
+						<SurveyComponent surveyComponent={surveyComponent} surveyId={surveyId} onSave={onClose} onCancel={onClose}/>
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ import com.leozanproject.mapper.PatientMapper;
 import com.leozanproject.model.Patient;
 import com.leozanproject.repository.PatientRepository;
 import com.leozanproject.resource.domain.PatientDTO;
+import com.leozanproject.resource.domain.PatientFilterDTO;
 import com.leozanproject.tools.AttributesControlsTool;
 
 /**
@@ -29,7 +30,19 @@ public class PatientService {
 	@Autowired
 	PatientMapper mapper;
 
-	public List<PatientDTO> list() {
+	/**
+	 * retunr the list of patients filtered.
+	 * @param filter
+	 * @return
+	 */
+	public List<PatientDTO> list(PatientFilterDTO filter) {
+		String name = filter.getName();
+		 if(name!=null&& !name.isEmpty()) {
+				List<Patient> patients = repository.findByName(name);
+				return mapper.map(patients);
+				
+			
+		}else
 		return mapper.map(repository.findAll());
 	}
 

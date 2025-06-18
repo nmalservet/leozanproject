@@ -15,11 +15,7 @@ import ActionButton from '../components/common/ActionButton.js';
  */
 export default function PatientsView() {
 
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "project", "displayed": "project" },
-	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }, { "name": "priorityLabel", "displayed": "priority" }
-		, { "name": "responsible", "displayed": "responsible" }, { "name": "startDate", "displayed": "start" }
-		, { "name": "endDate", "displayed": "end" }, { "name": "estimatedTime", "displayed": "estimated(h)" }
-		, { "name": "progress", "displayed": "progress" }];
+	const columns = [{ "name": "id", "displayed": "id" },{ "name": "name", "displayed": "Name" },];
 
 	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 

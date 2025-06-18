@@ -19,6 +19,7 @@ import com.leozanproject.repository.ProjectRepository;
 import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.ProjectDTO;
 import com.leozanproject.resource.domain.UserAccountDTO;
+import com.leozanproject.tools.ParametersChecker;
 
 @Component
 public class ProjectService {
@@ -40,10 +41,12 @@ public class ProjectService {
 	 * 
 	 * @return
 	 * @throws MissingParameterException
+	 * @throws InvalidParameterException 
 	 */
-	public int create(ProjectDTO dto) throws MissingParameterException {
-		if (dto.getName() == null)
-			throw new MissingParameterException("name");
+	public int create(ProjectDTO dto) throws MissingParameterException, InvalidParameterException {
+
+		ParametersChecker.isNotEmpty("name",dto.getName());
+		ParametersChecker.isNotEmpty("description",dto.getDescription());
 
 		Project entity = new Project();
 		entity.setName(dto.getName());

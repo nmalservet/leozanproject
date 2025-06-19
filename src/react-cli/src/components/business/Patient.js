@@ -83,9 +83,9 @@ function Patient({ initialPatient, readOnly }) {
 					<InputText name={"Name"} text={patient.name} onTextChange={setName} />
 					<InputText name={"FirstName"} text={patient.firstName} onTextChange={setFirstName} />
 					<InputText name={"Birthdate"} text={patient.birthdate} onTextChange={setBirthdate} />
+					<InputText name={"SSN"} text={patient.ssn} onTextChange={setSsn} />
 					<GenderSelectList  label={"Gender"} selected={gender} onSelection={setGender} readOnly={readOnly} />
 										
-					<InputText name={"SSN"} text={patient.ssn} onTextChange={setSsn} />
 				</div>
 			</form>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">

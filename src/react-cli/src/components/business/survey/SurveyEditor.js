@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ActionButton from '../../common/ActionButton';
 import SurveyComponentModal from "./SurveyComponentModal";
 import SurveyComponentEditor from "./SurveyComponentEditor";
@@ -36,6 +36,11 @@ function SurveyEditor({ survey }) {
 		setModalOpened(false);
 		refreshComponents();
 	}
+	
+	//load the components on startup
+	useEffect(() => {
+		refreshComponents();
+	}, []);
 
 	return (<div className="m-3 w-full"><h1>Survey Edition : {survey.name}</h1>
 

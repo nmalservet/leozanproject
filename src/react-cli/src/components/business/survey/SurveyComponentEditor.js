@@ -44,7 +44,7 @@ function SurveyComponentEditor({ surveyComponent }) {
 							{(surveyComponent.type === 0) && <InputText name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
 							{(surveyComponent.type === 1) && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
 						</div>
-						<div>
+						<div className="flex">
 							<button name={"edit"} className="py-1 px-3 rounded" onClick={() => edit()}><Pencil size={18} color={"blue"} /></button>
 							<button name={"delete"} className="py-1 px-3 rounded" onClick={() => deleteComp()}><Trash size={18} color={"red"} /></button>
 						</div>

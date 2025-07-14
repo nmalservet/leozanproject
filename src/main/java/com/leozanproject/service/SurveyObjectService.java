@@ -52,7 +52,8 @@ public class SurveyObjectService {
 
 		entity.setStyle(dto.getStyle());
 		entity.setType(dto.getType() != null ? dto.getType() : 0);
-
+		entity.setQuestionType(dto.getQuestionType());
+		entity.setValues(dto.getValues());
 		repository.save(entity);
 		return entity.getId();
 	}
@@ -64,7 +65,7 @@ public class SurveyObjectService {
 	 * @return
 	 */
 	public List<SurveyObjectDTO> list(int surveyId) {
-		List<SurveyObject> list = repository.findAll();
+		List<SurveyObject> list = repository.findBySurveyIdOrderByPosition(surveyId);
 		return mapper.map(list);
 	}
 
@@ -78,6 +79,8 @@ public class SurveyObjectService {
 			entity.setStyle(dto.getStyle());
 			entity.setStatus(dto.getStatus());
 			entity.setPosition(dto.getPosition());
+			entity.setQuestionType(dto.getQuestionType());
+			entity.setValues(dto.getValues());
 			repository.save(entity);
 			return entity.getId();
 		}

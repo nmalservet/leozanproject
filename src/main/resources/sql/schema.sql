@@ -146,15 +146,18 @@ project int
 --survey object is a part of a survey to display some data
 -- type can be : 0 = text, 1=question
 -- style can be a string corresponding to an html style : h1, h2, h3, label etc.
+-- values, array of string separated by ;
 CREATE TABLE survey_object(
 id SERIAL PRIMARY KEY,
 name varchar(50) NOT null,
 type int not null,
+question_type int not null,
 style varchar(250),
 translation_id int not null,
 survey_id int not NULL,
 status int,
-position int
+position int,
+values varchar,
 );
 
 -- question is a part of survey

@@ -18,5 +18,7 @@ public interface SurveyObjectRepository extends JpaRepository<SurveyObject, Inte
 	public SurveyObject findByName(String name);
 	
 	public List<SurveyObject> findBySurveyId(int surveyId);
+	
+	public List<SurveyObject> findBySurveyIdOrderByPosition(int surveyId);
 
 }

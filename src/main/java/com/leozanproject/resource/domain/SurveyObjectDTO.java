@@ -20,6 +20,13 @@ public class SurveyObjectDTO {
 	private Integer status;
 
 	private Integer position;
+	
+	private Integer questionType;
+	
+	/**
+	 * values provided in case of multiple values (select list, radio buttons)
+	 */
+	private String values;
 
 	public Integer getId() {
 		return id;
@@ -83,6 +90,22 @@ public class SurveyObjectDTO {
 
 	public void setPosition(Integer position) {
 		this.position = position;
+	}
+
+	public Integer getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(Integer questionType) {
+		this.questionType = questionType;
+	}
+
+	public String getValues() {
+		return values;
+	}
+
+	public void setValues(String values) {
+		this.values = values;
 	}
 
 	

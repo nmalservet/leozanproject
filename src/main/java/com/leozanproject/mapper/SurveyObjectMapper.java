@@ -22,6 +22,8 @@ public class SurveyObjectMapper {
 		dto.setType(entity.getType());
 		dto.setStyle(entity.getStyle());
 		dto.setPosition(entity.getPosition());
+		dto.setQuestionType(entity.getQuestionType());
+		dto.setValues(entity.getValues());
 		return dto;
 	}
 

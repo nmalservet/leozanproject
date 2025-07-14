@@ -3,6 +3,7 @@ import Api from '../../../Api.js';
 import AlertsPanel from '../../common/AlertsPanel';
 import InputText from '../../common/InputText.js';
 import StatusSelectList from '../StatusSelectList.js';
+import QuestionTypeSelectList from '../QuestionTypeSelectList.js';
 
 import SurveyObjectTypeSelectList from './SurveyObjectTypeSelectList.js';
 
@@ -20,6 +21,11 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 
 	const [type, setType] = useState(surveyComponent.type);
 	const [status, setStatus] = useState(surveyComponent.status);
+	
+	//if the object is a type question
+	const [questionType, setQuestionType] = useState(surveyComponent.questionType);
+	//if the object is a type question and a question type select list or radio buttons
+	const [values, setValues] = useState(surveyComponent.values);
 
 	const [alerts, setAlerts] = useState([]);
 	const [hiddenAlert, setHiddenAlert] = useState(false);
@@ -43,6 +49,16 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 		sc.style = (style) ? style : '';
 		sc.position = (position) ? position : '';
 		sc.status = (status) ? status : 0;
+		if(type==0)
+			sc.questionType = questionType;
+		if(type==0&&(questionType==2||questionType==5 ))
+			if(values)
+			sc.values=values;
+			else{
+				errorsForm++;
+				setAlerts([{ message: "Values are need for select list or radio buttons", type: "error" }]);
+			}
+			
 		if (!sc.name || sc.name.length === 0) {
 			setAlerts([{ message: "The name is undefined", type: "error" }]);
 			errorsForm++;
@@ -55,16 +71,18 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 						s2.id = response.data;
 						setSc(s2);
 						setAlerts([{ message: "The survey object has been created", type: "success" }]);
+						onSave();
 					}
 				})
 			} else {
 				Api.updateSurveyObject(surveyComponent).then(response => {
 					if (response)
 						setAlerts([{ message: "The survey object has been saved", type: "success" }]);
+						onSave();
 				})
 			}
 		}
-		onSave();
+		
 	}
 
 	//if cancel, go back to surveys?
@@ -84,9 +102,16 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 					<SurveyObjectTypeSelectList selected={type} onSelection={setType} readOnly={readOnly} />
 					<p className="italic">Component Type question will display a question. Component type Text will insert basic text, usefull for comments or descriptions. </p>
 
+					{type==0&&<div><QuestionTypeSelectList selected={questionType} onSelection={setQuestionType} readOnly={readOnly} />
+					<p className="italic">Type of the question, to display the appropriate input related to the question. </p></div>}
+
+					{type==0&&(questionType==2||questionType==5)&&<div><InputText name={"values"} text={values} onTextChange={setValues} inline={true}  />
+					<p className="italic">Values proposed into the list, use semi-column (;) as separator. Example : cat; dog; mouse </p></div>}
+
 					<InputText name={"Label"} text={name} onTextChange={setName} inline={true} />
 					<p className="italic">Label of the component.If the component type is a question, the label will be displayed.  </p>
 
+					
 					<InputText name={"Style"} text={style} onTextChange={setStyle} inline={true} />
 					<p className="italic">Style is applied during the rendering. You can use basic CSS and Tailwind classes to improve the rendering on specific components.</p>
 					<InputText name={"Position"} text={position} onTextChange={setPosition} inline={true} />

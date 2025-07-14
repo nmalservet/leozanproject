@@ -34,6 +34,12 @@ public class SurveyObject {
 	 */
 	@Column(name = "type")
 	private Integer type;
+	
+	/**
+	 * if the object is of type question
+	 */
+	@Column(name = "question_type")
+	private Integer questionType;
 
 	@Column(name = "style")
 	private String style;
@@ -49,6 +55,12 @@ public class SurveyObject {
 
 	@Column(name = "position")
 	private Integer position;
+	
+	/**
+	 * values provided in case of select list, array of string separated by ;
+	 */
+	@Column(name = "values")
+	private String values;
 
 	public Integer getId() {
 		return id;
@@ -112,6 +124,22 @@ public class SurveyObject {
 
 	public void setPosition(Integer position) {
 		this.position = position;
+	}
+
+	public Integer getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(Integer questionType) {
+		this.questionType = questionType;
+	}
+
+	public String getValues() {
+		return values;
+	}
+
+	public void setValues(String values) {
+		this.values = values;
 	}
 	
 	

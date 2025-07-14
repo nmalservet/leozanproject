@@ -36,6 +36,12 @@ public class SurveyComponentResource {
 	@Autowired
 	SurveyObjectService service;
 	
+	/**
+	 * survey objects ordered bw position
+	 * @param surveyId
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping(path = "/{surveyId}", produces = "application/json")
 	public List<SurveyObjectDTO> list(@PathVariable int surveyId) throws Exception {
 		return service.list(surveyId);

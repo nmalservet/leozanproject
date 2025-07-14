@@ -2,23 +2,54 @@ import React, { useState } from "react";
 import ActionButton from '../../common/ActionButton';
 import SurveyComponent from "./SurveyComponent";
 import InputText from '../../common/InputText.js';
+import InputDate from '../../common/InputDate.js';
+import QuillTextArea from '../../common/QuillTextArea.js';
+import SelectList from '../../common/SelectList.js';
+import Checkbox from '../../common/Checkbox.js';
+import RadioButtons from '../../common/RadioButtons.js';
 import Tooltip from '../../common/Tooltip.js';
 import { Pencil, Trash } from 'lucide-react';
 
 /**
  * survey object view component, to display the survey object in compact mode without edition
+ * onSave : action called triggered when saved provided by the parent
  */
-function SurveyComponentEditor({ surveyComponent }) {
+function SurveyComponentEditor({ surveyComponent,onSave }) {
 	const [editMode, setEditMode] = useState(false);
 
 	function edit() {
 		setEditMode(true);
 	}
+	
+	
+
+/**
+ * when we save we call the parent action onSave
+ */
+	function save(){
+		setEditMode(false);
+		onSave();
+	}
 
 	function deleteComp() {
 
 	}
+	
+	function onCheckBoxChange(){
+		
+	}
+	/** 
+	 * transform values to a map prepared for the select list
+	 */
+	function valuesToMap(values) {
+		var pMap = new Map();
+		const arr = values.split(";");
+		for (const element of arr) {
+			pMap.set(element, element);
+		}
+		return pMap;
 
+	}
 	function getMetaData() {
 		return <div className="ml-10 grid grid-col-1 gap-1 m-2">
 			<table class="table-auto">
@@ -29,6 +60,8 @@ function SurveyComponentEditor({ surveyComponent }) {
 					<tr><td>name:</td><td>{surveyComponent.name}</td></tr>
 					<tr><td>style:</td><td>{surveyComponent.style}</td></tr>
 					<tr><td>type:</td><td>{surveyComponent.type}</td></tr>
+					<tr><td>Question type:</td><td>{surveyComponent.questionType}</td></tr>
+					<tr><td>values:</td><td>{surveyComponent.values}</td></tr>
 					<tr><td>position:</td><td>{surveyComponent.position}</td></tr>
 					<tr><td>status:</td><td>{surveyComponent.status}</td></tr>
 				</tbody></table>
@@ -41,7 +74,14 @@ function SurveyComponentEditor({ surveyComponent }) {
 				<div className="flex">
 					<div className="flex">
 						<div className="w-[850px]" >
-							{(surveyComponent.type === 0) && <InputText name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 0) && <InputText name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 2) && surveyComponent.values&&<SelectList label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 3) && <Checkbox name={surveyComponent.name} text={""} onValueChange={()=>onCheckBoxChange()} inline={true} />}
+							
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 4) && <InputDate name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 5) && surveyComponent.values&&<RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={""} inline={true} />}
+							
 							{(surveyComponent.type === 1) && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
 						</div>
 						<div className="flex">
@@ -52,7 +92,7 @@ function SurveyComponentEditor({ surveyComponent }) {
 					<Tooltip name="my tool" content={getMetaData()} />
 				</div>
 			}
-			{editMode && <SurveyComponent surveyComponent={surveyComponent} onSave={() => setEditMode(false)} onCancel={() => setEditMode(false)} />}
+			{editMode && <SurveyComponent surveyComponent={surveyComponent} onSave={() => save()} onCancel={() => setEditMode(false)} />}
 
 		</div>);
 }

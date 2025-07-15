@@ -13,7 +13,6 @@ function SurveyEditor({ survey }) {
 
 	//refresh the rendering
 	function refreshComponents() {
-		console.log("refresh rendering?");
 		Api.getSurveyObjects(survey.id)
 			.then((response) => {
 				if (response !== undefined) {

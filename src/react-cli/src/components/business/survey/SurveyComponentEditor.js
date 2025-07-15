@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SurveyComponent from "./SurveyComponent";
 import InputText from '../../common/InputText.js';
 import InputDate from '../../common/InputDate.js';
+import InputFile from '../../common/InputFile.js';
 import QuillTextArea from '../../common/QuillTextArea.js';
 import SelectList from '../../common/SelectList.js';
 import Checkbox from '../../common/Checkbox.js';
@@ -103,6 +104,7 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 							
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 4) && <InputDate name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 5) && surveyComponent.values&&<RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 6) && <InputFile name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
 							
 							{(surveyComponent.type === 1) && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
 						</div>

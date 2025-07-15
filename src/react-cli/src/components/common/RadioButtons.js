@@ -23,7 +23,7 @@ function RadioButtons({ label, values, handleSelection, inline }) {
 	return (
 		<div className={inline == false ? '' : 'flex'}>
 			<fieldset>
-				{label && label.length > 0 && <legend>{label}:</legend>}
+				{label && label.length > 0 && <legend><label className={'block font-black mb-1 text-sm font-bold dark:text-white min-w-24'}>{label}:</label></legend>}
 
 
 				{(() => {
@@ -32,7 +32,7 @@ function RadioButtons({ label, values, handleSelection, inline }) {
 						options.push(
 							<div>
 								<input type="radio" id={value} name={label} value={value} />
-								<label for={value}>{value}</label>
+								<label for={value} className="ml-3"> {value}</label>
 							</div>)
 					})
 					return options;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,5 +60,11 @@ public class SurveyResource {
 	@PostMapping(path = "/filter", produces = "application/json")
 	public List<SurveyDTO> filter(@RequestBody SurveyFilterDTO filter) throws Exception {
 		return service.filter(filter);
+	}
+	
+	@DeleteMapping(path = "/{id}", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public Boolean deleteSurvey(@PathVariable int id) throws MissingParameterException {
+		return service.deleteSurvey(id);
 	}
 }

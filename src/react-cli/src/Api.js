@@ -39,7 +39,7 @@ export default class Api {
 	 */
 	static addSurveyComponent(so) { return axios.post('/api/v1/surveycomponents', so); }
 	static updateSurveyObject(so) { return axios.put('/api/v1/surveycomponents/' + so.id, so); }
-	static deleteSurveyObject(id) { return axios.delete('/api/v1/surveycomponents/' + id); }
+	static deleteSurveyComponent(id) { return axios.delete('/api/v1/surveycomponents/' + id); }
 	static getSurveyObjects(id) { return axios.get('/api/v1/surveycomponents/' + id); }
 	static searchSurveyObjects(filter) { return axios.post('/api/v1/surveycomponents/filter', filter); }
 	static getSurveyObjectStatuses() { return axios.get('/api/v1/options/surveyObjectStatuses'); }

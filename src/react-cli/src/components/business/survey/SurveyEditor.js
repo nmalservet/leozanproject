@@ -59,7 +59,7 @@ function SurveyEditor({ survey }) {
 			<ActionButton name={"addComponent"} text={"Add a component"} onClick={() => addComponent()} />
 		</div>
 
-		{surveyComponents != null && surveyComponents.map(comp => <SurveyComponentEditor surveyComponent={comp} onSave={()=>refreshComponents()}/>)}
+		{surveyComponents != null && surveyComponents.map(comp => <SurveyComponentEditor surveyComponent={comp} onSave={()=>refreshComponents()} onDelete={()=>refreshComponents()}/>)}
 	</div>)
 }
 

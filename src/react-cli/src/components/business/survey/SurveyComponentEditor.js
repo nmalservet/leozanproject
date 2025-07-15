@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ActionButton from '../../common/ActionButton';
 import SurveyComponent from "./SurveyComponent";
 import InputText from '../../common/InputText.js';
 import InputDate from '../../common/InputDate.js';
@@ -9,18 +8,39 @@ import Checkbox from '../../common/Checkbox.js';
 import RadioButtons from '../../common/RadioButtons.js';
 import Tooltip from '../../common/Tooltip.js';
 import { Pencil, Trash } from 'lucide-react';
+import { Modal } from '../../common/Modal.js';
+import Api from '../../../Api.js';
 
 /**
  * survey object view component, to display the survey object in compact mode without edition
  * onSave : action called triggered when saved provided by the parent
  */
-function SurveyComponentEditor({ surveyComponent,onSave }) {
+function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 	const [editMode, setEditMode] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	function edit() {
 		setEditMode(true);
 	}
 	
+	const handleYes = () => {
+		//setHiddenAlert(true);
+		Api.deleteSurveyComponent(surveyComponent.id).then((response) => {
+			if (response) {
+				setIsModalOpen(false);
+				onDelete();
+			//	setAlerts([{ message: "The survey component has been deleted", type: "success" }]);
+				//fetchData(filter,projectId);
+			}
+		}).catch((error)=>{
+			//setAlerts([{ message: "An error occured during survey deletion"+error, type: "error" }]);
+		})
+
+	};
+
+	const handleNo = () => {
+		setIsModalOpen(false);
+	};
 	
 
 /**
@@ -32,7 +52,7 @@ function SurveyComponentEditor({ surveyComponent,onSave }) {
 	}
 
 	function deleteComp() {
-
+		setIsModalOpen(true);
 	}
 	
 	function onCheckBoxChange(){
@@ -70,6 +90,8 @@ function SurveyComponentEditor({ surveyComponent,onSave }) {
 
 	return (
 		<div className="">
+		<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the component?" />
+			
 			{!editMode &&
 				<div className="flex">
 					<div className="flex">

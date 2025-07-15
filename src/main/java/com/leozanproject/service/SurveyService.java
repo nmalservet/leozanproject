@@ -158,4 +158,9 @@ public class SurveyService {
 		}, pageable);
 		return demandes.getContent();
 	}
+
+	public Boolean deleteSurvey(int id) {
+		repository.deleteById(id);
+		return true;
+	}
 }

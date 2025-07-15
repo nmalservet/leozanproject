@@ -8,7 +8,7 @@ import SurveyModal from '../components/business/SurveyModal.js';
 import LoadingPanel  from "../components/common/LoadingPanel.js";
 import { useNavigate } from "react-router-dom";
 import ActionButton from '../components/common/ActionButton.js';
-
+import AlertsPanel from '../components/common/AlertsPanel';
 
 /**
  * @param projectId to filter by project if needed and refresh it directly
@@ -28,13 +28,19 @@ export default function SurveysView({ projectId }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading,setIsLoading]=useState(false);
 	const navigate = useNavigate();
+	const [alerts, setAlerts] = useState([]);
+	const [hiddenAlert, setHiddenAlert] = useState(false);
 
 	const handleYes = () => {
+		setHiddenAlert(true);
 		Api.deleteSurvey(surveyId).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
+				setAlerts([{ message: "The survey has been deleted", type: "success" }]);
 				fetchData(filter,projectId);
 			}
+		}).catch((error)=>{
+			setAlerts([{ message: "An error occured during survey deletion"+error, type: "error" }]);
 		})
 
 	};
@@ -42,6 +48,13 @@ export default function SurveysView({ projectId }) {
 	const handleNo = () => {
 		setIsModalOpen(false);
 	};
+	
+		/**
+	 * call back if alert to be hidden.
+	 */
+	function closeAlert() {
+		setHiddenAlert(true);
+	}
 
 	/**
 	 * we will store the filter later in db if necessary but the added vaue is not really visible.
@@ -138,6 +151,7 @@ export default function SurveysView({ projectId }) {
 
 	return (
 		<div className="">
+		{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 			<CollapsiblePanel title={"Filter"} children={<SurveyFilter onApplyFilter={applyFilter} />} />
 			<SurveyModal survey={editedSurvey} isOpen={editedSurvey != null} onClose={() => closeSurveyModal()} readOnly={editedSurvey != null && editedSurvey.readOnly === true} />
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the survey?" />

@@ -207,10 +207,11 @@ pt text NOT NULL
 -- update date when the patient is updated
 -- ssn can be null or empty at the creation
 -- uuid to be used as external id
+-- mrn to be used as internal id if provided.
 CREATE TABLE patient (
  id BIGSERIAL PRIMARY KEY,
  uuid varchar(100) unique not null,
- mrn varchar(100) unique not null,
+ mrn varchar(100) unique null,
  name varchar(200) not null,
  first_name varchar(200) not null,
  gender varchar(1) not null,

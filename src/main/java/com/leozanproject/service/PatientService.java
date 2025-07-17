@@ -2,6 +2,7 @@ package com.leozanproject.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,6 +55,10 @@ public class PatientService {
 		entity.setFirstName(dto.getFirstName());
 		entity.setBirthdate(dto.getBirthdate());
 		entity.setGender(dto.getGender());
+        UUID uuid = UUID.randomUUID();
+        String uuidAsString = uuid.toString();
+
+		entity.setUuid(uuidAsString);
 		repository.save(entity);
 		return true;
 	}

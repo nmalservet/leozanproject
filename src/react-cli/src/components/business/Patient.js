@@ -2,6 +2,7 @@ import { useState } from "react";
 import Api from '../../Api.js';
 import AlertsPanel from '../common/AlertsPanel';
 import InputText from '../common/InputText.js';
+import InputDate from '../common/InputDate.js';
 import GenderSelectList from './GenderSelectList.js';
 //import {isEmpty} from '../../utils/StringUtils.js'
 
@@ -15,6 +16,7 @@ function Patient({ initialPatient, readOnly }) {
 	const [birthdate, setBirthdate] = useState(null);
 	const [gender, setGender] = useState(null);
 	const [ssn, setSsn] = useState(null);
+	const [mrn, setMrn] = useState(null);
 	const [patient, setPatient] = useState(initialPatient);
 	const [alerts, setAlerts] = useState([]);
 	const [hiddenAlert, setHiddenAlert] = useState(false);
@@ -34,6 +36,7 @@ function Patient({ initialPatient, readOnly }) {
 		patient.birthdate = (birthdate) ? birthdate : '';
 		patient.gender = (gender) ? gender : '';
 		patient.ssn = (ssn) ? ssn : '';
+		patient.mrn = (mrn) ? mrn : '';
 
 		var errorsForm = 0;
 		if (!patient.name === undefined || patient.name.length === 0) {
@@ -49,6 +52,7 @@ function Patient({ initialPatient, readOnly }) {
 			errorsForm++;
 		}
 
+		
 		if (errorsForm === 0) {
 			if (!patient.id) {
 				Api.addPatient(patient).then(response => {
@@ -82,10 +86,11 @@ function Patient({ initialPatient, readOnly }) {
 					</div>
 					<InputText name={"Name"} text={patient.name} onTextChange={setName} />
 					<InputText name={"FirstName"} text={patient.firstName} onTextChange={setFirstName} />
-					<InputText name={"Birthdate"} text={patient.birthdate} onTextChange={setBirthdate} />
+					<InputDate name={"Birthdate"} text={patient.birthdate} onTextChange={setBirthdate} />
 					<InputText name={"SSN"} text={patient.ssn} onTextChange={setSsn} />
-					<GenderSelectList  label={"Gender"} selected={gender} onSelection={setGender} readOnly={readOnly} />
-										
+					<InputText name={"MRN"} text={patient.mrn} onTextChange={setMrn} />
+					<GenderSelectList label={"Gender"} selected={gender} onSelection={setGender} readOnly={readOnly} />
+
 				</div>
 			</form>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">

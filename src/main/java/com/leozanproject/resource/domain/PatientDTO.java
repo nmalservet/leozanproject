@@ -2,6 +2,8 @@ package com.leozanproject.resource.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PatientDTO {
 	
 	Integer id;
@@ -13,6 +15,7 @@ public class PatientDTO {
 	
 	String firstName;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "fr-FR", timezone = "Europe/Luxembourg")
 	Date birthdate;
 	
 	/**
@@ -44,6 +47,7 @@ public class PatientDTO {
 		this.firstName = firstName;
 	}
 
+	
 	public Date getBirthdate() {
 		return birthdate;
 	}

@@ -15,7 +15,11 @@ import ActionButton from '../components/common/ActionButton.js';
  */
 export default function PatientsView() {
 
-	const columns = [{ "name": "id", "displayed": "id" },{ "name": "name", "displayed": "Name" },];
+	const columns = [{ "name": "name", "displayed": "Name" },{ "name": "firstName", "displayed": "FirstName" },
+	{ "name": "birthdate", "displayed": "birthdate" },
+	{ "name": "gender", "displayed": "gender" },
+	{ "name": "mrn", "displayed": "mrn" },
+	{ "name": "uuid", "displayed": "uuid" },];
 
 	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 

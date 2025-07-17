@@ -1,12 +1,13 @@
-import React, { useState, useEffect ,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import PatientFilter from '../components/business/PatientFilter.js';
 import { Modal } from '../components/common/Modal.js';
 import { CollapsiblePanel } from "../components/common/CollapsiblePanel.jsx";
 import PatientModal from '../components/business/PatientModal.js';
-import LoadingPanel  from "../components/common/LoadingPanel.js";
+import LoadingPanel from "../components/common/LoadingPanel.js";
 import ActionButton from '../components/common/ActionButton.js';
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -15,21 +16,23 @@ import ActionButton from '../components/common/ActionButton.js';
  */
 export default function PatientsView() {
 
-	const columns = [{ "name": "name", "displayed": "Name" },{ "name": "firstName", "displayed": "FirstName" },
+	const columns = [{ "name": "name", "displayed": "Name" }, { "name": "firstName", "displayed": "FirstName" },
 	{ "name": "birthdate", "displayed": "birthdate" },
 	{ "name": "gender", "displayed": "gender" },
 	{ "name": "mrn", "displayed": "mrn" },
 	{ "name": "uuid", "displayed": "uuid" },];
 
-	const buttons = [{ 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
+	const buttons = [{ 'image': "file-sliders", 'action': 'chooseSurvey' }, { 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 
 	const [patients, setPatients] = useState([]);
+	
+	const navigate = useNavigate();
 
 	const [editedPatient, setEditedPatient] = useState(null);
 	const [patientId, setPatientId] = useState(null);//current task, now for delete 
 	const [filter, setFilter] = useState({});
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [isLoading,setIsLoading]=useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleYes = () => {
 		Api.deletePatient(patientId).then((response) => {
@@ -51,6 +54,14 @@ export default function PatientsView() {
 	function applyFilter(cfilter) {
 		setFilter(cfilter);
 		fetchData(cfilter);
+	}
+
+	/**
+	 * on edit, redirect to the viez edittask
+	 */
+	function chooseSurvey(id) {
+		console.log("choosed patient:"+id);
+		navigate('/chooseSurvey/' + id);
 	}
 
 	/**
@@ -88,12 +99,15 @@ export default function PatientsView() {
 	 * callback function to be able to call action on grid
 	 */
 	function onCallButton(action, id) {
+		console.log("choosed id:"+id);
 		if (action === "edit")
 			editPatient(id);
 		if (action === "delete")
 			deletePatient(id);
 		if (action === "view")
 			viewPatient(id);
+		if (action === "chooseSurvey")
+			chooseSurvey(id);
 	}
 
 	/**
@@ -103,38 +117,38 @@ export default function PatientsView() {
 		setPatientId(id);
 		setIsModalOpen(true);
 	}
-	
-	function addPatient(){
+
+	function addPatient() {
 		console.log("set edited patient");
 		setEditedPatient({});
 	}
-	
+
 	/**
 	 * we use async callback function to be used inside the useEffect properly
 	 */
-	const fetchData=useCallback(async(cfilter) =>{
-			setIsLoading(true);
-			Api.getPatients(cfilter)
-				.then((response) => {
-					if (response !== undefined) {
-						//we must create a new refernce for the array to be able to refresh the component
-						setPatients([...response.data]);
-						setIsLoading(false);
-					}
-				})
-				.catch((error) => { (console.error(error)) });
-		},[]);
-	
-	useEffect(() => { fetchData(filter); }, [fetchData,filter]);
+	const fetchData = useCallback(async (cfilter) => {
+		setIsLoading(true);
+		Api.getPatients(cfilter)
+			.then((response) => {
+				if (response !== undefined) {
+					//we must create a new refernce for the array to be able to refresh the component
+					setPatients([...response.data]);
+					setIsLoading(false);
+				}
+			})
+			.catch((error) => { (console.error(error)) });
+	}, []);
+
+	useEffect(() => { fetchData(filter); }, [fetchData, filter]);
 
 	return (
 		<div className="">
 			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
-			{editedPatient!==undefined&&editedPatient!==null&&<PatientModal patient={editedPatient} onClose={() => closePatientModal()} readOnly={editedPatient != null && editedPatient.readOnly === true} />}
+			{editedPatient !== undefined && editedPatient !== null && <PatientModal patient={editedPatient} onClose={() => closePatientModal()} readOnly={editedPatient != null && editedPatient.readOnly === true} />}
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the patient?" />
 			<Grid columns={columns} items={patients} onCall={onCallButton} buttons={buttons} />
-			{isLoading&&<LoadingPanel/>}
-			<ActionButton name={"addPatient"} text={"Add a patient"} onClick={()=>addPatient()}/>
+			{isLoading && <LoadingPanel />}
+			<ActionButton name={"addPatient"} text={"Add a patient"} onClick={() => addPatient()} />
 		</div>
 	);
 }

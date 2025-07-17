@@ -13,6 +13,7 @@ import AddPatientView from './views/AddPatientView';
 import AddSurveyView from './views/AddSurveyView';
 import EditSurveyView from './views/EditSurveyView';
 import EditPatientView from './views/EditPatientView';
+import ChooseSurveyView from './views/ChooseSurveyView';
 import ViewPatientView from './views/ViewPatientView';
 import AdministrationView from './views/AdministrationView';
 import ProjectsView from './views/ProjectsView';
@@ -39,6 +40,7 @@ function App() {
 				{ path: 'addSurvey', element: <AddSurveyView /> },
 				{ path: 'editSurvey/:surveyId', element: <EditSurveyView /> },
 				{ path: 'editPatient/:patientId', element: <EditPatientView /> },
+				{ path: 'chooseSurvey/:patientId', element: <ChooseSurveyView /> },
 				{ path: 'viewPatient/:patientId', element: <ViewPatientView /> },
 				{ path: 'projects', element: <ProjectsView /> },
 				{ path: 'users', element: <UsersView /> },

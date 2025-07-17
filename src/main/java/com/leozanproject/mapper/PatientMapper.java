@@ -17,6 +17,7 @@ public class PatientMapper {
 			return null;
 		
 		PatientDTO dto = new PatientDTO();
+		dto.setId(entity.getId());
 		dto.setName(entity.getName());
 		dto.setFirstName(entity.getFirstName());
 		dto.setBirthdate(entity.getBirthdate());

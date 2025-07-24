@@ -14,7 +14,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "question")
+@Table(name = "answer")
 public class Answer {
 
 	@Id
@@ -25,8 +25,12 @@ public class Answer {
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "question_id")
-	private Integer questionId;
+
+	@Column(name = "survey_object_id")
+	private Integer surveyObjectId;
+	
+	@Column(name = "survey_answer_id")
+	private Integer surveyAnswerId;
 
 	public Integer getId() {
 		return id;
@@ -44,12 +48,38 @@ public class Answer {
 		this.value = value;
 	}
 
-	public Integer getQuestionId() {
-		return questionId;
+	
+
+	public Integer getSurveyObjectId() {
+		return surveyObjectId;
 	}
 
-	public void setQuestionId(Integer questionId) {
-		this.questionId = questionId;
+	public void setSurveyObjectId(Integer surveyObjectId) {
+		this.surveyObjectId = surveyObjectId;
 	}
 
+	public Integer getSurveyAnswerId() {
+		return surveyAnswerId;
+	}
+
+	public void setSurveyAnswerId(Integer surveyAnswerId) {
+		this.surveyAnswerId = surveyAnswerId;
+	}
+
+	/**
+	 * empty constructor for reflection.
+	 */
+	public Answer() {
+		
+	}
+	
+	public Answer(int surveyAnswerId, int surveyObjectId, String value) {
+		this.surveyAnswerId=surveyAnswerId;
+		this.surveyObjectId=surveyObjectId;
+		this.value=value;
+		
+	}
+	
+	
+	
 }

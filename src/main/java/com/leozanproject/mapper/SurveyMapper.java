@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.leozanproject.constants.SurveyStatus;
 import com.leozanproject.model.Survey;
 import com.leozanproject.resource.domain.SurveyDTO;
 
@@ -19,6 +20,7 @@ public class SurveyMapper {
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
 		dto.setStatus(entity.getStatus());
+		dto.setStatusLabel(SurveyStatus.getValue(entity.getStatus()).name());
 		dto.setTargetObject(entity.getTargetObject());
 		dto.setUuid(entity.getUuid());
 		if (entity.getProject() != null)

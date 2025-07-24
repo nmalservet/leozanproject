@@ -177,20 +177,26 @@ question_id int NOT NULL,
 position int
 );
 
+
+--created_by : user id creator
+--updated_by : user_id updator
 CREATE TABLE survey_answer(
 id SERIAL PRIMARY KEY,
 uuid varchar(100) NOT NULL UNIQUE,
 name varchar(50) NOT null,
 survey_id int NOT NULL,
-appointment_id int,
-folder_id int,
-account_id int NOT null
+patient_id int,
+created_by int NOT null,
+updated_by int null,
+creation_date timestamp,
+update_date timestamp
 );
 
 CREATE TABLE answer(
 id SERIAL PRIMARY KEY,
-question_id int NOT null,
-value text
+survey_object_id int NOT null,
+value text,
+survey_answer_id int NOT null
 );
 
 -- table to manage the translations

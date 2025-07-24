@@ -24,6 +24,8 @@ public class SurveyDTO {
 
 	private Integer status;
 	
+	private String statusLabel;
+	
 	private int project;
 	
 	private String projectName;
@@ -98,6 +100,14 @@ public class SurveyDTO {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+
+	public String getStatusLabel() {
+		return statusLabel;
+	}
+
+	public void setStatusLabel(String statusLabel) {
+		this.statusLabel = statusLabel;
 	}
 	
 	

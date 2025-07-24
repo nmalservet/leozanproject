@@ -64,8 +64,8 @@ public class PatientService {
 	}
 
 	public boolean updatePatient(PatientDTO dto) throws MissingParameterException, InvalidParameterException {
-		AttributesControlsTool.isSet("id", dto.getId());
-		Optional<Patient> opt = repository.findById(dto.getId());
+		AttributesControlsTool.isEmpty("id", dto.getId());
+		Optional<Patient> opt = repository.findByUuid(dto.getId());
 		if (opt.isPresent()) {
 			Patient entity = opt.get();
 			entity.setBirthdate(dto.getBirthdate());
@@ -79,21 +79,21 @@ public class PatientService {
 		return true;
 	}
 	
-	public PatientDTO getPatient(int id) throws MissingParameterException, InvalidParameterException {
-		AttributesControlsTool.isSet("id", id);
-		Optional<Patient> opt = repository.findById(id);
+	public PatientDTO getPatient(String uuid) throws MissingParameterException, InvalidParameterException {
+		AttributesControlsTool.isEmpty("uuid", uuid);
+		Optional<Patient> opt = repository.findByUuid(uuid);
 		if (opt.isPresent()) {
 			return mapper.map(opt.get());
 		} else {
-			throw new InvalidParameterException("id");
+			throw new InvalidParameterException("uuid");
 		}
 	}
 	
-	public boolean deletePatient(int id) throws MissingParameterException, InvalidParameterException {
-		AttributesControlsTool.isSet("id", id);
-		Optional<Patient> opt = repository.findById(id);
+	public boolean deletePatient(String uuid) throws MissingParameterException, InvalidParameterException {
+		AttributesControlsTool.isEmpty("uuid", uuid);
+		Optional<Patient> opt = repository.findByUuid(uuid);
 		if (opt.isPresent()) {
-			repository.deleteById(id);
+			repository.deleteById(opt.get().getId());
 		} else {
 			throw new InvalidParameterException("id");
 		}

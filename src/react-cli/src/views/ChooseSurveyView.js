@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Api from '../Api.js';
 import ProjectsSelectList from "../components/business/ProjectsSelectList.js";
+import SurveysSelectList from "../components/business/SurveysSelectList.js";
+import ActionButton from "../components/common/ActionButton.js";
+import { useNavigate } from "react-router-dom";
+import PatientBanner from "../components/business/PatientBanner.js";
 
 /**
  * 
  * @returns display the search filter with multiple dynamic fields
  */
 export default function ChooseSurveyView() {
-	const { patientId } = useParams();
-	const [patient, setPatient] = useState(null)
+	const { patientUuid } = useParams();
+	const [patient, setPatient] = useState(null);
+	const [projectId, setProjectId] = useState(null);
+	const [surveyId, setSurveyId] = useState(null);
+	const navigate = useNavigate();
 
 	//load projects
 
-	function loadPatient(id) {
-		Api.getPatient(id)
+	function loadPatient(uuid) {
+		Api.getPatient(uuid)
 			.then((response) => {
 				if (response !== undefined) {
 					//we must create a new refernce for the array to be able to refresh the component
@@ -25,18 +32,28 @@ export default function ChooseSurveyView() {
 				(console.error(error))
 			});
 	}
+	
+	/**
+	 * go to fill the survey choosen
+	 */
+	function fillSurvey(){
+		navigate('/fillSurvey/'+patientUuid+'/'+surveyId);
+	}
 
 
 	useEffect(() => {
-		if (patientId != null)
-			loadPatient(patientId);
-	}, [patientId]);
+		if (patientUuid != null)
+			loadPatient(patientUuid);
+	}, [patientUuid]);
 
-	return (<>  <div>
-		<div>{patient && <div>Patient : {patient.name} {patient.firstName} {patient.birthdate}</div>}</div>
-		Choose a project : <ProjectsSelectList />
-		Choose a survey :
-	</div></>
+	return (<div className="m-4">
+		<div>{
+			patient && <PatientBanner patient={patient}/>}</div>
+		<hr />
+		<div className="flex"><span className="font-bold">1 - Choose a project :</span><div className="ml-5"> <ProjectsSelectList selected={projectId} onSelection={setProjectId} /></div></div>
+		{projectId && <div className="flex"><span className="font-bold">2 - Choose a survey : </span><div className="ml-5"> <SurveysSelectList projectId={projectId} selected={surveyId} onSelection={setSurveyId} /></div></div>}
+		{surveyId && <ActionButton name={"fillSurvey"} text={"Fill the survey"} onClick={() => fillSurvey()} />}
+	</div>
 
 	);
 }

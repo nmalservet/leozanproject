@@ -55,16 +55,16 @@ public class PatientResource {
 		return service.updatePatient(dto);
 	}
 
-	@GetMapping(path = "/{id}", produces = "application/json")
+	@GetMapping(path = "/{uuid}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public PatientDTO getPatient(@PathVariable int id) throws MissingParameterException, InvalidParameterException {
-		return service.getPatient(id);
+	public PatientDTO getPatient(@PathVariable String uuid) throws MissingParameterException, InvalidParameterException {
+		return service.getPatient(uuid);
 	}
 
-	@DeleteMapping(path = "/{id}", produces = "application/json")
+	@DeleteMapping(path = "/{uuid}", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public boolean deletePatient(@PathVariable int id) throws MissingParameterException, InvalidParameterException {
-		return service.deletePatient(id);
+	public boolean deletePatient(@PathVariable String uuid) throws MissingParameterException, InvalidParameterException {
+		return service.deletePatient(uuid);
 	}
 
 }

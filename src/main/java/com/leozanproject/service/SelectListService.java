@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leozanproject.constants.SurveyStatus;
 import com.leozanproject.model.SelectListOption;
 import com.leozanproject.repository.SelectListOptionRepository;
 import com.leozanproject.resource.domain.SelectListOptionDTO;
@@ -27,7 +28,14 @@ public class SelectListService {
 	 * @return
 	 */
 	public List<SelectListOptionDTO> getSurveyStatuses(){
-		return getOptions(1);
+		List<SelectListOptionDTO> result = new ArrayList();
+		
+		for(SurveyStatus status : SurveyStatus.values()) {
+			result.add(new SelectListOptionDTO(1, status.name(), status.name()+"", 1,status.getValue()+""));
+		}
+		return result;
+		
+		//return getOptions(1);
 		
 	}
 	

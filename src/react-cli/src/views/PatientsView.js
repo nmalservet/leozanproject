@@ -29,13 +29,13 @@ export default function PatientsView() {
 	const navigate = useNavigate();
 
 	const [editedPatient, setEditedPatient] = useState(null);
-	const [patientId, setPatientId] = useState(null);//current task, now for delete 
+	const [patientUuid, setPatientUuid] = useState(null);//current task, now for delete 
 	const [filter, setFilter] = useState({});
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleYes = () => {
-		Api.deletePatient(patientId).then((response) => {
+		Api.deletePatient(patientUuid).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
 				fetchData(filter);
@@ -67,9 +67,9 @@ export default function PatientsView() {
 	/**
 	 * on edit, redirect to the viez edittask
 	 */
-	function editPatient(id) {
+	function editPatient(uuid) {
 		patients.forEach((task) => {
-			if (task.id === id)
+			if (task.uuid === uuid)
 				setEditedPatient(task);
 		})
 	}
@@ -77,9 +77,9 @@ export default function PatientsView() {
 	/**
 	 * on edit, redirect to the viez edittask
 	 */
-	function viewPatient(id) {
+	function viewPatient(uuid) {
 		patients.forEach((task) => {
-			if (task.id === id) {
+			if (task.uuid === uuid) {
 				var taskR = task;
 				taskR.readOnly = true;
 				setEditedPatient(task);
@@ -114,7 +114,7 @@ export default function PatientsView() {
 	 * 
 	 */
 	function deletePatient(id) {
-		setPatientId(id);
+		setPatientUuid(id);
 		setIsModalOpen(true);
 	}
 

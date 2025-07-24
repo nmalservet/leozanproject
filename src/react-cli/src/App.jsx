@@ -14,6 +14,7 @@ import AddSurveyView from './views/AddSurveyView';
 import EditSurveyView from './views/EditSurveyView';
 import EditPatientView from './views/EditPatientView';
 import ChooseSurveyView from './views/ChooseSurveyView';
+import FillSurveyView from './views/FillSurveyView';
 import ViewPatientView from './views/ViewPatientView';
 import AdministrationView from './views/AdministrationView';
 import ProjectsView from './views/ProjectsView';
@@ -39,9 +40,10 @@ function App() {
 				{ path: 'addPatient', element: <AddPatientView /> },
 				{ path: 'addSurvey', element: <AddSurveyView /> },
 				{ path: 'editSurvey/:surveyId', element: <EditSurveyView /> },
-				{ path: 'editPatient/:patientId', element: <EditPatientView /> },
-				{ path: 'chooseSurvey/:patientId', element: <ChooseSurveyView /> },
-				{ path: 'viewPatient/:patientId', element: <ViewPatientView /> },
+				{ path: 'editPatient/:patientUuid', element: <EditPatientView /> },
+				{ path: 'chooseSurvey/:patientUuid', element: <ChooseSurveyView /> },
+				{ path: 'fillSurvey/:patientUuid/:surveyId', element: <FillSurveyView /> },//this route should have parameters with patientId and surveyId
+				{ path: 'viewPatient/:patientUuid', element: <ViewPatientView /> },
 				{ path: 'projects', element: <ProjectsView /> },
 				{ path: 'users', element: <UsersView /> },
 				{

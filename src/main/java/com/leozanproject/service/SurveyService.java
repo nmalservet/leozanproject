@@ -116,14 +116,14 @@ public class SurveyService {
 	public List<SurveyDTO> filter(SurveyFilterDTO filter) {
 		List<SurveyDTO> result = new ArrayList<>();
 		Pageable pageable = PageRequest.of(0, 1000, Sort.by(Sort.Direction.DESC, "id"));
-		List<Survey> tasks = retrieveSurveys(filter, pageable);
+		List<Survey> surveys = retrieveSurveys(filter, pageable);
 		List<Project> projects = projectRepository.findAll();
 		HashMap<Integer, Project> map = new HashMap<>();
 		projects.forEach(p -> {
 			map.put(p.getId(), p);
 		});
-		if (tasks != null) {
-			for (Survey task : tasks) {
+		if (surveys != null) {
+			for (Survey task : surveys) {
 				result.add(mapper.map(task));
 			}
 		}
@@ -151,6 +151,10 @@ public class SurveyService {
 					predicates.add(cb.equal(root.get("id"), new Integer(filter.getId())));
 				if (filter.getResponsibleId() != null)
 					predicates.add(cb.equal(root.get("responsible"), filter.getResponsibleId()));
+				if (filter.getProjectId() != null)
+					predicates.add(cb.equal(root.get("project"), filter.getProjectId()));
+				if (filter.getStatus() != null)
+					predicates.add(cb.equal(root.get("status"), filter.getStatus()));
 				if (filter.getTopic() != null)
 					predicates.add(cb.like(cb.upper(root.get("name")), "%" + filter.getTopic().toUpperCase() + "%"));
 				return cb.and(predicates.toArray(new Predicate[0]));

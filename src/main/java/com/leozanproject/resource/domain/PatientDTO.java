@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PatientDTO {
 	
-	Integer id;
+	/**
+	 * for API calls id is equal to uuid to protect the data with a scanning attack on id
+	 */
+	String id;
 	
 	
 	String uuid;
@@ -64,11 +67,11 @@ public class PatientDTO {
 		this.gender = gender;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

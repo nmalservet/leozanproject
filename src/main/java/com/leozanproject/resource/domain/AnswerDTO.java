@@ -1,5 +1,10 @@
 package com.leozanproject.resource.domain;
 
+/**
+ * atomic answer for a question/surveyObject
+ * @author nicolas malservet
+ *
+ */
 public class AnswerDTO {
 	
 	/**

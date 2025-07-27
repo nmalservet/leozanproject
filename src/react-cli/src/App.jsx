@@ -1,14 +1,13 @@
+import React, { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import LoginView from './views/LoginView'
-
-import React, { useState } from 'react';
 import { CurrentUserContext } from './context/user-context.js';
 import Layout from './components/layout/Layout';
 import DashboardView from './views/DashboardView';
 import SurveysView from './views/SurveysView';
 import PatientsView from './views/PatientsView';
-
+import AnswersView from './views/AnswersView';
 import AddPatientView from './views/AddPatientView';
 import AddSurveyView from './views/AddSurveyView';
 import EditSurveyView from './views/EditSurveyView';
@@ -44,6 +43,8 @@ function App() {
 				{ path: 'chooseSurvey/:patientUuid', element: <ChooseSurveyView /> },
 				{ path: 'fillSurvey/:patientUuid/:surveyId', element: <FillSurveyView /> },//this route should have parameters with patientId and surveyId
 				{ path: 'viewPatient/:patientUuid', element: <ViewPatientView /> },
+				{ path: 'answers', element: <AnswersView/> },
+				
 				{ path: 'projects', element: <ProjectsView /> },
 				{ path: 'users', element: <UsersView /> },
 				{

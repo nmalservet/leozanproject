@@ -43,12 +43,6 @@ export default class Api {
 	static getSurveyObjects(id) { return axios.get('/api/v1/surveycomponents/' + id); }
 	static searchSurveyObjects(filter) { return axios.post('/api/v1/surveycomponents/filter', filter); }
 	static getSurveyObjectStatuses() { return axios.get('/api/v1/options/surveyObjectStatuses'); }
-	
-	/**
-	 * Answers Management
-	 */
-	static saveAnswers(answers){return axios.post('/api/v1/answers',answers);}
-	static updateAnswers(answers){return axios.put('/api/v1/answers',answers);}
 
 	/**
 	 * Patient management
@@ -58,6 +52,14 @@ export default class Api {
 	static deletePatient(uuid) { return axios.delete('/api/v1/patients/' + uuid); }
 	static getPatient(uuid) { return axios.get('/api/v1/patients/' + uuid); }
 	static getPatients(filter) { return axios.post('/api/v1/patients/filter', filter); }
+	/**
+	 * Answers management
+	 */
+	static getAnswers(filter) { return axios.post('/api/v1/answers/filter', filter); }
+	
+	static saveAnswers(answers){return axios.post('/api/v1/answers',answers);}
+	static updateAnswers(answers){return axios.put('/api/v1/answers',answers);}
+	
 	/**
 	 * User management
 	 */

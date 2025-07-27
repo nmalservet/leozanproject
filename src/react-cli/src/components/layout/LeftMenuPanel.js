@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
-import { Notebook, BarChart2Icon, Settings, Users, List, FileText, CircleUser } from 'lucide-react';
+import { Notebook, BarChart2Icon, Settings, Users, List, FileText, CircleUser, BookText } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 function LeftMenuPanel() {
@@ -15,6 +15,8 @@ function LeftMenuPanel() {
 
 					<MenuItem icon={<List size={20} />} text="Surveys" isOpen={isMenuOpen} link={"/surveys"} location={location.pathname} />
 					<MenuItem icon={<CircleUser size={20} />} text="Patients" isOpen={isMenuOpen} link={"/patients"} location={location.pathname} />
+					<MenuItem icon={<BookText size={20} />} text="Answers" isOpen={isMenuOpen} link={"/answers"} location={location.pathname} />
+				
 				</nav>
 
 				<MenuTitle icon={<BarChart2Icon size={20} />} text="Analyze" isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />

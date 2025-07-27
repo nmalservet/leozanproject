@@ -1,6 +1,8 @@
 package com.leozanproject.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -8,13 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.leozanproject.exceptions.InvalidParameterException;
+import com.leozanproject.mapper.PatientMapper;
+import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Answer;
 import com.leozanproject.model.Patient;
+import com.leozanproject.model.Survey;
 import com.leozanproject.model.SurveyAnswer;
 import com.leozanproject.repository.AnswerRepository;
 import com.leozanproject.repository.PatientRepository;
 import com.leozanproject.repository.SurveyAnswerRepository;
+import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.AnswerDTO;
+import com.leozanproject.resource.domain.AnswerFilterDTO;
+import com.leozanproject.resource.domain.AnswersInstanceDTO;
+import com.leozanproject.resource.domain.PatientDTO;
 import com.leozanproject.resource.domain.SurveyAnswersDTO;
 
 @Component
@@ -27,7 +36,38 @@ public class AnswerService {
 	SurveyAnswerRepository surveyAnswerRepository;
 	
 	@Autowired
+	SurveyRepository surveyRepository;
+	
+	@Autowired
 	PatientRepository patientRepository;
+	
+	@Autowired
+	PatientMapper patMapper;
+	
+	@Autowired
+	SurveyMapper survMapper;
+	
+	public List<AnswersInstanceDTO> list(AnswerFilterDTO filter) {
+		List<SurveyAnswer> ans = surveyAnswerRepository.findAll();
+		List<AnswersInstanceDTO> res = new ArrayList<>();
+		for(SurveyAnswer an : ans) {
+			AnswersInstanceDTO dto = new AnswersInstanceDTO();
+			dto.setUpdateDate(an.getUpdateDate());
+			int patId=an.getPatientId();
+			Optional<Patient> optPat = patientRepository.findById(patId);
+			if(optPat.isPresent()) {
+				PatientDTO patDTO = patMapper.map(optPat.get());
+				dto.setPatient(patDTO);
+			}
+			//get the survey
+			Optional<Survey> opt = surveyRepository.findById(an.getSurveyId());
+			if (opt.isPresent()) {
+				dto.setSurvey(survMapper.map(opt.get()));
+			}
+			res.add(dto);
+		}
+		return res;
+	}
 
 	/**
 	 * todo manage the update

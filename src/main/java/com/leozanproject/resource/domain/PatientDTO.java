@@ -18,6 +18,8 @@ public class PatientDTO {
 	
 	String firstName;
 	
+	String mrn;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "fr-FR", timezone = "Europe/Luxembourg")
 	Date birthdate;
 	
@@ -25,6 +27,8 @@ public class PatientDTO {
 	 * encoded with HL7 Values.
 	 */
 	String gender;
+	
+	String ssn;
 
 	public String getUuid() {
 		return uuid;
@@ -73,6 +77,22 @@ public class PatientDTO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getMrn() {
+		return mrn;
+	}
+
+	public void setMrn(String mrn) {
+		this.mrn = mrn;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
 	}
 	
 	

@@ -15,13 +15,16 @@ import { useNavigate } from "react-router-dom";
  */
 export default function AnswersView() {
 
-	const columns = [{ "name": "name", "displayed": "Name" }, { "name": "firstName", "displayed": "FirstName" },
-	{ "name": "birthdate", "displayed": "birthdate" },
-	{ "name": "gender", "displayed": "gender" },
+	const columns = [{ "name": "id", "displayed": "Id" },{ "name": "patientLabel", "displayed": "Patient" }, 
 	{ "name": "mrn", "displayed": "mrn" },
+	{ "name": "project", "displayed": "Project" },
+	{ "name": "surveyLabel", "displayed": "Survey" },
+	{ "name": "updateDate", "displayed": "Updated" },
 	{ "name": "uuid", "displayed": "uuid" },];
 
-	const buttons = [{ 'image': "file-sliders", 'action': 'chooseSurvey' }, { 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
+	//{ 'image': "file-sliders", 'action': 'chooseSurvey' },
+	const buttons = [ { 'image': "eye", 'action': 'view' }, 
+		{ 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 
 	const [answers, setAnswers] = useState([]);
 	

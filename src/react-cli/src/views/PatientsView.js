@@ -19,7 +19,7 @@ export default function PatientsView() {
 	const columns = [{ "name": "name", "displayed": "Name" }, { "name": "firstName", "displayed": "FirstName" },
 	{ "name": "birthdate", "displayed": "birthdate" },
 	{ "name": "gender", "displayed": "gender" },
-	{ "name": "mrn", "displayed": "mrn" },
+	{ "name": "mrn", "displayed": "mrn" },{ "name": "ssn", "displayed": "ssn" },
 	{ "name": "uuid", "displayed": "uuid" },];
 
 	const buttons = [{ 'image': "file-sliders", 'action': 'chooseSurvey' }, { 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//

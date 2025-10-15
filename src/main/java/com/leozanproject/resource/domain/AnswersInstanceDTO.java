@@ -9,7 +9,29 @@ import java.util.Date;
  *
  */
 public class AnswersInstanceDTO {
+	
+	Integer id;
+	
+	String uuid;
+	
+	/**
+	 * label displayed with name and firstName
+	 */
+	String patientLabel;
+	
+	/**
+	 * label displayed for the survey
+	 */
+	String surveyLabel;
+	
+	/**
+	 * project name
+	 */
+	String project;
 
+	String mrn;
+	
+	
 	PatientDTO patient;
 	
 	SurveyDTO survey;
@@ -55,6 +77,55 @@ public class AnswersInstanceDTO {
 	public void setSurveyAnswersId(int surveyAnswersId) {
 		this.surveyAnswersId = surveyAnswersId;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPatientLabel() {
+		return patientLabel;
+	}
+
+	public void setPatientLabel(String patientLabel) {
+		this.patientLabel = patientLabel;
+	}
+
+	public String getMrn() {
+		return mrn;
+	}
+
+	public void setMrn(String mrn) {
+		this.mrn = mrn;
+	}
+
+	public String getSurveyLabel() {
+		return surveyLabel;
+	}
+
+	public void setSurveyLabel(String surveyLabel) {
+		this.surveyLabel = surveyLabel;
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	
 	
 	
 }

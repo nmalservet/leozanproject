@@ -36,7 +36,13 @@ public class Patient {
 	@Column(name = "gender")
 	String gender;
 	
+	@Column(name = "birthdate")
 	Date birthdate;
+	
+	@Column(name = "ssn")
+	String ssn;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -92,6 +98,14 @@ public class Patient {
 
 	public void setMrn(String mrn) {
 		this.mrn = mrn;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
 	}
 	
 	

@@ -14,10 +14,12 @@ import com.leozanproject.mapper.PatientMapper;
 import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Answer;
 import com.leozanproject.model.Patient;
+import com.leozanproject.model.Project;
 import com.leozanproject.model.Survey;
 import com.leozanproject.model.SurveyAnswer;
 import com.leozanproject.repository.AnswerRepository;
 import com.leozanproject.repository.PatientRepository;
+import com.leozanproject.repository.ProjectRepository;
 import com.leozanproject.repository.SurveyAnswerRepository;
 import com.leozanproject.repository.SurveyRepository;
 import com.leozanproject.resource.domain.AnswerDTO;
@@ -42,6 +44,9 @@ public class AnswerService {
 	PatientRepository patientRepository;
 	
 	@Autowired
+	ProjectRepository projectRepository;
+	
+	@Autowired
 	PatientMapper patMapper;
 	
 	@Autowired
@@ -52,17 +57,27 @@ public class AnswerService {
 		List<AnswersInstanceDTO> res = new ArrayList<>();
 		for(SurveyAnswer an : ans) {
 			AnswersInstanceDTO dto = new AnswersInstanceDTO();
+			dto.setId(an.getId());
+			dto.setUuid(an.getUuid());
 			dto.setUpdateDate(an.getUpdateDate());
 			int patId=an.getPatientId();
 			Optional<Patient> optPat = patientRepository.findById(patId);
 			if(optPat.isPresent()) {
 				PatientDTO patDTO = patMapper.map(optPat.get());
 				dto.setPatient(patDTO);
+				dto.setPatientLabel(patDTO.getName()+" "+patDTO.getFirstName());
+				dto.setMrn(patDTO.getMrn());
 			}
+			
 			//get the survey
 			Optional<Survey> opt = surveyRepository.findById(an.getSurveyId());
 			if (opt.isPresent()) {
-				dto.setSurvey(survMapper.map(opt.get()));
+				Survey surv = opt.get();
+				dto.setSurvey(survMapper.map(surv));
+				dto.setSurveyLabel(surv.getName());
+				Integer projectId = surv.getProject();
+				Optional<Project> optP = projectRepository.findById(projectId);
+				dto.setProject(optP.get().getName());
 			}
 			res.add(dto);
 		}
@@ -89,6 +104,7 @@ public class AnswerService {
 		sa.setSurveyId(answers.getSurveyId());
 		sa.setCreatedBy(userId);
 		sa.setCreationDate(new Date());
+		sa.setUpdateDate(new Date());
 		sa.setName("");
 		UUID uuid = UUID.randomUUID();
 		String uuidAsString = uuid.toString();

@@ -72,6 +72,8 @@ public class PatientService {
 			entity.setName(dto.getName());
 			entity.setFirstName(dto.getFirstName());
 			entity.setGender(dto.getGender());
+			entity.setMrn(dto.getMrn());
+			entity.setSsn(dto.getSsn());
 			repository.save(entity);
 		} else {
 			throw new InvalidParameterException("id");

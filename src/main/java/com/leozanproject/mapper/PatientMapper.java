@@ -23,6 +23,8 @@ public class PatientMapper {
 		dto.setBirthdate(entity.getBirthdate());
 		dto.setGender(entity.getGender());
 		dto.setUuid(entity.getUuid());
+		dto.setMrn(entity.getMrn());
+		dto.setSsn(entity.getSsn());
 		return dto;
 	}
 	

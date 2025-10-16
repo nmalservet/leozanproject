@@ -12,8 +12,8 @@ import { ProjectsContext } from '../context/projects-context.js';
  */
 export default function ProjectsView() {
 
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "name", "displayed": "name" },
-	{ "name": "statusLabel", "displayed": "status" }, { "name": "responsibleUsername", "displayed": "responsible" }, { "name": "disabled", "displayed": "disabled" }];
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": "Nom" },
+	{ "name": "statusLabel", "displayed": "Statut" }, { "name": "responsibleUsername", "displayed": "Responsable" }, { "name": "disabled", "displayed": "Inactif" }];
 	const buttons = [{ 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];
 	const [projectId, setProjectId] = useState(null);//current project, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);

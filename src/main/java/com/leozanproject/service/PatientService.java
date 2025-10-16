@@ -55,6 +55,8 @@ public class PatientService {
 		entity.setFirstName(dto.getFirstName());
 		entity.setBirthdate(dto.getBirthdate());
 		entity.setGender(dto.getGender());
+		entity.setMrn(dto.getMrn());
+		entity.setSsn(dto.getSsn());
         UUID uuid = UUID.randomUUID();
         String uuidAsString = uuid.toString();
 

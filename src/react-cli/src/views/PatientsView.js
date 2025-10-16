@@ -16,11 +16,11 @@ import { useNavigate } from "react-router-dom";
  */
 export default function PatientsView() {
 
-	const columns = [{ "name": "name", "displayed": "Name" }, { "name": "firstName", "displayed": "FirstName" },
-	{ "name": "birthdate", "displayed": "birthdate" },
-	{ "name": "gender", "displayed": "gender" },
-	{ "name": "mrn", "displayed": "mrn" },{ "name": "ssn", "displayed": "ssn" },
-	{ "name": "uuid", "displayed": "uuid" },];
+	const columns = [{ "name": "name", "displayed": "Nom" }, { "name": "firstName", "displayed": "Prénom" },
+	{ "name": "birthdate", "displayed": "Date de naissance" },
+	{ "name": "gender", "displayed": "Genre" },
+	{ "name": "mrn", "displayed": "Mrn" },{ "name": "ssn", "displayed": "Ssn" },
+	{ "name": "uuid", "displayed": "Uuid" },];
 
 	const buttons = [{ 'image': "file-sliders", 'action': 'chooseSurvey' }, { 'image': "eye", 'action': 'view' }, { 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];//
 
@@ -148,7 +148,7 @@ export default function PatientsView() {
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the patient?" />
 			<Grid columns={columns} items={patients} onCall={onCallButton} buttons={buttons} />
 			{isLoading && <LoadingPanel />}
-			<ActionButton name={"addPatient"} text={"Add a patient"} onClick={() => addPatient()} />
+			<ActionButton name={"addPatient"} text={"Ajouter un patient"} onClick={() => addPatient()} />
 		</div>
 	);
 }

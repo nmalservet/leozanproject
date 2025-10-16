@@ -28,7 +28,7 @@ function Navbar() {
 					{/* Logo and main nav */}
 					<div className="flex items-center">
 						<div className="flex-shrink-0">
-							<ScanHeart className="h-8 w-8 text-secondary-500 mr-5" />
+							<ScanHeart className="h-8 w-8 text-primary-900 mr-5" />
 						</div>
 						<div className="flex-shrink-0">
 							<span className="text-primary-900 text-lg font-bold">Leozan Project</span>
@@ -39,7 +39,7 @@ function Navbar() {
 					<div className="hidden md:flex items-center space-x-4">
 						{currentUser == null && <ActionButton name={"login"} text={"Log in"} onClick={() => login()} />}
 						{currentUser && <div className=""><span className="text-white">{currentUser.username}</span>
-							<div><ActionButton name={"logout"} text={"Log out"} onClick={logout} /></div>
+							<div><ActionButton name={"logout"} text={"Se déconnecter"} onClick={logout} /></div>
 						</div>
 						}
 					</div>

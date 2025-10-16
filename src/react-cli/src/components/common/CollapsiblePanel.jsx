@@ -8,7 +8,7 @@ export function CollapsiblePanel({ title, children }) {
     <div className="w-full  mx-auto overflow-hidden rounded-lg shadow-lg bg-white">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-2 flex items-center justify-between bg-gradient-to-r from-primary-500 to-secondary-600 text-white hover:from-primary-600 hover:to-secondary-700 transition-all duration-300"
+        className="w-full px-6 py-2 flex items-center justify-between  bg-primary-900 text-white  transition-all duration-300"
       >
         <span className="text-lg font-semibold">{title}</span>
         {isOpen ? (

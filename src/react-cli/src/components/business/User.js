@@ -70,13 +70,13 @@ function User({ initialUser, readOnly }) {
 				Api.addUser(user).then(response => {
 					if (response) {
 						user.id = response.data;
-						setAlerts([{ message: "The user has been created", type: "success" }]);
+						setAlerts([{ message: "L'utilisateur a été créé", type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateUser(user).then(response => {
 					if (response)
-						setAlerts([{ message: "The user has been saved", type: "success" }]);
+						setAlerts([{ message: "L'tulisateur a été enregistré", type: "success" }]);
 				})
 			}
 		}
@@ -96,18 +96,18 @@ function User({ initialUser, readOnly }) {
 					<div className="" >
 						{user.id && <label># <span style={{ marginLeft: '10px' }}>{user.id}</span></label>}
 					</div>
-					<InputText name={"Name"} text={user.name} onTextChange={setName}></InputText>
-					<InputText name={"FirstName"} text={user.firstName} onTextChange={setFirstName}></InputText>
-					<InputText name={"Username"} text={user.username} onTextChange={setUsername}></InputText>
+					<InputText name={"Nom"} text={user.name} onTextChange={setName}></InputText>
+					<InputText name={"Prénom"} text={user.firstName} onTextChange={setFirstName}></InputText>
+					<InputText name={"Utilisateur"} text={user.username} onTextChange={setUsername}></InputText>
 					<InputText name={"Email"} text={user.email} onTextChange={setEmail}></InputText>
-					<InputPasswordText name={"Password"} type='password' text={password} onTextChange={setPassword}/>
+					<InputPasswordText name={"Mot de passe"} type='password' text={password} onTextChange={setPassword}/>
 					<RoleSelectList selected={user.role} onSelection={setRole} readOnly={readOnly} />
-					<Checkbox name={"Disabled"} value={user.disabled} onValueChange={setDisabled}/>
+					<Checkbox name={"Inactif"} value={user.disabled} onValueChange={setDisabled}/>
 				</div>
 			</form>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}
-				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Save</button>}
+				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Annuler</button>}
+				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Enregistrer</button>}
 			</div>
 		</div>);
 }

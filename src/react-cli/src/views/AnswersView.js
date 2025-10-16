@@ -16,11 +16,11 @@ import { useNavigate } from "react-router-dom";
 export default function AnswersView() {
 
 	const columns = [{ "name": "id", "displayed": "Id" },{ "name": "patientLabel", "displayed": "Patient" }, 
-	{ "name": "mrn", "displayed": "mrn" },
-	{ "name": "project", "displayed": "Project" },
-	{ "name": "surveyLabel", "displayed": "Survey" },
-	{ "name": "updateDate", "displayed": "Updated" },
-	{ "name": "uuid", "displayed": "uuid" },];
+	{ "name": "mrn", "displayed": "Mrn" },
+	{ "name": "project", "displayed": "Projet" },
+	{ "name": "surveyLabel", "displayed": "Questionnaire" },
+	{ "name": "updateDate", "displayed": "Mis à jour" },
+	{ "name": "uuid", "displayed": "Uuid" },];
 
 	//{ 'image': "file-sliders", 'action': 'chooseSurvey' },
 	const buttons = [ { 'image': "eye", 'action': 'view' }, 

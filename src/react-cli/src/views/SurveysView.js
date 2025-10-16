@@ -17,9 +17,9 @@ import AlertsPanel from '../components/common/AlertsPanel';
  */
 export default function SurveysView({ projectId }) {
 
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "projectName", "displayed": "project" },
-	{ "name": "name", "displayed": "topic" }, { "name": "statusLabel", "displayed": "status" }
-		, { "name": "responsible", "displayed": "responsible" }];
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "projectName", "displayed": "Projet" },
+	{ "name": "name", "displayed": "Sujet" }, { "name": "statusLabel", "displayed": "Statut" }
+		, { "name": "responsible", "displayed": "Responsable" }];
 	const buttons = [{ 'image': "eye", 'action': 'view' },{ 'image': "pencil", 'action': 'edit' },  { 'image': "brick-wall", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
 	const [surveys, setSurveys] = useState([]);
 	const [editedSurvey, setEditedSurvey] = useState(null);
@@ -36,7 +36,7 @@ export default function SurveysView({ projectId }) {
 		Api.deleteSurvey(surveyId).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
-				setAlerts([{ message: "The survey has been deleted", type: "success" }]);
+				setAlerts([{ message: "Le questionnaire a été supprimé", type: "success" }]);
 				fetchData(filter,projectId);
 			}
 		}).catch((error)=>{
@@ -152,7 +152,7 @@ export default function SurveysView({ projectId }) {
 	return (
 		<div className="">
 		{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
-			<CollapsiblePanel title={"Filter"} children={<SurveyFilter onApplyFilter={applyFilter} />} />
+			<CollapsiblePanel title={"Filtrer"} children={<SurveyFilter onApplyFilter={applyFilter} />} />
 			<SurveyModal survey={editedSurvey} isOpen={editedSurvey != null} onClose={() => closeSurveyModal()} readOnly={editedSurvey != null && editedSurvey.readOnly === true} />
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the survey?" />
 			<Grid columns={columns} items={surveys} onCall={onCallButton} buttons={buttons} />

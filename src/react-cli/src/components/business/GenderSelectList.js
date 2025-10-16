@@ -21,7 +21,7 @@ export default function GenderSelectList({ selected, onSelection }) {
 	useEffect(() => { loadData({}); }, []);
 	return (
 		<>
-			<SelectList label={"Gender"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={"Genre"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

@@ -44,16 +44,20 @@ function Patient({ initialPatient, readOnly }) {
     patient.mrn = mrn;
 
     var errorsForm = 0;
+    if (!patient.mrn === undefined || patient.mrn.length === 0) {
+      setAlerts([{ message: "Le mrn est obligatoire", type: "error" }]);
+      errorsForm++;
+    }
     if (!patient.name === undefined || patient.name.length === 0) {
-      setAlerts([{ message: "The name is undefined", type: "error" }]);
+      setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
       errorsForm++;
     }
     if (!patient.firstName === undefined || patient.firstName.length === 0) {
-      setAlerts([{ message: "The firstName is undefined", type: "error" }]);
+      setAlerts([{ message: "Le prénom est obligatoire", type: "error" }]);
       errorsForm++;
     }
     if (!patient.birthdate === undefined || patient.birthdate.length === 0) {
-      setAlerts([{ message: "The birthdate is undefined", type: "error" }]);
+      setAlerts([{ message: "La date de naissance est obligatoire", type: "error" }]);
       errorsForm++;
     }
 
@@ -63,7 +67,7 @@ function Patient({ initialPatient, readOnly }) {
           if (response) {
             patient.id = response.data;
             setAlerts([
-              { message: "The patient has been created", type: "success" },
+              { message: "Le patient a été créé", type: "success" },
             ]);
           }
         });
@@ -71,7 +75,7 @@ function Patient({ initialPatient, readOnly }) {
         Api.updatePatient(patient).then((response) => {
           if (response)
             setAlerts([
-              { message: "The patient has been saved", type: "success" },
+              { message: "Le patient a été enregistré.", type: "success" },
             ]);
         });
       }
@@ -98,25 +102,20 @@ function Patient({ initialPatient, readOnly }) {
               </label>
             )}
           </div>
-          <InputText name={"Name"} text={name} onTextChange={setName} />
+          <InputText name={"Nom"} text={name} onTextChange={setName} />
           <InputText
-            name={"FirstName"}
+            name={"Prénom"}
             text={firstName}
             onTextChange={setFirstName}
           />
           <InputDate
-            name={"Birthdate"}
+            name={"Date de naissance"}
             text={birthdate}
             onTextChange={setBirthdate}
           />
           <InputText name={"SSN"} text={ssn} onTextChange={setSsn} />
           <InputText name={"MRN"} text={mrn} onTextChange={setMrn} />
-          <GenderSelectList
-            label={"Gender"}
-            selected={gender}
-            onSelection={setGender}
-            readOnly={readOnly}
-          />
+          <GenderSelectList selected={gender} onSelection={setGender} readOnly={readOnly}/>
         </div>
       </form>
       <div
@@ -128,12 +127,12 @@ function Patient({ initialPatient, readOnly }) {
             className="btn btn-outline-secondary ml-10"
             onClick={() => cancel()}
           >
-            Cancel
+            Annuler
           </button>
         )}
         {readOnly !== true && (
           <button className="btn btn-outline-primary" onClick={() => save()}>
-            Save
+            Enregistrer
           </button>
         )}
       </div>

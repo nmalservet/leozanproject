@@ -23,10 +23,10 @@ export default function LoginView() {
 		// Prevent the browser from reloading the page
 		//read the form
 		if (isEmpty(username))
-			setAlerts([{ message: "Username is mandatory", type: "error" }])
+			setAlerts([{ message: "Le nom d'utilisateur est obligatoire", type: "error" }])
 		else
 			if (isEmpty(password))
-				setAlerts([{ message: "Password is mandatory", type: "error" }])
+				setAlerts([{ message: "Le mot de passe est obligatoire", type: "error" }])
 			else {
 				const data = { username: username, password: password }
 				loginAction(data);
@@ -58,17 +58,17 @@ export default function LoginView() {
 	}
 	return (
 		<div className="login-wrapper">
-			<h1>Connection</h1>
+			<h1>Connexion</h1>
 			<AlertsPanel alerts={alerts}></AlertsPanel>
 			<div className='mb-3'>
-				<label htmlFor='userName' className='form-label'>Login</label>
+				<label htmlFor='userName' className='form-label'>Nom d'utilisateur</label>
 				<input type='text' className='form-control' id='username' name='username' value={username} onChange={e => setUsername(e.target.value)} />
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='password' className='form-label'>Password</label>
+				<label htmlFor='password' className='form-label'>Mot de passe</label>
 				<input type='password' className='form-control' id='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
 			</div>
-			<ActionButton name={"signin"} text={"Sign in"} onClick={submitLogin} />
+			<ActionButton name={"signin"} text={"Se connecter"} onClick={submitLogin} />
 		</div>
 	)
 }

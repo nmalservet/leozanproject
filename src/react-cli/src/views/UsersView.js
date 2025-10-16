@@ -11,8 +11,8 @@ import AlertsPanel from '../components/common/AlertsPanel';
  */
 export default function UsersView() {
 
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "name", "displayed": "name" }, { "name": "firstName", "displayed": "firstName" }, { "name": "username", "displayed": "username" },
-	{ "name": "email", "displayed": "email" }, { "name": "roleLabel", "displayed": "role" }, { "name": "disabled", "displayed": "disabled" }];
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": "Nom" }, { "name": "firstName", "displayed": "Prénom" }, { "name": "username", "displayed": "Utilisateur" },
+	{ "name": "email", "displayed": "Email" }, { "name": "roleLabel", "displayed": "Rôle" }, { "name": "disabled", "displayed": "Inactif" }];
 	const [userId, setUserId] = useState(null);//current project, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [users, setUsers] = useState([]);
@@ -26,7 +26,7 @@ export default function UsersView() {
 			if (response) {
 				setIsModalOpen(false);
 				loadData();
-				setAlerts([{ message: "The user has been deleted", type: "success" }]);
+				setAlerts([{ message: "L utilisateur a été supprimé", type: "success" }]);
 			}
 		})
 
@@ -99,9 +99,9 @@ export default function UsersView() {
 		<div className="">
 			{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 			{editedUser!=null&&<UserModal user={editedUser} onClose={() => closeUserModal()} />}
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the user?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Êtes-vous sûr de vouloir supprimer l'utilisateur?" />
 			<Grid columns={columns} items={users} onCall={onCallButton} buttons={buttons} withFilter={true}/>
-			<ActionButton name={"addUser"} text={"Add a user"} onClick={()=>addUser()}/>
+			<ActionButton name={"addUser"} text={"Ajouter un utilisateur"} onClick={()=>addUser()}/>
 		</div>
 	);
 }

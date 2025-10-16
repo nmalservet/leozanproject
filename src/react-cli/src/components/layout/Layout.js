@@ -26,7 +26,7 @@ function Layout() {
 					<div>
 						{currentUser!==null && <div className="flex flex-1"><LeftMenuPanel></LeftMenuPanel> </div>}
 					</div>
-					<div className="flex-1 p-2">
+					<div className="flex-1">
 						<div className=""><NotificationPanel></NotificationPanel></div>
 						<div className="bg-white rounded-lg border border-gray-300"><Outlet /></div>
 					</div>

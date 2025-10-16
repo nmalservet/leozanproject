@@ -20,7 +20,7 @@ export default function RoleSelectList({ selected, onSelection }) {
 	useEffect(() => { loadData({}); }, []);
 	return (
 		<>
-			<SelectList label={"Status"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={"Role"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

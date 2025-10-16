@@ -11,7 +11,7 @@ export default function ProjectModal({ project,  onClose }) {
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Project #{project.id}</h5>
+						<h5 className="modal-title">Projet #{project.id}</h5>
 						<button
 							type="button"
 							className="btn-close"

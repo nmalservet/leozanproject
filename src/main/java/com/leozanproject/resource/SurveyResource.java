@@ -41,7 +41,7 @@ public class SurveyResource {
 	
 	@PostMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public boolean createSurvey(@RequestBody SurveyDTO dto) throws MissingParameterException, InvalidParameterException {
+	public int createSurvey(@RequestBody SurveyDTO dto) throws MissingParameterException, InvalidParameterException {
 		return service.createSurvey(dto);
 	}
 	

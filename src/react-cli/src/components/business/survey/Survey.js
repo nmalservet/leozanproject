@@ -13,15 +13,15 @@ import QuillTextArea from '../../common/QuillTextArea.js';
  */
 function Survey({ initialSurvey, readOnly }) {
 
-	const [survey, setSurvey] = useState(initialSurvey);
-	const [name, setName] = useState(initialSurvey.name);
-	const [status, setStatus] = useState(initialSurvey.status);
-
-	const [project, setProject] = useState(initialSurvey.project);
+	const [id, setId] = useState(initialSurvey?initialSurvey.id:null);
+	const [name, setName] = useState(initialSurvey?initialSurvey.name:'');
+	const [status, setStatus] = useState(initialSurvey?initialSurvey.status:'');
+const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
+	const [project, setProject] = useState(initialSurvey?initialSurvey.project:'');
 	const [alerts, setAlerts] = useState([]);
 	const [hiddenAlert, setHiddenAlert] = useState(false);
-	const [description, setDescription] = useState(initialSurvey.description);
-	const [responsible, setResponsible] = useState(initialSurvey.responsible);
+	const [description, setDescription] = useState(initialSurvey?initialSurvey.description:'');
+	const [responsible, setResponsible] = useState(initialSurvey?initialSurvey.responsible:'');
 
 	/**
 	 * call back if alert to be hidden.
@@ -32,11 +32,13 @@ function Survey({ initialSurvey, readOnly }) {
 
 	function save() {
 		setHiddenAlert(false);
-		console.log("project:"+project);
 		setAlerts([]);
 		//checks
 		var errorsForm = 0;
 		//
+		let survey = {};
+		if(id)
+			survey.id=id;
 		if (name)
 			survey.name = name;
 		if (status)
@@ -48,27 +50,25 @@ function Survey({ initialSurvey, readOnly }) {
 		if (project)
 			survey.project = project;
 		if (!survey.name || survey.name.length === 0) {
-			setAlerts([{ message: "The name is undefined", type: "error" }]);
+			setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
 			errorsForm++;
 		}
 		if (!survey.project || survey.project.length === 0) {
-			setAlerts([{ message: "The project is undefined", type: "error" }]);
+			setAlerts([{ message: "Le projet est obligatoire", type: "error" }]);
 			errorsForm++;
 		}
 		if (errorsForm === 0) {
 			if (!survey.id) {
 				Api.addSurvey(survey).then(response => {
 					if (response) {
-						var s2 = survey;
-						s2.id = response.data;
-						setSurvey(s2);
-						setAlerts([{ message: "The survey has been created", type: "success" }]);
+						setId(response.data);
+						setAlerts([{ message: "Le questionnaire a été créé", type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateSurvey(survey).then(response => {
 					if (response)
-						setAlerts([{ message: "The survey has been saved", type: "success" }]);
+						setAlerts([{ message: "Le questionnaire a été enregistré", type: "success" }]);
 				})
 			}
 		}
@@ -82,17 +82,17 @@ function Survey({ initialSurvey, readOnly }) {
 
 	return (
 		<div className="max-w-2xl">
-				<h1>Survey #{survey.id}</h1>
+				<h1>Questionnaire #{id}</h1>
 				{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 				<form >
 					<div className="grid grid-col-1 gap-1 m-2">
 						<div className="" >
-							{survey.author && <label className="">created by <i>{survey.author}</i></label>}
+							{author && <label className="">created by <i>{author}</i></label>}
 						</div>
-						<InputText name={"Name"} text={name} onTextChange={setName} />
+						<InputText name={"Nom"} text={name} onTextChange={setName} />
 						<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
 						<div className="grid grid-col-2 gap-1 m-1">
-							<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
+							<UsersSelectList label={"Responsable"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 							<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
 							<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
 						</div>
@@ -100,8 +100,8 @@ function Survey({ initialSurvey, readOnly }) {
 				</form>
 				<hr />
 				<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-					{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}
-					{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Save</button>}
+					{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Annuler</button>}
+					{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Enregistrer</button>}
 				</div>
 
 		</div>);

@@ -96,7 +96,7 @@ export default function ProjectsView() {
 			<ProjectModal project={editedProject} isOpen={editedProject != null} onClose={() => closeProjectModal()} />
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the project?" />
 			{(localProjects&&localProjects.length>0)&&<Grid columns={columns} items={localProjects} buttons={buttons} onCall={onCallButton} withFilter={true}/>}
-			<ActionButton name={"addProject"} text={"Add a project"} onClick={()=>addProject()}/>
+			<ActionButton name={"addProject"} text={"Ajouter un project"} onClick={()=>addProject()}/>
 		</div>
 	);
 }

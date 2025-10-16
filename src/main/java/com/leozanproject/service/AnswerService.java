@@ -109,7 +109,6 @@ public class AnswerService {
 		UUID uuid = UUID.randomUUID();
 		String uuidAsString = uuid.toString();
 		sa.setUuid(uuidAsString);
-
 		surveyAnswerRepository.save(sa);
 		int surveyAnswerId = sa.getId();
 		// now we save the answers related to the survey

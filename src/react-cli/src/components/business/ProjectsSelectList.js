@@ -26,7 +26,7 @@ export default function ProjectsSelectList({selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Project"} values={projects} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={"Projet"} values={projects} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

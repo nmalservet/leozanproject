@@ -157,7 +157,7 @@ export default function SurveysView({ projectId }) {
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the survey?" />
 			<Grid columns={columns} items={surveys} onCall={onCallButton} buttons={buttons} />
 			{isLoading&&<LoadingPanel/>}
-			<ActionButton name={"addSurvey"} text={"Add a survey"} onClick={()=>addSurvey()}/>
+			<ActionButton name={"addSurvey"} text={"Ajouter un questionnaire"} onClick={()=>addSurvey()}/>
 		</div>
 	);
 }

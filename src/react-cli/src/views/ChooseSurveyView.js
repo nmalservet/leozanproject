@@ -50,9 +50,9 @@ export default function ChooseSurveyView() {
 		<div>{
 			patient && <PatientBanner patient={patient}/>}</div>
 		<hr />
-		<div className="flex"><span className="font-bold">1 - Choose a project :</span><div className="ml-5"> <ProjectsSelectList selected={projectId} onSelection={setProjectId} /></div></div>
-		{projectId && <div className="flex"><span className="font-bold">2 - Choose a survey : </span><div className="ml-5"> <SurveysSelectList projectId={projectId} selected={surveyId} onSelection={setSurveyId} /></div></div>}
-		{surveyId && <ActionButton name={"fillSurvey"} text={"Fill the survey"} onClick={() => fillSurvey()} />}
+		<div className="flex"><span className="font-bold">1 - Choisissez un projet :</span><div className="ml-5"> <ProjectsSelectList selected={projectId} onSelection={setProjectId} /></div></div>
+		{projectId && <div className="flex"><span className="font-bold">2 - Choisissez un questionnaire : </span><div className="ml-5"> <SurveysSelectList projectId={projectId} selected={surveyId} onSelection={setSurveyId} /></div></div>}
+		{surveyId && <ActionButton name={"fillSurvey"} text={"Renseigner le questionnaire"} onClick={() => fillSurvey()} />}
 	</div>
 
 	);

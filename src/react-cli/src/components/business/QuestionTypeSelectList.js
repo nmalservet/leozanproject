@@ -27,7 +27,7 @@ export default function QuestionTypeSelectList({ selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Question Type"} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
+			<SelectList label={"Type de question"} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
 		</>
 	);
 }

@@ -26,7 +26,7 @@ export default function StatusSelectList({ selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Status"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
+			<SelectList label={"Statut"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
 		</>
 	);
 }

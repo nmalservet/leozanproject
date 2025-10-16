@@ -61,7 +61,7 @@ public class SurveyService {
 	 * @throws MissingParameterException
 	 * @throws InvalidParameterException
 	 */
-	public boolean createSurvey(SurveyDTO dto) throws MissingParameterException, InvalidParameterException {
+	public int createSurvey(SurveyDTO dto) throws MissingParameterException, InvalidParameterException {
 		ParametersChecker.isNotEmpty("name", dto.getName());
 		ParametersChecker.isNotEmpty("description", dto.getDescription());
 		ParametersChecker.isValidId("project", dto.getProject());
@@ -77,7 +77,7 @@ public class SurveyService {
 		entity.setProject(dto.getProject());
 		repository.save(entity);
 
-		return true;
+		return entity.getId();
 	}
 
 	public boolean updateSurvey(SurveyDTO dto) throws MissingParameterException {

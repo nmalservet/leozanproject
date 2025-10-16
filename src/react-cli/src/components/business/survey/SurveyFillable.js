@@ -10,7 +10,7 @@ import ActionButton from '../../common/ActionButton.js';
 function SurveyFillable({ survey, patientUuid }) {
 	const [surveyComponents, setSurveyComponents] = useState([]);//array of survey objects for the survey
 	const [answers, setAnswers] = useState([]);//answers is a list of pairs [surveyComponentId:answer]}
-	const [surveyAnswersId, setSurveyAnswersId] = useState(null);
+	const [id, setId] = useState(null);//surveyAnswerId
 	const [alerts, setAlerts] = useState([]);
 	const [hiddenAlert, setHiddenAlert] = useState(false);
 
@@ -41,20 +41,21 @@ function SurveyFillable({ survey, patientUuid }) {
 	function saveAnswer(surveyComponentId, answer) {
 		//save the answer
 		console.log("save answer:" + surveyComponentId + ":" + answer);
-		var alreadyAdded = false;
+		//var alreadyAdded = false;
 		var newAnswers = [];//new objects to avoid issue with references not updated
 		//if the answer already exists we override else we add
 		for (const answer of answers) {
 			//console.log(element);
 			if (answer.surveyComponentId == surveyComponentId) {
-				alreadyAdded = true;
+			//	alreadyAdded = true;
+			//we replace the value
 				newAnswers.push({ "surveyComponentId": surveyComponentId, "value": answer });
 			}
 			else
 				newAnswers.push(answer);
 		}
-		if (alreadyAdded == false)
-			newAnswers.push({ "surveyComponentId": surveyComponentId, "value": answer });
+		//if (alreadyAdded == false)
+		//	newAnswers.push({ "surveyComponentId": surveyComponentId, "value": answer });
 
 		setAnswers(newAnswers);
 	}
@@ -64,13 +65,15 @@ function SurveyFillable({ survey, patientUuid }) {
 		console.log("pat:"+patientUuid);
 		setHiddenAlert(false);
 		var surveyAnswers = {};
+		if(id)
+			surveyAnswers.id=id;
 		var errorsForm = 0;
 		surveyAnswers.surveyId = survey.id;
 		surveyAnswers.patientUuid = patientUuid;
 		surveyAnswers.answers = answers;
 		//case create or update 
 		if (errorsForm === 0) {
-			if (surveyAnswersId != null) {
+			if (id != null) {
 				Api.updateAnswers(surveyAnswers)
 					.then((response) => {
 						if (response !== undefined) {
@@ -78,7 +81,7 @@ function SurveyFillable({ survey, patientUuid }) {
 							//we must create a new refernce for the array to be able to refresh the component
 							//setSurveyComponents(response.data);
 							//setSurveyAnswersId(response.data.id);
-							setAlerts([{ message: "The survey has been updated", type: "success" }]);
+							setAlerts([{ message: "Le questionnaire a été mis à jour", type: "success" }]);
 						}
 					})
 					.catch((error) => {
@@ -90,8 +93,8 @@ function SurveyFillable({ survey, patientUuid }) {
 						if (response !== undefined) {
 							//we must create a new refernce for the array to be able to refresh the component
 							//setSurveyComponents(response.data);
-							setSurveyAnswersId(response.data.id);
-							setAlerts([{ message: "The survey has been saved", type: "success" }]);
+							setId(response.data);
+							setAlerts([{ message: "Le questionnaire a été enregistré", type: "success" }]);
 						}
 					})
 					.catch((error) => {
@@ -100,13 +103,13 @@ function SurveyFillable({ survey, patientUuid }) {
 		}
 	}
 
-	return (<div className="m-3 w-full"><h1>Survey : {survey.name}</h1>
+	return (<div className="m-3 w-full"><h1>Questionnaire : {survey.name}</h1>
 
 		<div>
 			<hr />
 			<div className="m-3">
-				<div><b>Responsible :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}</div>
-				<div><b>Unique Id</b> : {survey.id}</div>
+				<div><b>Responsable :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}</div>
+				<div><b>Identifiant unique :</b> {survey.id}</div>
 			</div>
 			<hr />
 		</div>
@@ -114,7 +117,7 @@ function SurveyFillable({ survey, patientUuid }) {
 		{(surveyComponents == null || surveyComponents.length === 0) && <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">You must add your first component!</div>}
 		{surveyComponents != null && surveyComponents.map(comp => <SurveyComponentFillable surveyComponent={comp} onSave={saveAnswer} />)}
 
-		<ActionButton name={"saveForm"} text={"Save"} onClick={() => saveForm()} />
+		<ActionButton name={"saveForm"} text={"Enregistrer"} onClick={() => saveForm()} />
 	</div>)
 }
 

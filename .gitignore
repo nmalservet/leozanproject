@@ -3,3 +3,5 @@
 .project
 .classpath
 spring.log
+docs/.$leozan_architecture.drawio.bkp
+.DS_Store

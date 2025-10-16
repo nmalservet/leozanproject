@@ -39,11 +39,17 @@ function Project({ initialProject, readOnly }) {
 			project.status = status;
 		if (description)
 			project.description = description;
+
+
 		if (responsible)
 			project.responsible = responsible;
 		project.disabled = disabled;
 		if (!project.name|| project.name.length === 0) {
-					setAlerts([{ message: "The name is undefined", type: "error" }]);
+					setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
+					errorsForm++;
+				}
+		if (!project.description|| project.description.length === 0) {
+					setAlerts([{ message: "La description est obligatoire", type: "error" }]);
 					errorsForm++;
 				}
 		if (errorsForm === 0) {
@@ -51,13 +57,13 @@ function Project({ initialProject, readOnly }) {
 				Api.addProject(project).then(response => {
 					if (response) {
 						project.id = response.data;
-						setAlerts([{ message: "The project has been created", type: "success" }]);
+						setAlerts([{ message: "Le projet a été créé", type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateProject(project).then(response => {
 					if (response)
-						setAlerts([{ message: "The project has been saved", type: "success" }]);
+						setAlerts([{ message: "Le projet a été enregistré", type: "success" }]);
 				})
 			}
 		}
@@ -75,19 +81,19 @@ function Project({ initialProject, readOnly }) {
 			<form >
 				<div className="grid grid-col-1 gap-1 m-2">
 					<div className="" >
-						{project.author && <label className="">created by <i>{project.author}</i></label>}
+						{project.author && <label className="">créé par <i>{project.author}</i></label>}
 					</div>
-					<InputText name={"Name"} text={name} onTextChange={setName}/>
-					<UsersSelectList label={"Responsible"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
+					<InputText name={"Nom"} text={name} onTextChange={setName}/>
+					<UsersSelectList label={"Responsable"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 					<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
 					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
-					<Checkbox name={"Disabled"} value={disabled} onValueChange={setDisabled}/>
+					<Checkbox name={"Inactif"} value={disabled} onValueChange={setDisabled}/>
 				</div>
 			</form>
 			<hr/>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}
-				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Save</button>}
+				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Annuler</button>}
+				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Enregistrer</button>}
 			</div>
 		</div>);
 }

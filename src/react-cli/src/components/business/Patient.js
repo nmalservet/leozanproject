@@ -10,6 +10,7 @@ import GenderSelectList from "./GenderSelectList.js";
  * patientcomponent, to create or edit a tasks
  */
 function Patient({ initialPatient, readOnly }) {
+  const [id, setId] = useState(initialPatient ? initialPatient.id : null);
   const [name, setName] = useState(initialPatient ? initialPatient.name : "");
   const [firstName, setFirstName] = useState(
     initialPatient ? initialPatient.firstName : ""
@@ -35,7 +36,7 @@ function Patient({ initialPatient, readOnly }) {
   function save() {
     setHiddenAlert(false);
     let patient = {};
-    if (initialPatient) patient.id = initialPatient.id;
+    patient.id = id;
     patient.name = name;
     patient.firstName = firstName;
     patient.birthdate = birthdate;
@@ -65,7 +66,7 @@ function Patient({ initialPatient, readOnly }) {
       if (!patient.id) {
         Api.addPatient(patient).then((response) => {
           if (response) {
-            patient.id = response.data;
+            setId(response.data);
             setAlerts([
               { message: "Le patient a été créé", type: "success" },
             ]);
@@ -115,7 +116,7 @@ function Patient({ initialPatient, readOnly }) {
           />
           <InputText name={"SSN"} text={ssn} onTextChange={setSsn} />
           <InputText name={"MRN"} text={mrn} onTextChange={setMrn} />
-          <GenderSelectList selected={gender} onSelection={setGender} readOnly={readOnly}/>
+          <GenderSelectList selected={gender} onSelection={setGender} readOnly={readOnly} />
         </div>
       </form>
       <div

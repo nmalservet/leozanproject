@@ -48,15 +48,15 @@ public class ProjectResource {
 	
 	/**
 	 * POST to create
-	 * @param task
+	 * @param project
 	 * @return
 	 * @throws MissingParameterException
 	 * @throws InvalidParameterException 
 	 */
 	@PostMapping(path = "", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public int create(@RequestBody ProjectDTO task) throws MissingParameterException, InvalidParameterException {
-		return service.create(task);
+	public int create(@RequestBody ProjectDTO project) throws MissingParameterException, InvalidParameterException {
+		return service.create(project);
 	}
 
 	@GetMapping(path = "/{id}", produces = "application/json")

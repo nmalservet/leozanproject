@@ -5,7 +5,7 @@ import SurveyFillable from '../components/business/survey/SurveyFillable';
 import PatientBanner from "../components/business/PatientBanner.js";
 
 /**
- * edit survey mode. to edit component
+ * fill survey mode. to fill survey with answers
  */
 export default function FillSurveyView() {
 	//const navigation = useNavigation();

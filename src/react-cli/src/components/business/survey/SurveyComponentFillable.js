@@ -20,7 +20,6 @@ function SurveyComponentFillable({ surveyComponent ,onSave}) {
 	
 	function save(value){
 		console.log("save:"+surveyComponent.id+":"+value);
-		
 		onSave(surveyComponent.id,value);
 	}
 	

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Api from '../Api.js';
-import ProjectsSelectList from "../components/business/ProjectsSelectList.js";
+import ProjectsSelectList from "../components/business/projects/ProjectsSelectList.js";
 import SurveysSelectList from "../components/business/SurveysSelectList.js";
 import ActionButton from "../components/common/ActionButton.js";
 import { useNavigate } from "react-router-dom";

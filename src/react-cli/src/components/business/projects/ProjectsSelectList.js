@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import SelectList from '../common/SelectList';
-import Api from '../../Api.js';
+import SelectList from '../../common/SelectList';
+import Api from '../../../Api.js';
 
 /**
  * select list for the projects. Reusable component

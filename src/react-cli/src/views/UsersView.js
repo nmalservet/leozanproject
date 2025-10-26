@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import { Modal } from '../components/common/Modal.js';
-import UserModal from '../components/business/UserModal.js';
+import UserModal from '../components/business/users/UserModal.js';
 import ActionButton from '../components/common/ActionButton.js';
 import AlertsPanel from '../components/common/AlertsPanel';
 /**

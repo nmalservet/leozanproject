@@ -1,10 +1,10 @@
 import { useState} from "react";
-import Api from '../../Api.js';
-import AlertsPanel from '../common/AlertsPanel';
-import InputText from '../common/InputText.js';
-import InputPasswordText from '../common/InputPasswordText.js';
-import RoleSelectList from './RoleSelectList.js';
-import Checkbox from '../common/Checkbox.js';
+import Api from '../../../Api.js';
+import AlertsPanel from '../../common/AlertsPanel';
+import InputText from '../../common/InputText.js';
+import InputPasswordText from '../../common/InputPasswordText.js';
+import RoleSelectList from '../RoleSelectList.js';
+import Checkbox from '../../common/Checkbox.js';
 /**
  * user component, to create or edit a users
  */

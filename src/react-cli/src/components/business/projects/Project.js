@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Api from '../../Api.js';
-import AlertsPanel from '../common/AlertsPanel';
-import InputText from '../common/InputText.js';
-import Checkbox from '../common/Checkbox.js';
-import StatusSelectList from './StatusSelectList.js';
-import UsersSelectList from './UsersSelectList.js';
-import QuillTextArea from '../common/QuillTextArea.js';
+import Api from '../../../Api.js';
+import AlertsPanel from '../../common/AlertsPanel.js';
+import InputText from '../../common/InputText.js';
+import Checkbox from '../../common/Checkbox.js';
+import StatusSelectList from '../StatusSelectList.js';
+import UsersSelectList from '../users/UsersSelectList.js';
+import QuillTextArea from '../../common/QuillTextArea.js';
 /**
  * project component, to create or edit a projects
  */

@@ -80,11 +80,11 @@ export default function AnswersView() {
 	 * on edit, redirect to the viez edittask
 	 */
 	function viewAnswer(id) {
-		answers.forEach((task) => {
-			if (task.uuid === id) {
-				var taskR = task;
-				taskR.readOnly = true;
-				setEditedAnswer(task);
+		answers.forEach((answer) => {
+			if (answer.uuid === id) {
+				let ansR =answer;
+				ansR.readOnly=true
+				setEditedAnswer(ansR);
 			}
 		})
 	}
@@ -134,6 +134,7 @@ export default function AnswersView() {
 		<div className="">
 			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the answer?" />
+			{editedAnswer&<div>Here we display the modal answer</div>}
 			<Grid columns={columns} items={answers} onCall={onCallButton} buttons={buttons} />
 			{isLoading && <LoadingPanel />}
 		</div>

@@ -4,8 +4,8 @@ import AlertsPanel from '../../common/AlertsPanel';
 import InputText from '../../common/InputText.js';
 import StatusSelectList from '../StatusSelectList.js';
 
-import ProjectsSelectList from '../ProjectsSelectList.js';
-import UsersSelectList from '../UsersSelectList.js';
+import ProjectsSelectList from '../projects/ProjectsSelectList.js';
+import UsersSelectList from '../users/UsersSelectList.js';
 import QuillTextArea from '../../common/QuillTextArea.js';
 
 /**

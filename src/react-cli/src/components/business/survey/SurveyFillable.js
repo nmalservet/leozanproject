@@ -61,8 +61,6 @@ function SurveyFillable({ survey, patientUuid }) {
 	}
 
 	function saveForm() {
-		console.log("save form");
-		console.log("pat:"+patientUuid);
 		setHiddenAlert(false);
 		var surveyAnswers = {};
 		if(id)

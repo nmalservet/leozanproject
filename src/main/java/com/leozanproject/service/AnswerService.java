@@ -119,6 +119,12 @@ public class AnswerService {
 		return surveyAnswerId;
 	}
 
+	/**
+	 * update the answer survey. for each answer save it (create or update)
+	 * @param answers
+	 * @param userId
+	 * @return
+	 */
 	public Boolean update(SurveyAnswersDTO answers, int userId) {
 
 		int id = answers.getId();
@@ -139,6 +145,8 @@ public class AnswerService {
 				Answer ans = opt2.get();
 				ans.setValue(answer.getValue());
 				repository.save(ans);
+			}else {
+				repository.save(new Answer(id, answer.getSurveyComponentId(), answer.getValue()));
 			}
 		}
 		return true;

@@ -15,7 +15,8 @@ function SurveyComponentFillable({ surveyComponent ,onValueChange}) {
 	const [answer, setAnswer] = useState(null);
 
 	function onChange(value) {
-		onValueChange(surveyComponent.id,value)
+		onValueChange(surveyComponent.id,value);
+		setAnswer(value);
 	}
 	
 	/*function save(value){
@@ -42,11 +43,11 @@ function SurveyComponentFillable({ surveyComponent ,onValueChange}) {
 				<div className="flex">
 					<div className="w-[850px] m-1" >
 						{(surveyComponent.type === 0) && (surveyComponent.questionType == 0) && <InputText name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} />}
-						{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} />}
+						{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={answer} onTextChange={onChange} readOnly={false} height={"300"} />}
 						{(surveyComponent.type === 0) && (surveyComponent.questionType == 2) && surveyComponent.values && <SelectList label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={answer} handleSelection={onChange} inline={true} />}
 						{(surveyComponent.type === 0) && (surveyComponent.questionType == 3) && <Checkbox name={surveyComponent.name} text={""} onValueChange={onChange} inline={true} />}
 						{(surveyComponent.type === 0) && (surveyComponent.questionType == 4) && <InputDate name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} />}
-						{(surveyComponent.type === 0) && (surveyComponent.questionType == 5) && surveyComponent.values && <RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={onChange} inline={true} />}
+						{(surveyComponent.type === 0) && (surveyComponent.questionType == 5) && surveyComponent.values && <RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={answer} handleSelection={onChange} inline={true} />}
 						{(surveyComponent.type === 0) && (surveyComponent.questionType == 6) && <InputFile name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} />}
 						{(surveyComponent.type === 1) && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
 						

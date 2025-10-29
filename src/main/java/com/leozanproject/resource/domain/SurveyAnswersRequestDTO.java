@@ -8,7 +8,7 @@ import java.util.List;
  * @author nicolas malservet
  *
  */
-public class SurveyAnswersDTO {
+public class SurveyAnswersRequestDTO {
 	
 	int id;
 

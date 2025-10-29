@@ -1,5 +1,6 @@
 package com.leozanproject.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +24,12 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 	 * @return
 	 */
 	public Optional<Answer>  findBySurveyAnswerIdAndSurveyObjectId(int surveyAnswerId,int surveyObjectId);
+
+	/**
+	 * find all answers related to a response on a survey
+	 * @param id
+	 * @return
+	 */
+	public List<Answer> findBySurveyAnswerId(int surveyAnswerId);
 
 }

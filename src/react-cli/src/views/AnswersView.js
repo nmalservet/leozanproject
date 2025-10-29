@@ -58,9 +58,6 @@ export default function AnswersView() {
 		fetchData(cfilter);
 	}
 
-	/**
-	 * on edit, redirect to the viez edittask
-	 */
 	function chooseSurvey(id) {
 		console.log("choosed patient:"+id);
 		navigate('/chooseSurvey/' + id);
@@ -80,13 +77,8 @@ export default function AnswersView() {
 	 * on edit, redirect to the viez edittask
 	 */
 	function viewAnswer(id) {
-		answers.forEach((answer) => {
-			if (answer.uuid === id) {
-				let ansR =answer;
-				ansR.readOnly=true
-				setEditedAnswer(ansR);
-			}
-		})
+		navigate('/viewSurveyResponse/' + id);
+		
 	}
 
 	/**

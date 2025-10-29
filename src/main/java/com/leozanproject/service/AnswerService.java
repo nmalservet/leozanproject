@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.leozanproject.exceptions.InvalidParameterException;
+import com.leozanproject.mapper.AnswerMapper;
 import com.leozanproject.mapper.PatientMapper;
 import com.leozanproject.mapper.SurveyMapper;
 import com.leozanproject.model.Answer;
@@ -26,7 +27,9 @@ import com.leozanproject.resource.domain.AnswerDTO;
 import com.leozanproject.resource.domain.AnswerFilterDTO;
 import com.leozanproject.resource.domain.AnswersInstanceDTO;
 import com.leozanproject.resource.domain.PatientDTO;
-import com.leozanproject.resource.domain.SurveyAnswersDTO;
+import com.leozanproject.resource.domain.SurveyAnswersRequestDTO;
+import com.leozanproject.resource.domain.SurveyDTO;
+import com.leozanproject.resource.domain.SurveyResponse;
 
 @Component
 public class AnswerService {
@@ -51,6 +54,30 @@ public class AnswerService {
 	
 	@Autowired
 	SurveyMapper survMapper;
+	
+	@Autowired
+	AnswerMapper mapper;
+	
+	@Autowired
+	SurveyObjectService soService;
+	
+	private PatientDTO getPatient(int patientId) {
+		Optional<Patient> optPat = patientRepository.findById(patientId);
+		if(optPat.isPresent()) {
+			PatientDTO patDTO = patMapper.map(optPat.get());
+			return patDTO;
+		}
+		return null;
+	}
+	
+	private SurveyDTO getSurvey(int surveyId) {
+		Optional<Survey> opt = surveyRepository.findById(surveyId);
+		if (opt.isPresent()) {
+			Survey surv = opt.get();
+			return survMapper.map(surv);
+		}
+		return null;
+	}
 	
 	public List<AnswersInstanceDTO> list(AnswerFilterDTO filter) {
 		List<SurveyAnswer> ans = surveyAnswerRepository.findAll();
@@ -92,7 +119,7 @@ public class AnswerService {
 	 * @return surveyAnswersId
 	 * @throws InvalidParameterException 
 	 */
-	public Integer save(SurveyAnswersDTO answers, int userId) throws InvalidParameterException {
+	public Integer save(SurveyAnswersRequestDTO answers, int userId) throws InvalidParameterException {
 
 		SurveyAnswer sa = new SurveyAnswer();
 		
@@ -125,7 +152,7 @@ public class AnswerService {
 	 * @param userId
 	 * @return
 	 */
-	public Boolean update(SurveyAnswersDTO answers, int userId) {
+	public Boolean update(SurveyAnswersRequestDTO answers, int userId) {
 
 		int id = answers.getId();
 
@@ -150,5 +177,22 @@ public class AnswerService {
 			}
 		}
 		return true;
+	}
+
+	public SurveyResponse getSurveyResponse(int id) {
+		Optional<SurveyAnswer> opt = surveyAnswerRepository.findById(id);
+		SurveyResponse res = new SurveyResponse();
+		if (opt.isPresent()) {
+			SurveyAnswer sa = opt.get();
+			res.setId(id);
+			int patientId = sa.getPatientId();
+			int surveyId = sa.getSurveyId();
+			res.setPatient(getPatient(patientId));
+			res.setSurvey(getSurvey(surveyId));
+			List<Answer> opt2 = repository.findBySurveyAnswerId(id);
+			res.setAnswers(mapper.map(opt2));
+			res.setSurveyObjects(soService.list(surveyId));
+		}
+		return res;
 	}
 }

@@ -55,10 +55,10 @@ export default class Api {
 	/**
 	 * Answers management
 	 */
-	static getAnswers(filter) { return axios.post('/api/v1/answers/filter', filter); }
-	
+	static getAnswers(filter) { return axios.post('/api/v1/answers/filter', filter); }//list all survey answers
 	static saveAnswers(answers){return axios.post('/api/v1/answers',answers);}
 	static updateAnswers(answers){return axios.put('/api/v1/answers',answers);}
+	static getSurveyResponse(id){return axios.get('/api/v1/answers/'+id);}//get a survey response (answers+ patient)
 	
 	/**
 	 * User management

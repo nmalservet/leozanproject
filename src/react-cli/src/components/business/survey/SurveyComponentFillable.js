@@ -10,9 +10,10 @@ import RadioButtons from '../../common/RadioButtons.js';
  * survey object view component, to display the survey object in compact mode without edition
  * onSave : action called triggered when saved provided by the parent : onSave(surveyComponentId,answer)
  */
-function SurveyComponentFillable({ surveyComponent ,onValueChange}) {
+function SurveyComponentFillable({ surveyComponent ,onValueChange,initialValue}) {
 	
-	const [answer, setAnswer] = useState(null);
+	const [answer, setAnswer] = useState(initialValue);
+	//const [initialValue]
 
 	function onChange(value) {
 		onValueChange(surveyComponent.id,value);

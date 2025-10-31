@@ -195,4 +195,21 @@ public class AnswerService {
 		}
 		return res;
 	}
+
+	/**
+	 * delete the survey response.
+	 * <br> Dangerous feature, data will be lost.
+	 * @param id
+	 * @return
+	 */
+	public Boolean deleteSurveyResponse(int id) {
+		Optional<SurveyAnswer> opt = surveyAnswerRepository.findById(id);
+		SurveyResponse res = new SurveyResponse();
+		if (opt.isPresent()) {
+			surveyAnswerRepository.deleteById(id);
+			
+			return true;
+		}
+		return false;
+	}
 }

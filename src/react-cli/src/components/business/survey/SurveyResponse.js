@@ -7,11 +7,11 @@ import ActionButton from "../../common/ActionButton.js";
 /**
  * main component to edit a survey
  */
-export default function SurveyResponse({ surveyResponse }) {
-    const [survey]=useState(surveyResponse.survey);
+export default function SurveyResponse({ surveyResponse , readOnly}) {
+  const [survey] = useState(surveyResponse.survey);
   const [surveyComponents] = useState(surveyResponse.surveyObjects); //array of survey objects for the survey
-  const [patient]=useState(surveyResponse.patient);
-  const [answers, setAnswers] = useState(surveyResponse.answers); //answers is a map [surveyComponentId:answer]}
+  const [patient] = useState(surveyResponse.patient);
+  const [answers, setAnswers] = useState(arrayToMap(surveyResponse.answers)); //answers is a map [surveyComponentId:answer]}
   const [id, setId] = useState(null); //surveyAnswerId
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
@@ -20,10 +20,29 @@ export default function SurveyResponse({ surveyResponse }) {
     setHiddenAlert(true);
   }
 
+  /**
+   * convert the array answers to a map
+   */
+  function arrayToMap(arr){
+    let myMap = new Map();
+    arr.forEach((answer) => myMap.set(answer.surveyComponentId,answer.value));
+    return myMap;
+  }
+
   function onValueChange(surveyComponentId, answer) {
     //save the answer
     console.log("save answer:" + surveyComponentId + ":" + answer);
     setAnswers(new Map(answers.set(surveyComponentId, answer)));
+  }
+
+  /**
+   * get the answer provided on a the response
+   * @param {} surveyVComponentId 
+   */
+  function getAnswer(surveyComponentId){
+    if(surveyComponentId!=null)
+      return answers.get(surveyComponentId);
+    return "";
   }
 
   function mapToJson(myMap) {
@@ -90,9 +109,7 @@ export default function SurveyResponse({ surveyResponse }) {
   return (
     <div className="m-3 w-full">
       <h1>Questionnaire : {survey.name}</h1>
-
       <div>
-        <hr />
         <div className="m-3">
           <div>
             <b>Responsable :</b>{" "}
@@ -114,17 +131,14 @@ export default function SurveyResponse({ surveyResponse }) {
       )}
       {surveyComponents != null &&
         surveyComponents.map((comp) => (
-          <SurveyComponentFillable
-            surveyComponent={comp}
-            onValueChange={onValueChange}
-          />
+          <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} initialValue={getAnswer(comp.id)}/>
         ))}
 
-      <ActionButton
+      {readOnly==false&&<ActionButton
         name={"saveForm"}
         text={"Enregistrer"}
         onClick={() => saveForm()}
-      />
+      />}
     </div>
   );
 }

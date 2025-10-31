@@ -37,7 +37,7 @@ export default function AnswersView() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleYes = () => {
-		Api.deleteAnswer(answerId).then((response) => {
+		Api.deleteSurveyResponse(answerId).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
 				fetchData(filter);
@@ -125,7 +125,7 @@ export default function AnswersView() {
 	return (
 		<div className="">
 			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the answer?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Êtes-vous sûr de vouloir supprimer la réponse?" />
 			{editedAnswer&<div>Here we display the modal answer</div>}
 			<Grid columns={columns} items={answers} onCall={onCallButton} buttons={buttons} />
 			{isLoading && <LoadingPanel />}

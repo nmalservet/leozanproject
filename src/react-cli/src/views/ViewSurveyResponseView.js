@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Api from '../Api.js';
-import SurveyResponse from '../components/business/survey/SurveyResponse';
+import SurveyResponse from '../components/business/survey/SurveyResponse.js';
 import PatientBanner from "../components/business/PatientBanner.js";
 
 /**
@@ -9,7 +9,7 @@ import PatientBanner from "../components/business/PatientBanner.js";
  */
 export default function ViewSurveyAnswersView() {
 
-	const { surveyAnswersId } = useParams();//get the surveyAnswersId
+	const { surveyResponseId } = useParams();//get the surveyAnswersId
 	const [surveyResponse, setSurveyResponse] = useState(null);
 
 	function loadData(id) {
@@ -25,11 +25,12 @@ export default function ViewSurveyAnswersView() {
 			});
 	}
 	useEffect(() => {
-		if (surveyAnswersId != null)
-			loadData(surveyAnswersId);
-	}, [surveyAnswersId]);
+		console.log("load survey response:"+surveyResponseId);
+		if (surveyResponseId != null)
+			loadData(surveyResponseId);
+	}, [surveyResponseId]);
 
-	return (<div>ok
+	return (<div>
 		{surveyResponse && <PatientBanner patient={surveyResponse.patient} />}
 		
 		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} />}

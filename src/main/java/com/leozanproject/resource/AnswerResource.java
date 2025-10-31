@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,15 @@ public class AnswerResource {
 	@GetMapping(path="/{id}", produces = "application/json")
 	public SurveyResponse getSurveyResponse(@PathVariable int id) {
 		return service.getSurveyResponse(id);
+	}
+	
+	/**
+	 * delete the survey response
+	 * 
+	 */
+	@DeleteMapping(path="/{id}", produces = "application/json")
+	public Boolean deleteSurveyResponse(@PathVariable int id) {
+		return service.deleteSurveyResponse(id);
 	}
 
 }

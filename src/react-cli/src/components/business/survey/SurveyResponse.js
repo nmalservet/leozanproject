@@ -7,11 +7,11 @@ import ActionButton from "../../common/ActionButton.js";
 /**
  * main component to edit a survey
  */
-export default function SurveyResponse({ surveyResponse , readOnly}) {
+export default function SurveyResponse({ surveyResponse, readOnly }) {
   const [survey] = useState(surveyResponse.survey);
-  const [surveyComponents] = useState(surveyResponse.surveyObjects); //array of survey objects for the survey
+  const [surveyComponents,setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [patient] = useState(surveyResponse.patient);
-  const [answers, setAnswers] = useState(arrayToMap(surveyResponse.answers)); //answers is a map [surveyComponentId:answer]}
+  const [answers, setAnswers] = useState(new Map()); //answers is a map [surveyComponentId:answer]}
   const [id, setId] = useState(null); //surveyAnswerId
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
@@ -23,25 +23,38 @@ export default function SurveyResponse({ surveyResponse , readOnly}) {
   /**
    * convert the array answers to a map
    */
-  function arrayToMap(arr){
-    let myMap = new Map();
-    arr.forEach((answer) => myMap.set(answer.surveyComponentId,answer.value));
+  function arrayToMap(arr) {
+    console.log("arrToMap");
+    console.log(arr);
+    var myMap = new Map();
+    if (arr && arr.length > 0)
+      for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+        var key = arr[i].surveyComponentId;
+        var val = arr[i].value;
+        myMap.set(key, val);
+      }
+    // myMap.set("1",2);
+    //  myMap.set(1,"2");
     return myMap;
   }
 
   function onValueChange(surveyComponentId, answer) {
     //save the answer
     console.log("save answer:" + surveyComponentId + ":" + answer);
-    setAnswers(new Map(answers.set(surveyComponentId, answer)));
+    //if(answers.get(surveyComponentId))
+    //setAnswers(new Map(answers.set(surveyComponentId, answer)));
   }
 
   /**
    * get the answer provided on a the response
-   * @param {} surveyVComponentId 
+   * @param {} surveyVComponentId
    */
-  function getAnswer(surveyComponentId){
-    if(surveyComponentId!=null)
+  function getAnswer(surveyComponentId) {
+    console.log("get answer:"+surveyComponentId+""+answers.get(surveyComponentId))
+    if (surveyComponentId != null) {
       return answers.get(surveyComponentId);
+      }
     return "";
   }
 
@@ -106,6 +119,20 @@ export default function SurveyResponse({ surveyResponse , readOnly}) {
     }
   }
 
+  useEffect(() => {
+    console.log("load answers:");
+    var ans = arrayToMap(surveyResponse.answers);
+    //setAnswers();
+    //we agregate the initial value on each component to avoid to refresh it in a bad order
+    let objs =[];
+    for (let i = 0; i < surveyResponse.surveyObjects.length; i++) {
+        let comp =surveyResponse.surveyObjects[i];
+        comp.initialValue=ans.get(comp.id);
+        objs.push(comp);
+        console.log(comp);
+      }
+      setSurveyComponents(objs);
+  }, []);
   return (
     <div className="m-3 w-full">
       <h1>Questionnaire : {survey.name}</h1>
@@ -131,15 +158,16 @@ export default function SurveyResponse({ surveyResponse , readOnly}) {
       )}
       {surveyComponents != null &&
         surveyComponents.map((comp) => (
-          <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} initialValue={getAnswer(comp.id)}/>
+          <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} readOnly={readOnly}/>
         ))}
 
-      {readOnly==false&&<ActionButton
-        name={"saveForm"}
-        text={"Enregistrer"}
-        onClick={() => saveForm()}
-      />}
+      {readOnly === false && (
+        <ActionButton
+          name={"saveForm"}
+          text={"Enregistrer"}
+          onClick={() => saveForm()}
+        />
+      )}
     </div>
   );
 }
-

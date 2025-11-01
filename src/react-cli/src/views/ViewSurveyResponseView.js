@@ -13,6 +13,7 @@ export default function ViewSurveyAnswersView() {
 	const [surveyResponse, setSurveyResponse] = useState(null);
 
 	function loadData(id) {
+		console.log("loadData :"+id);
 		Api.getSurveyResponse(id)
 			.then((response) => {
 				if (response !== undefined) {
@@ -33,7 +34,7 @@ export default function ViewSurveyAnswersView() {
 	return (<div>
 		{surveyResponse && <PatientBanner patient={surveyResponse.patient} />}
 		
-		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} />}
+		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} readOnly={true}/>}
 	</div>)
 
 }

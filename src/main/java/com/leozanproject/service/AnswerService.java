@@ -80,7 +80,7 @@ public class AnswerService {
 	}
 	
 	public List<AnswersInstanceDTO> list(AnswerFilterDTO filter) {
-		List<SurveyAnswer> ans = surveyAnswerRepository.findAll();
+		List<SurveyAnswer> ans = surveyAnswerRepository.findAllByOrderByIdDesc();
 		List<AnswersInstanceDTO> res = new ArrayList<>();
 		for(SurveyAnswer an : ans) {
 			AnswersInstanceDTO dto = new AnswersInstanceDTO();

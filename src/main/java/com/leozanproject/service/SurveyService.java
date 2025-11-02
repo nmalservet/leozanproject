@@ -56,6 +56,7 @@ public class SurveyService {
 
 	/**
 	 * a project is mandatory for the survey
+	 * 
 	 * @param dto
 	 * @return
 	 * @throws MissingParameterException
@@ -66,7 +67,7 @@ public class SurveyService {
 		ParametersChecker.isNotEmpty("description", dto.getDescription());
 		ParametersChecker.isValidId("project", dto.getProject());
 		Survey entity = new Survey();
-		
+
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());
 		UUID uuid = UUID.randomUUID();
@@ -91,14 +92,15 @@ public class SurveyService {
 			entity.setDescription(dto.getDescription());
 			if (dto.getResponsible() != 0)
 				entity.setResponsible(dto.getResponsible());
-			entity.setStatus(dto.getStatus());
+			if (dto.getStatus() != null)
+				entity.setStatus(dto.getStatus());
 			entity.setProject(dto.getProject());
 			repository.save(entity);
 		}
 
 		return true;
 	}
-	
+
 	public SurveyDTO getSurvey(int id) throws MissingParameterException {
 
 		Optional<Survey> opt = repository.findById(id);

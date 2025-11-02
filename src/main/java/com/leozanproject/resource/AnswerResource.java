@@ -53,7 +53,6 @@ public class AnswerResource {
 	
 	@PostMapping(path = "/filter", produces = "application/json")
 	public List<AnswersInstanceDTO> list(@RequestBody AnswerFilterDTO filter) {
-
 		return service.list(filter);
 	}
 	@GetMapping(path="/{id}", produces = "application/json")

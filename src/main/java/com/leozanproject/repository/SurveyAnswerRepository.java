@@ -1,5 +1,7 @@
 package com.leozanproject.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,8 @@ import com.leozanproject.model.SurveyAnswer;
  */
 @Repository
 public interface SurveyAnswerRepository extends JpaRepository<SurveyAnswer, Integer> {
+
+	public List<SurveyAnswer> findAllByOrderByIdDesc();
 
 	
 

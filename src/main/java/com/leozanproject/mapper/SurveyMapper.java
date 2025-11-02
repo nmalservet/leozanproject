@@ -20,7 +20,8 @@ public class SurveyMapper {
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
 		dto.setStatus(entity.getStatus());
-		dto.setStatusLabel(SurveyStatus.getValue(entity.getStatus()).name());
+		if(entity.getStatus()!=null)
+			dto.setStatusLabel(SurveyStatus.getValue(entity.getStatus()).name());
 		dto.setTargetObject(entity.getTargetObject());
 		dto.setUuid(entity.getUuid());
 		if (entity.getProject() != null)

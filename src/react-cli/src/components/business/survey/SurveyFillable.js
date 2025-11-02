@@ -112,8 +112,7 @@ function SurveyFillable({ survey, patientUuid }) {
         <hr />
         <div className="m-3">
           <div>
-            <b>Responsable :</b>{" "}
-            {survey.responsible === 0 ? "Not yet defined" : survey.responsible}
+            <b>Responsable :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}
           </div>
           <div>
             <b>Identifiant unique :</b> {survey.id}
@@ -121,27 +120,12 @@ function SurveyFillable({ survey, patientUuid }) {
         </div>
         <hr />
       </div>
-      {hiddenAlert === false && (
-        <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>
-      )}
+      {hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
       {(surveyComponents == null || surveyComponents.length === 0) && (
-        <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
-          You must add your first component!
-        </div>
+        <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">You must add your first component!</div>
       )}
-      {surveyComponents != null &&
-        surveyComponents.map((comp) => (
-          <SurveyComponentFillable
-            surveyComponent={comp}
-            onValueChange={onValueChange}
-          />
-        ))}
-
-      <ActionButton
-        name={"saveForm"}
-        text={"Enregistrer"}
-        onClick={() => saveForm()}
-      />
+      {surveyComponents != null && surveyComponents.map((comp) => <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} />)}
+      <ActionButton name={"saveForm"} text={"Enregistrer"} onClick={() => saveForm()} />
     </div>
   );
 }

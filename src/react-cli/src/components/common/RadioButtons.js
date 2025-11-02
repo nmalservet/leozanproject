@@ -9,7 +9,7 @@ import { memo } from "react";
  * @param selected the defaultSelection
  * @returns select list component.
  */
-function RadioButtons({ label,selected, values, handleSelection, inline }) {
+function RadioButtons({ label,selected, values, handleSelection, inline ,readOnly}) {
 
 	/**
 	 * we hide the first item if a selection has been already done
@@ -31,8 +31,7 @@ function RadioButtons({ label,selected, values, handleSelection, inline }) {
 					values.forEach((value, key) => {
 						options.push(
 							<div>
-								{value}:{selected}
-								<input type="radio" id={value} name={label} value={value} checked={selected === value} onChange={handleChange}/>
+								<input disabled={readOnly===true}  type="radio" id={value} name={label} value={value} checked={selected === value} onChange={()=>handleChange(value)}/>
 								<label for={value} className="ml-3"> {value}</label>
 							</div>)
 					})

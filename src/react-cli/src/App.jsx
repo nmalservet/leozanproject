@@ -15,6 +15,7 @@ import EditPatientView from './views/EditPatientView';
 import ChooseSurveyView from './views/ChooseSurveyView';
 import FillSurveyView from './views/FillSurveyView';
 import ViewSurveyResponseView from './views/ViewSurveyResponseView';
+import EditSurveyResponseView from './views/EditSurveyResponseView';
 import ViewPatientView from './views/ViewPatientView';
 import AdministrationView from './views/AdministrationView';
 import ProjectsView from './views/ProjectsView';
@@ -46,7 +47,7 @@ function App() {
 				{ path: 'viewPatient/:patientUuid', element: <ViewPatientView /> },
 				{ path: 'answers', element: <AnswersView/> },
 				{ path: 'viewSurveyResponse/:surveyResponseId', element: <ViewSurveyResponseView /> },
-				
+				{ path: 'editSurveyResponse/:surveyResponseId', element: <EditSurveyResponseView /> },
 				{ path: 'projects', element: <ProjectsView /> },
 				{ path: 'users', element: <UsersView /> },
 				{

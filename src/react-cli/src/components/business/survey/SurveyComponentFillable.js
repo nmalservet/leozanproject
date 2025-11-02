@@ -56,7 +56,7 @@ function SurveyComponentFillable({ surveyComponent, onValueChange, readOnly }) {
             {surveyComponent.type === 0 && surveyComponent.questionType == 5 && surveyComponent.values && (
               <RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} selected={answer} handleSelection={onChange} inline={true} readOnly={readOnly} />
             )}
-            {surveyComponent.type === 0 && surveyComponent.questionType == 6  && <InputFile name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} />}
+            {true===false&&surveyComponent.type === 0 && surveyComponent.questionType === 6  && <div>Question File : Coming soon<InputFile name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} /></div>}
             {surveyComponent.type === 1 && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
           </div>
         </div>
@@ -64,5 +64,4 @@ function SurveyComponentFillable({ surveyComponent, onValueChange, readOnly }) {
     </div>
   );
 }
-
 export default SurveyComponentFillable;

@@ -58,42 +58,17 @@ export default function AnswersView() {
 		fetchData(cfilter);
 	}
 
-	function chooseSurvey(id) {
-		console.log("choosed patient:"+id);
-		navigate('/chooseSurvey/' + id);
-	}
-
-	/**
-	 * on edit, redirect to the viez edittask
-	 */
-	function editAnswer(id) {
-		answers.forEach((answer) => {
-			if (answer.id === id)
-				setEditedAnswer(answer);
-		})
-	}
-
-	/**
-	 * on edit, redirect to the viez edittask
-	 */
-	function viewAnswer(id) {
-		navigate('/viewSurveyResponse/' + id);
-		
-	}
-
 	/**
 	 * callback function to be able to call action on grid
 	 */
 	function onCallButton(action, id) {
 		console.log("choosed id:"+id);
 		if (action === "edit")
-			editAnswer(id);
+			navigate('/editSurveyResponse/' + id);
 		if (action === "delete")
 			deleteAnswer(id);
 		if (action === "view")
-			viewAnswer(id);
-		if (action === "chooseSurvey")
-			chooseSurvey(id);
+			navigate('/viewSurveyResponse/' + id);
 	}
 
 	/**

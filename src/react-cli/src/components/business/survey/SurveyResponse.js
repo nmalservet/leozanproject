@@ -11,7 +11,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
   const [survey] = useState(surveyResponse.survey);
   const [surveyComponents,setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [patient] = useState(surveyResponse.patient);
-  const [answers, setAnswers] = useState(new Map()); //answers is a map [surveyComponentId:answer]}
+  const [answers, setAnswers] = useState(arrayToMap(surveyResponse.answers)); //answers is a map [surveyComponentId:answer]}
   const [id, setId] = useState(null); //surveyAnswerId
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
@@ -44,6 +44,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
     console.log("save answer:" + surveyComponentId + ":" + answer);
     //if(answers.get(surveyComponentId))
     //setAnswers(new Map(answers.set(surveyComponentId, answer)));
+     setAnswers(new Map(answers.set(surveyComponentId, answer)));
   }
 
   /**
@@ -71,7 +72,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
     var surveyAnswers = {};
     var errorsForm = 0;
     surveyAnswers.surveyId = survey.id;
-    surveyAnswers.patientUuid = patient.patientUuid;
+    surveyAnswers.patientUuid = patient.uuid;
 
     surveyAnswers.answers = mapToJson(answers);
     //case create or update
@@ -121,15 +122,15 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
 
   useEffect(() => {
     console.log("load answers:");
-    var ans = arrayToMap(surveyResponse.answers);
+    //var ans = arrayToMap(surveyResponse.answers);
     //setAnswers();
     //we agregate the initial value on each component to avoid to refresh it in a bad order
     let objs =[];
     for (let i = 0; i < surveyResponse.surveyObjects.length; i++) {
         let comp =surveyResponse.surveyObjects[i];
-        comp.initialValue=ans.get(comp.id);
+        comp.initialValue=answers.get(comp.id);
         objs.push(comp);
-        console.log(comp);
+       // console.log(comp);
       }
       setSurveyComponents(objs);
   }, []);

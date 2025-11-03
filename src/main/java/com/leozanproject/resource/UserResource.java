@@ -66,11 +66,11 @@ public class UserResource {
 	 * default is ad00
 	 * 
 	 */
-
-	@PostConstruct
+	//TODO to activate only in dev
+	/*@PostConstruct
 	public void initAdminUser() {
 		
-		if (isAuthenticationLocalRequired == Boolean.TRUE) {
+		if (isAuthenticationLocalRequired == Boolean.TRUE&&) {
 			Optional<User> opt = userRepository.findByUsername("ad00");
 			if (!opt.isPresent()) {
 				User user = new User();
@@ -80,7 +80,7 @@ public class UserResource {
 				userRepository.save(user);
 			}
 		}
-	}
+	}*/
 
 	@GetMapping(path = "", produces = "application/json")
 	public List<UserAccountDTO> list() throws Exception {

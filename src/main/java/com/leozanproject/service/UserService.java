@@ -73,9 +73,18 @@ public class UserService {
 	 * @return
 	 */
 	public boolean authenticate(String username, String password) {
-		if (isAuthenticationLocal)
-			return true;
-		return true;
+		if (isAuthenticationLocal) {
+			//System.out.println("authentication local, we check in db");
+			Optional<User> user = uRepository.findByUsername(username);
+			if (user.isPresent()) {
+				//System.out.println("user is present:" + username);
+				boolean res = encryptionTool.matches(password, user.get().getPassword());
+				//System.out.println("pwd equals:" + res);
+				//sysout
+				return res;
+			}
+		}
+		return false;
 	}
 
 	public List<UserAccountDTO> list() {

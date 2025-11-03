@@ -157,7 +157,7 @@ translation_id int not null,
 survey_id int not NULL,
 status int,
 position int,
-values varchar,
+values varchar
 );
 
 -- question is a part of survey

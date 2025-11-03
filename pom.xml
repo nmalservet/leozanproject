@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.leozanproject</groupId>
 	<artifactId>leozan</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<!-- packaged as executable jar with embedded tomcat -->
 	<packaging>jar</packaging>
 	<name>leozan</name>
 	<url>http://leozan</url>
 	<properties>
-		<start-class>com.leozan.Application</start-class>
+		<start-class>com.leozanproject.Application</start-class>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<!-- latest springfox version at this moment -->

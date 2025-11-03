@@ -16,8 +16,8 @@ export default function LoginView() {
 	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 	const [alerts, setAlerts] = useState([]);
 	const navigate = useNavigate();
-	const [username, setUsername] = useState('ad00');
-	const [password, setPassword] = useState('administrator');
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
 
 	const submitLogin = () => {
 		// Prevent the browser from reloading the page

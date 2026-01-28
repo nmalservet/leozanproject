@@ -10,6 +10,9 @@ public class SurveyObjectDTO {
 	private Integer id;
 
 	private String name;
+	/**
+	 * survey object type :1 = text, 0 = question
+	 */
 	private Integer type;
 	private String style;
 	

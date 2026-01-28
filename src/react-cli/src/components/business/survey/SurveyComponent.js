@@ -19,7 +19,7 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 	const [style, setStyle] = useState(surveyComponent.style);
 	const [position, setPosition] = useState(surveyComponent.position);
 
-	const [type, setType] = useState(surveyComponent.type);
+	const [type, setType] = useState(surveyComponent.type?surveyComponent.type:0);
 	const [status, setStatus] = useState(surveyComponent.status);
 
 	//if the object is a type question
@@ -49,8 +49,8 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 		sc.style = (style) ? style : '';
 		sc.position = (position) ? position : '';
 		sc.status = (status) ? status : 0;
-		if (type == 0)
-			sc.questionType = questionType;
+		//if the component is a quetsion we set the questionType
+		sc.questionType = questionType;
 		if (type == 0 && (questionType == 2 || questionType == 5))
 			if (values)
 				sc.values = values;

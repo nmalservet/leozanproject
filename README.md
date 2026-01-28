@@ -58,6 +58,7 @@ make a symbolic link
 
 java -jar leozan-0.0.1.jar config/application.properties
 
+<<<<<<< Updated upstream
 Make the service file
 
 ### Create a unix service
@@ -102,3 +103,9 @@ To check the status
 
 ## Use lingering to start service out of the user session
     sudo loginctl enable-linger leozan
+=======
+To test
+
+http://myip:8082/
+
+>>>>>>> Stashed changes

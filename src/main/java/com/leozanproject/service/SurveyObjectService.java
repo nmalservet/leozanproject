@@ -37,6 +37,7 @@ public class SurveyObjectService {
 	 * @throws BusinessRuleValidationException
 	 */
 	public int create(SurveyObjectDTO dto) throws MissingParameterException, BusinessRuleValidationException {
+		System.out.println("create");
 		checkConstraints(dto);
 		// create the translation bw default
 		TranslationDTO translation = new TranslationDTO(dto.getName(), dto.getName(), dto.getName(), dto.getName(),
@@ -99,7 +100,8 @@ public class SurveyObjectService {
 	public void checkConstraints(SurveyObjectDTO dto)
 			throws BusinessRuleValidationException, MissingParameterException {
 		AttributesControlsTool.isEmpty("name", dto.getName());
-		if (dto.getStyle().length() > Constraints.SURVEY_OBJECT_LENGTH)
+		AttributesControlsTool.isSet("type", dto.getType());//we should have a type
+		if (dto.getStyle()!=null &&dto.getStyle().length() > Constraints.SURVEY_OBJECT_LENGTH)
 			throw new BusinessRuleValidationException("Style exceed the limit of 250 characters");
 	}
 }

@@ -5,15 +5,14 @@ import SurveyResponse from '../components/business/survey/SurveyResponse.js';
 import PatientBanner from "../components/business/PatientBanner.js";
 
 /**
- * fview survey answers
+ * EditSurveyAnswer
  */
-export default function ViewSurveyAnswersView() {
+export default function EditResponseView() {
 
 	const { surveyResponseId } = useParams();//get the surveyAnswersId
 	const [surveyResponse, setSurveyResponse] = useState(null);
 
 	function loadData(id) {
-		console.log("loadData :"+id);
 		Api.getSurveyResponse(id)
 			.then((response) => {
 				if (response !== undefined) {
@@ -26,15 +25,13 @@ export default function ViewSurveyAnswersView() {
 			});
 	}
 	useEffect(() => {
-		console.log("load survey response:"+surveyResponseId);
 		if (surveyResponseId != null)
 			loadData(surveyResponseId);
 	}, [surveyResponseId]);
 
 	return (<div>
 		{surveyResponse && <PatientBanner patient={surveyResponse.patient} />}
-		
-		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} readOnly={true}/>}
+		{surveyResponse && <SurveyResponse surveyResponse={surveyResponse} readOnly={false} />}
 	</div>)
 
 }

@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
  * @param storedFilter init with the stored filter into the localstorage
  * @returns display the search filter with multiple dynamic fields
  */
-export default function AnswersView() {
+export default function ResponsesView() {
 
 	const columns = [{ "name": "id", "displayed": "Id" },{ "name": "patientLabel", "displayed": "Patient" }, 
 	{ "name": "mrn", "displayed": "Mrn" },
@@ -64,11 +64,11 @@ export default function AnswersView() {
 	function onCallButton(action, id) {
 		console.log("choosed id:"+id);
 		if (action === "edit")
-			navigate('/editSurveyResponse/' + id);
+			navigate('/editResponse/' + id);
 		if (action === "delete")
 			deleteAnswer(id);
 		if (action === "view")
-			navigate('/viewSurveyResponse/' + id);
+			navigate('/viewResponse/' + id);
 	}
 
 	/**

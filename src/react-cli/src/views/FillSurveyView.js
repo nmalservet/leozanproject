@@ -8,8 +8,7 @@ import PatientBanner from "../components/business/PatientBanner.js";
  * fill survey mode. to fill survey with answers
  */
 export default function FillSurveyView() {
-	//const navigation = useNavigation();
-
+	
 	const { surveyId, patientUuid } = useParams();
 	const [survey, setSurvey] = useState(null);
 	const [patient,setPatient] =useState(null);
@@ -41,8 +40,6 @@ export default function FillSurveyView() {
 			});
 	}
 	useEffect(() => {
-		console.log("survey:" + surveyId);
-		console.log("patient:" + patientUuid);
 		if (surveyId != null)
 			loadData(surveyId,patientUuid);
 	}, [surveyId,patientUuid]);

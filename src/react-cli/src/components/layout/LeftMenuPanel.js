@@ -15,7 +15,7 @@ function LeftMenuPanel() {
 
 					<MenuItem icon={<List size={20} />} text="Questionnaires" isOpen={isMenuOpen} link={"/surveys"} location={location.pathname} />
 					<MenuItem icon={<CircleUser size={20} />} text="Patients" isOpen={isMenuOpen} link={"/patients"} location={location.pathname} />
-					<MenuItem icon={<BookText size={20} />} text="Réponses" isOpen={isMenuOpen} link={"/answers"} location={location.pathname} />
+					<MenuItem icon={<BookText size={20} />} text="Réponses" isOpen={isMenuOpen} link={"/responses"} location={location.pathname} />
 				
 				</nav>
 

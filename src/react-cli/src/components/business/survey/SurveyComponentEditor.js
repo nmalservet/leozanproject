@@ -25,7 +25,6 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 	}
 	
 	const handleYes = () => {
-		//setHiddenAlert(true);
 		Api.deleteSurveyComponent(surveyComponent.id).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
@@ -36,7 +35,6 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 		}).catch((error)=>{
 			//setAlerts([{ message: "An error occured during survey deletion"+error, type: "error" }]);
 		})
-
 	};
 
 	const handleNo = () => {
@@ -98,7 +96,7 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 					<div className="flex">
 						<div className="w-[1024px]" >
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 0) && <InputText name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
-							{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
+							{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={""}  inline={true} />}
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 2) && surveyComponent.values&&<SelectList label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={""} inline={true} />}
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 3) && <Checkbox name={surveyComponent.name} text={""} onValueChange={()=>onCheckBoxChange()} inline={true} />}
 							

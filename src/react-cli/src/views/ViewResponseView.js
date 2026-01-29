@@ -7,7 +7,7 @@ import PatientBanner from "../components/business/PatientBanner.js";
 /**
  * fview survey answers
  */
-export default function EditSurveyAnswersView() {
+export default function ViewResponseView() {
 
 	const { surveyResponseId } = useParams();//get the surveyAnswersId
 	const [surveyResponse, setSurveyResponse] = useState(null);
@@ -34,7 +34,7 @@ export default function EditSurveyAnswersView() {
 	return (<div>
 		{surveyResponse && <PatientBanner patient={surveyResponse.patient} />}
 		
-		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} readOnly={false}/>}
+		{surveyResponse &&<SurveyResponse surveyResponse={surveyResponse} readOnly={true}/>}
 	</div>)
 
 }

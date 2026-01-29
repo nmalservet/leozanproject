@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SurveyComponentFillable from "./SurveyComponentFillable";
 import Api from "../../../Api.js";
 import AlertsPanel from "../../common/AlertsPanel";
-
 import ActionButton from "../../common/ActionButton.js";
 /**
  * main component to edit a survey
@@ -10,13 +9,11 @@ import ActionButton from "../../common/ActionButton.js";
 function SurveyFillable({ survey, patientUuid }) {
   const [surveyComponents, setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [answers, setAnswers] = useState(new Map()); //answers is a map [surveyComponentId:answer]}
-  const [id, setId] = useState(null); //surveyAnswerId
+  const [id, setId] = useState(survey?survey.id:null); //surveyAnswerId
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
 
-  function closeAlert() {
-    setHiddenAlert(true);
-  }
+  function closeAlert() { setHiddenAlert(true);}
 
   //refresh the rendering
   function refreshComponents() {
@@ -28,20 +25,14 @@ function SurveyFillable({ survey, patientUuid }) {
         }
       })
       .catch((error) => {
-        console.error(error);
+        setAlerts([{ message: "Erreur de recupération des composants du questionnaire:" + error, type: "error" }]);
       });
   }
 
   //load the components on startup
-  useEffect(() => {
-    refreshComponents();
-  }, []);
+  useEffect(() => { refreshComponents(); }, []);
 
-  function onValueChange(surveyComponentId, answer) {
-    //save the answer
-    console.log("save answer:" + surveyComponentId + ":" + answer);
-    setAnswers(new Map(answers.set(surveyComponentId, answer)));
-  }
+  function onValueChange(surveyComponentId, answer) {setAnswers(new Map(answers.set(surveyComponentId, answer)));}
 
   function mapToJson(myMap) {
     let result = [];
@@ -57,7 +48,6 @@ function SurveyFillable({ survey, patientUuid }) {
     var errorsForm = 0;
     surveyAnswers.surveyId = survey.id;
     surveyAnswers.patientUuid = patientUuid;
-
     surveyAnswers.answers = mapToJson(answers);
     //case create or update
     if (errorsForm === 0) {
@@ -65,24 +55,15 @@ function SurveyFillable({ survey, patientUuid }) {
         surveyAnswers.id = id;
         Api.updateAnswers(surveyAnswers)
           .then((response) => {
+            console.log("update answers");
             if (response !== undefined) {
-              console.log("Updated ok");
-              //we must create a new refernce for the array to be able to refresh the component
-              //setSurveyComponents(response.data);
-              //setSurveyAnswersId(response.data.id);
-              setAlerts([
-                {
-                  message: "Le questionnaire a été mis à jour",
-                  type: "success",
-                },
-              ]);
+              setAlerts([{ message: "Le questionnaire a été mis à jour", type: "success" }]);
             }
           })
           .catch((error) => {
-            console.error(error);
+            setAlerts([{ message: "Le questionnaire n'a pas été mis à jour:" + error, type: "error" }]);
           });
       } else {
-        console.log("save answers");
         Api.saveAnswers(surveyAnswers)
           .then((response) => {
             if (response !== undefined) {
@@ -107,16 +88,11 @@ function SurveyFillable({ survey, patientUuid }) {
   return (
     <div className="m-3 w-full">
       <h1>Questionnaire : {survey.name}</h1>
-
       <div>
         <hr />
         <div className="m-3">
-          <div>
-            <b>Responsable :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}
-          </div>
-          <div>
-            <b>Identifiant unique :</b> {survey.id}
-          </div>
+          <div> <b>Responsable :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}</div>
+          <div><b>Identifiant unique :</b> {survey.id}</div>
         </div>
         <hr />
       </div>
@@ -129,5 +105,4 @@ function SurveyFillable({ survey, patientUuid }) {
     </div>
   );
 }
-
 export default SurveyFillable;

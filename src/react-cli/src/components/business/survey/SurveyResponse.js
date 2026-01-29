@@ -5,14 +5,14 @@ import AlertsPanel from "../../common/AlertsPanel";
 
 import ActionButton from "../../common/ActionButton.js";
 /**
- * main component to edit a survey
+ * main component to edit a survey == Copy of surveFillable
  */
 export default function SurveyResponse({ surveyResponse, readOnly }) {
   const [survey] = useState(surveyResponse.survey);
   const [surveyComponents,setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [patient] = useState(surveyResponse.patient);
   const [answers, setAnswers] = useState(arrayToMap(surveyResponse.answers)); //answers is a map [surveyComponentId:answer]}
-  const [id, setId] = useState(null); //surveyAnswerId
+  const [id, setId] = useState(surveyResponse?surveyResponse.id:null); //surveyAnswerId
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
 

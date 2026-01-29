@@ -4,6 +4,7 @@ import AlertsPanel from '../../common/AlertsPanel';
 import InputText from '../../common/InputText.js';
 import StatusSelectList from '../StatusSelectList.js';
 import QuestionTypeSelectList from '../QuestionTypeSelectList.js';
+import { isEmpty } from '../../../utils/StringUtils.js';
 
 import SurveyObjectTypeSelectList from './SurveyObjectTypeSelectList.js';
 
@@ -19,7 +20,7 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 	const [style, setStyle] = useState(surveyComponent.style);
 	const [position, setPosition] = useState(surveyComponent.position);
 
-	const [type, setType] = useState(surveyComponent.type?surveyComponent.type:0);
+	const [type, setType] = useState(surveyComponent.type ? surveyComponent.type : 0);
 	const [status, setStatus] = useState(surveyComponent.status);
 
 	//if the object is a type question
@@ -39,48 +40,56 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 
 	function save() {
 		setHiddenAlert(false);
-		//checks
-		var errorsForm = 0;
 		//
 		if (surveyId != null)
 			sc.surveyId = surveyId;
 		sc.type = (type) ? type : 0;
-		sc.name = (name) ? name : '';
+		//type is defined
+		if (type == undefined || type == null) {
+			setAlerts([{ message: "Le type est obligatoire", type: "error" }]);
+			return;
+		}
+
+		if (name == undefined || name == null || isEmpty(name)) {
+			setAlerts([{ message: "Le label est obligatoire", type: "error" }]);
+			return;
+		}
+
+		//si c est une question, le type de question est obligatoire
+		if (type == 0 && (questionType == undefined || questionType == null)) {
+			setAlerts([{ message: "Le type de question est obligatoire", type: "error" }]);
+			return;
+		}
+		sc.name = name;
+		//if the component is a quetsion we set the questionType
+		sc.questionType = questionType;
 		sc.style = (style) ? style : '';
 		sc.position = (position) ? position : '';
 		sc.status = (status) ? status : 0;
-		//if the component is a quetsion we set the questionType
-		sc.questionType = questionType;
+
 		if (type == 0 && (questionType == 2 || questionType == 5))
 			if (values)
 				sc.values = values;
 			else {
-				errorsForm++;
-				setAlerts([{ message: "Values are need for select list or radio buttons", type: "error" }]);
+				setAlerts([{ message: "Une liste doit contenir au moins une valeur", type: "error" }]);
+				return;
 			}
-
-		if (!sc.name || sc.name.length === 0) {
-			setAlerts([{ message: "The name is undefined", type: "error" }]);
-			errorsForm++;
-		}
-		if (errorsForm === 0) {
-			if (!sc.id) {
-				Api.addSurveyComponent(sc).then(response => {
-					if (response) {
-						var s2 = sc;
-						s2.id = response.data;
-						setSc(s2);
-						setAlerts([{ message: "The survey object has been created", type: "success" }]);
-						onSave();
-					}
-				})
-			} else {
-				Api.updateSurveyObject(surveyComponent).then(response => {
-					if (response)
-						setAlerts([{ message: "The survey object has been saved", type: "success" }]);
+		if (!sc.id) {
+			Api.addSurveyComponent(sc).then(response => {
+				if (response) {
+					var s2 = sc;
+					s2.id = response.data;
+					setSc(s2);
+					setAlerts([{ message: "Le composant de questionnaire a été créé", type: "success" }]);
 					onSave();
-				})
-			}
+				}
+			})
+		} else {
+			Api.updateSurveyObject(surveyComponent).then(response => {
+				if (response)
+					setAlerts([{ message: "Le composant de questionnaire a été enregistré", type: "success" }]);
+				onSave();
+			})
 		}
 
 	}

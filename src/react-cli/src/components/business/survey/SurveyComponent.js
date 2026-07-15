@@ -85,7 +85,7 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 				}
 			})
 		} else {
-			Api.updateSurveyObject(surveyComponent).then(response => {
+			Api.updateSurveyObject(sc).then(response => {
 				if (response)
 					setAlerts([{ message: "Le composant de questionnaire a été enregistré", type: "success" }]);
 				onSave();

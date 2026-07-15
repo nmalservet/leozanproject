@@ -56,7 +56,7 @@ function SurveyEditor({ survey }) {
 			{modalOpened === true && <SurveyComponentModal surveyId={survey.id} surveyComponent={{}} onClose={() => closeAddComponent()} />}
 			<ActionButton name={"addComponent"} text={"Ajouter un composant"} onClick={() => addComponent()} />
 		</div>
-		{surveyComponents != null && surveyComponents.map(comp => <SurveyComponentEditor surveyComponent={comp} onSave={()=>refreshComponents()} onDelete={()=>refreshComponents()}/>)}
+		{surveyComponents != null && surveyComponents.map(comp => <SurveyComponentEditor key={comp.id} surveyComponent={comp} onSave={()=>refreshComponents()} onDelete={()=>refreshComponents()}/>)}
 	</div>)
 }
 

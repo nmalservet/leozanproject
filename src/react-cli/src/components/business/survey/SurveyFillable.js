@@ -9,7 +9,7 @@ import ActionButton from "../../common/ActionButton.js";
 function SurveyFillable({ survey, patientUuid }) {
   const [surveyComponents, setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [answers, setAnswers] = useState(new Map()); //answers is a map [surveyComponentId:answer]}
-  const [id, setId] = useState(survey?survey.id:null); //surveyAnswerId
+  const [id, setId] = useState(null); //surveyAnswerId, unset until the first save creates it
   const [alerts, setAlerts] = useState([]);
   const [hiddenAlert, setHiddenAlert] = useState(false);
 
@@ -100,7 +100,7 @@ function SurveyFillable({ survey, patientUuid }) {
       {(surveyComponents == null || surveyComponents.length === 0) && (
         <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">You must add your first component!</div>
       )}
-      {surveyComponents != null && surveyComponents.map((comp) => <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} />)}
+      {surveyComponents != null && surveyComponents.map((comp) => <SurveyComponentFillable key={comp.id} surveyComponent={comp} onValueChange={onValueChange} />)}
       <ActionButton name={"saveForm"} text={"Enregistrer"} onClick={() => saveForm()} />
     </div>
   );

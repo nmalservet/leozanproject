@@ -159,7 +159,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
       )}
       {surveyComponents != null &&
         surveyComponents.map((comp) => (
-          <SurveyComponentFillable surveyComponent={comp} onValueChange={onValueChange} readOnly={readOnly}/>
+          <SurveyComponentFillable key={comp.id} surveyComponent={comp} onValueChange={onValueChange} readOnly={readOnly}/>
         ))}
 
       {readOnly === false && (

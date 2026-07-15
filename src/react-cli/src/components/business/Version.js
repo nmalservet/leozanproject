@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Api from '../../Api.js';
 import AlertsPanel from '../common/AlertsPanel';
 import InputText from '../common/InputText.js';
@@ -10,7 +11,7 @@ import QuillTextArea from '../common/QuillTextArea.js';
  * projectId is fixed.
  */
 function Version({ projectId,initialVersion, readOnly }) {
-
+	const { t } = useTranslation();
 	const [version] = useState(initialVersion);
 	const [disabled, setDisabled] = useState(false);
 	const [name, setName] = useState(initialVersion.name);
@@ -42,7 +43,7 @@ function Version({ projectId,initialVersion, readOnly }) {
 			version.description = description;
 		version.disabled = disabled;
 		if (!version.name|| version.name.length === 0) {
-					setAlerts([{ message: "The name is undefined", type: "error" }]);
+					setAlerts([{ message: t("version.nameRequired"), type: "error" }]);
 					errorsForm++;
 				}
 		if (errorsForm === 0) {
@@ -50,13 +51,13 @@ function Version({ projectId,initialVersion, readOnly }) {
 				Api.addVersion(version).then(response => {
 					if (response) {
 						version.id = response.data;
-						setAlerts([{ message: "The version has been created", type: "success" }]);
+						setAlerts([{ message: t("version.created"), type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateVersion(version).then(response => {
 					if (response)
-						setAlerts([{ message: "The Version has been saved", type: "success" }]);
+						setAlerts([{ message: t("version.saved"), type: "success" }]);
 				})
 			}
 		}
@@ -73,15 +74,15 @@ function Version({ projectId,initialVersion, readOnly }) {
 			{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 			<form >
 				<div className="grid grid-col-1 gap-1 m-2">
-					<InputText name={"Name"} text={name} onTextChange={setName}/>
-					<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
+					<InputText name={t("common.name")} text={name} onTextChange={setName}/>
+					<QuillTextArea name={t("common.description")} text={description} onTextChange={setDescription} readOnly={readOnly} />
 					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
-					<Checkbox name={"Disabled"} value={disabled} onValueChange={setDisabled}/>
+					<Checkbox name={t("common.disabled")} value={disabled} onValueChange={setDisabled}/>
 				</div>
 			</form>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}
-				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Save</button>}
+				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>{t("common.cancel")}</button>}
+				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>{t("common.save")}</button>}
 			</div>
 		</div>);
 }

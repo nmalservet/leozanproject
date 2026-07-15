@@ -1,4 +1,5 @@
 import React, { useState, useEffect,useContext } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import { Modal } from '../components/common/Modal.js';
@@ -7,13 +8,13 @@ import ActionButton from '../components/common/ActionButton.js';
 import { ProjectsContext } from '../context/projects-context.js';
 
 /**
- * 
+ *
  * @returns display the search filter with multiple dynamic fields
  */
 export default function ProjectsView() {
-
-	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": "Nom" },
-	{ "name": "statusLabel", "displayed": "Statut" }, { "name": "responsibleUsername", "displayed": "Responsable" }, { "name": "disabled", "displayed": "Inactif" }];
+	const { t } = useTranslation();
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": t("common.name") },
+	{ "name": "statusLabel", "displayed": t("status.label") }, { "name": "responsibleUsername", "displayed": t("project.responsible") }, { "name": "disabled", "displayed": t("common.disabled") }];
 	const buttons = [{ 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];
 	const [projectId, setProjectId] = useState(null);//current project, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -94,9 +95,9 @@ export default function ProjectsView() {
 	return (
 		<div className="">
 			<ProjectModal project={editedProject} isOpen={editedProject != null} onClose={() => closeProjectModal()} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the project?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("project.confirmDelete")} />
 			{(localProjects&&localProjects.length>0)&&<Grid columns={columns} items={localProjects} buttons={buttons} onCall={onCallButton} withFilter={true}/>}
-			<ActionButton name={"addProject"} text={"Ajouter un project"} onClick={()=>addProject()}/>
+			<ActionButton name={"addProject"} text={t("project.add")} onClick={()=>addProject()}/>
 		</div>
 	);
 }

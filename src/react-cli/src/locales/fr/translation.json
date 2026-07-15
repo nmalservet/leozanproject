@@ -1,0 +1,207 @@
+{
+  "about": {
+    "title": "À propos"
+  },
+  "chooseSurvey": {
+    "step1": "1 - Choisissez un projet :",
+    "step2": "2 - Choisissez un questionnaire :",
+    "fillSurvey": "Renseigner le questionnaire"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "confirmation": "Confirmation",
+    "createdBy": "créé par",
+    "description": "Description",
+    "disabled": "Inactif",
+    "filter": "Filtrer",
+    "id": "Id",
+    "loading": "Chargement...",
+    "name": "Nom",
+    "no": "Non",
+    "noValue": "Aucune valeur",
+    "none": "Aucun",
+    "pageOf": "Page {{current}} sur {{total}}",
+    "resetFilter": "Réinitialiser le filtre",
+    "save": "Enregistrer",
+    "search": "Rechercher",
+    "undefined": "Non défini",
+    "uniqueId": "Identifiant unique",
+    "updatedAt": "Mis à jour",
+    "yes": "Oui"
+  },
+  "dashboard": {
+    "placeholder": "Ceci est le tableau de bord"
+  },
+  "errorPage": {
+    "title": "Oups !",
+    "message": "Désolé, une erreur inattendue est survenue."
+  },
+  "gender": {
+    "female": "Femme",
+    "label": "Genre",
+    "male": "Homme",
+    "other": "Autre",
+    "unknown": "Inconnu"
+  },
+  "login": {
+    "error": "Une erreur est survenue : ",
+    "invalidResponse": "Réponse invalide du serveur",
+    "password": "Mot de passe",
+    "passwordRequired": "Le mot de passe est obligatoire",
+    "signIn": "Se connecter",
+    "title": "Connexion",
+    "username": "Nom d'utilisateur",
+    "usernameRequired": "Le nom d'utilisateur est obligatoire"
+  },
+  "logout": {
+    "thankYou": "Merci de votre visite!"
+  },
+  "menu": {
+    "analysis": "Analyse",
+    "patients": "Patients",
+    "plan": "Plan",
+    "projects": "Projets",
+    "responses": "Réponses",
+    "settings": "Paramètres",
+    "surveys": "Questionnaires",
+    "users": "Utilisateurs"
+  },
+  "nav": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
+  },
+  "notFound": {
+    "goHome": "Veuillez retourner à la page d'accueil pour retrouver vos informations :",
+    "home": "Accueil",
+    "message": "Désolé, une erreur est survenue, la page demandée n'a pas été trouvée !",
+    "title": "Page non trouvée"
+  },
+  "patient": {
+    "add": "Ajouter un patient",
+    "birthdate": "Date de naissance",
+    "birthdateRequired": "La date de naissance est obligatoire",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce patient ?",
+    "created": "Le patient a été créé",
+    "firstName": "Prénom",
+    "firstNameRequired": "Le prénom est obligatoire",
+    "label": "Patient",
+    "mrnRequired": "Le mrn est obligatoire",
+    "name": "Nom",
+    "nameRequired": "Le nom est obligatoire",
+    "saved": "Le patient a été enregistré."
+  },
+  "priority": {
+    "label": "Priorité"
+  },
+  "project": {
+    "add": "Ajouter un projet",
+    "allProjects": "Tous les projets",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce projet ?",
+    "created": "Le projet a été créé",
+    "descriptionRequired": "La description est obligatoire",
+    "label": "Projet",
+    "nameRequired": "Le nom est obligatoire",
+    "responsible": "Responsable",
+    "saved": "Le projet a été enregistré"
+  },
+  "questionType": {
+    "checkbox": "Case à cocher",
+    "date": "Date",
+    "file": "Fichier",
+    "label": "Type de question",
+    "radioButtons": "Boutons radio",
+    "selectList": "Liste déroulante",
+    "text": "Texte",
+    "textArea": "Zone de texte"
+  },
+  "resources": {
+    "placeholder": "Ceci est l'ajout de ressources"
+  },
+  "response": {
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer la réponse?",
+    "displayModalPlaceholder": "Affichage de la réponse ici"
+  },
+  "role": {
+    "administrator": "Administrateur",
+    "guest": "Invité",
+    "label": "Rôle",
+    "manager": "Gestionnaire"
+  },
+  "status": {
+    "label": "Statut"
+  },
+  "survey": {
+    "add": "Ajouter un questionnaire",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce questionnaire ?",
+    "created": "Le questionnaire a été créé",
+    "deleteError": "Une erreur est survenue lors de la suppression du questionnaire : ",
+    "deleted": "Le questionnaire a été supprimé",
+    "label": "Questionnaire",
+    "nameRequired": "Le nom est obligatoire",
+    "projectRequired": "Le projet est obligatoire",
+    "saved": "Le questionnaire a été enregistré",
+    "topic": "Sujet"
+  },
+  "surveyComponent": {
+    "attribute": "Attribut",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce composant ?",
+    "created": "Le composant de questionnaire a été créé",
+    "label": "Composant de questionnaire",
+    "labelField": "Label",
+    "labelHelp": "Le label est le text affiché au dessus ou à côté des champs si le type de champs est une question.",
+    "labelRequired": "Le label est obligatoire",
+    "position": "Position",
+    "positionHelp": "La position est celle d'affichage du composant dans la liste, uniquement une valeur numérique.",
+    "questionTypeHelp": "Le type de question affichera le champs spécifique.",
+    "questionTypeRequired": "Le type de question est obligatoire",
+    "saved": "Le composant de questionnaire a été enregistré",
+    "style": "Style",
+    "styleHelp": "Le style est appliqué durant l'affichage. Vous pouvez utilisez du CSS basique ou des classes Tailwind. Vérifiez qu'il n'y a pas d'effet de bord si vous utilisez cette surcharge de style.",
+    "typeHelp": "Le type de composant question affichera des champs à renseigner. Le type Text affichera uniquement un texte, utile pour les explications.",
+    "typeRequired": "Le type est obligatoire",
+    "value": "Valeur",
+    "values": "Valeurs",
+    "valuesHelp": "Les valeurs sont codées dans une liste, utilisant comme séparateur le ; . Exemple : cat; dog; mouse",
+    "valuesRequired": "Une liste doit contenir au moins une valeur"
+  },
+  "surveyEditor": {
+    "addComponent": "Ajouter un composant",
+    "createFirstComponent": "Vous devez créer votre premier composant!",
+    "title": "Edition du questionnaire"
+  },
+  "surveyFillable": {
+    "loadError": "Erreur de récupération des composants du questionnaire : ",
+    "saved": "Le questionnaire a été enregistré",
+    "updateError": "Le questionnaire n'a pas été mis à jour : ",
+    "updated": "Le questionnaire a été mis à jour"
+  },
+  "surveyObjectType": {
+    "label": "Type",
+    "question": "Question",
+    "text": "Texte"
+  },
+  "user": {
+    "add": "Ajouter un utilisateur",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "created": "L'utilisateur a été créé",
+    "deleted": "L'utilisateur a été supprimé",
+    "email": "Email",
+    "emailRequired": "L'email est obligatoire",
+    "firstNameRequired": "Le prénom est obligatoire",
+    "label": "Utilisateur",
+    "nameRequired": "Le nom est obligatoire",
+    "password": "Mot de passe",
+    "passwordRequired": "Le mot de passe est obligatoire",
+    "saved": "L'utilisateur a été enregistré",
+    "username": "Utilisateur",
+    "usernameRequired": "Le nom d'utilisateur est obligatoire"
+  },
+  "version": {
+    "add": "Ajouter une version",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette version ?",
+    "created": "La version a été créée",
+    "label": "Version",
+    "nameRequired": "Le nom est obligatoire",
+    "saved": "La version a été enregistrée"
+  }
+}

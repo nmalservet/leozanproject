@@ -1,0 +1,207 @@
+{
+  "about": {
+    "title": "Über"
+  },
+  "chooseSurvey": {
+    "step1": "1 - Wählen Sie ein Projekt:",
+    "step2": "2 - Wählen Sie einen Fragebogen:",
+    "fillSurvey": "Fragebogen ausfüllen"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "confirmation": "Bestätigung",
+    "createdBy": "erstellt von",
+    "description": "Beschreibung",
+    "disabled": "Deaktiviert",
+    "filter": "Filter",
+    "id": "Id",
+    "loading": "Wird geladen...",
+    "name": "Name",
+    "no": "Nein",
+    "noValue": "Kein Wert",
+    "none": "Keine",
+    "pageOf": "Seite {{current}} von {{total}}",
+    "resetFilter": "Filter zurücksetzen",
+    "save": "Speichern",
+    "search": "Suchen",
+    "undefined": "Noch nicht definiert",
+    "uniqueId": "Eindeutige Kennung",
+    "updatedAt": "Aktualisiert",
+    "yes": "Ja"
+  },
+  "dashboard": {
+    "placeholder": "Dies ist das Dashboard"
+  },
+  "errorPage": {
+    "title": "Hoppla!",
+    "message": "Entschuldigung, ein unerwarteter Fehler ist aufgetreten."
+  },
+  "gender": {
+    "female": "Weiblich",
+    "label": "Geschlecht",
+    "male": "Männlich",
+    "other": "Andere",
+    "unknown": "Unbekannt"
+  },
+  "login": {
+    "error": "Ein Fehler ist aufgetreten: ",
+    "invalidResponse": "Ungültige Antwort vom Server",
+    "password": "Passwort",
+    "passwordRequired": "Das Passwort ist erforderlich",
+    "signIn": "Anmelden",
+    "title": "Anmeldung",
+    "username": "Benutzername",
+    "usernameRequired": "Der Benutzername ist erforderlich"
+  },
+  "logout": {
+    "thankYou": "Danke für Ihren Besuch!"
+  },
+  "menu": {
+    "analysis": "Analyse",
+    "patients": "Patienten",
+    "plan": "Plan",
+    "projects": "Projekte",
+    "responses": "Antworten",
+    "settings": "Einstellungen",
+    "surveys": "Fragebögen",
+    "users": "Benutzer"
+  },
+  "nav": {
+    "login": "Anmelden",
+    "logout": "Abmelden"
+  },
+  "notFound": {
+    "goHome": "Bitte gehen Sie zur Startseite, um Ihre Informationen zu finden:",
+    "home": "Startseite",
+    "message": "Entschuldigung, ein Fehler ist aufgetreten, die angeforderte Seite wurde nicht gefunden!",
+    "title": "Seite nicht gefunden"
+  },
+  "patient": {
+    "add": "Patient hinzufügen",
+    "birthdate": "Geburtsdatum",
+    "birthdateRequired": "Das Geburtsdatum ist erforderlich",
+    "confirmDelete": "Möchten Sie diesen Patienten wirklich löschen?",
+    "created": "Der Patient wurde erstellt",
+    "firstName": "Vorname",
+    "firstNameRequired": "Der Vorname ist erforderlich",
+    "label": "Patient",
+    "mrnRequired": "Die MRN ist erforderlich",
+    "name": "Name",
+    "nameRequired": "Der Name ist erforderlich",
+    "saved": "Der Patient wurde gespeichert."
+  },
+  "priority": {
+    "label": "Priorität"
+  },
+  "project": {
+    "add": "Projekt hinzufügen",
+    "allProjects": "Alle Projekte",
+    "confirmDelete": "Möchten Sie dieses Projekt wirklich löschen?",
+    "created": "Das Projekt wurde erstellt",
+    "descriptionRequired": "Die Beschreibung ist erforderlich",
+    "label": "Projekt",
+    "nameRequired": "Der Name ist erforderlich",
+    "responsible": "Verantwortlich",
+    "saved": "Das Projekt wurde gespeichert"
+  },
+  "questionType": {
+    "checkbox": "Kontrollkästchen",
+    "date": "Datum",
+    "file": "Datei",
+    "label": "Fragetyp",
+    "radioButtons": "Optionsfelder",
+    "selectList": "Auswahlliste",
+    "text": "Text",
+    "textArea": "Textbereich"
+  },
+  "resources": {
+    "placeholder": "Dies ist das Hinzufügen von Ressourcen"
+  },
+  "response": {
+    "confirmDelete": "Möchten Sie diese Antwort wirklich löschen?",
+    "displayModalPlaceholder": "Antwortanzeige hier"
+  },
+  "role": {
+    "administrator": "Administrator",
+    "guest": "Gast",
+    "label": "Rolle",
+    "manager": "Manager"
+  },
+  "status": {
+    "label": "Status"
+  },
+  "survey": {
+    "add": "Fragebogen hinzufügen",
+    "confirmDelete": "Möchten Sie diesen Fragebogen wirklich löschen?",
+    "created": "Der Fragebogen wurde erstellt",
+    "deleteError": "Beim Löschen des Fragebogens ist ein Fehler aufgetreten: ",
+    "deleted": "Der Fragebogen wurde gelöscht",
+    "label": "Fragebogen",
+    "nameRequired": "Der Name ist erforderlich",
+    "projectRequired": "Das Projekt ist erforderlich",
+    "saved": "Der Fragebogen wurde gespeichert",
+    "topic": "Thema"
+  },
+  "surveyComponent": {
+    "attribute": "Attribut",
+    "confirmDelete": "Möchten Sie diese Komponente wirklich löschen?",
+    "created": "Die Fragebogenkomponente wurde erstellt",
+    "label": "Fragebogenkomponente",
+    "labelField": "Label",
+    "labelHelp": "Das Label ist der Text, der über oder neben den Feldern angezeigt wird, wenn der Feldtyp eine Frage ist.",
+    "labelRequired": "Das Label ist erforderlich",
+    "position": "Position",
+    "positionHelp": "Die Position ist die Anzeigereihenfolge der Komponente in der Liste, nur numerischer Wert.",
+    "questionTypeHelp": "Der Fragetyp zeigt das spezifische Feld an.",
+    "questionTypeRequired": "Der Fragetyp ist erforderlich",
+    "saved": "Die Fragebogenkomponente wurde gespeichert",
+    "style": "Stil",
+    "styleHelp": "Der Stil wird während der Anzeige angewendet. Sie können einfaches CSS oder Tailwind-Klassen verwenden. Prüfen Sie, dass es keine Nebenwirkungen gibt, wenn Sie diese Stilüberschreibung verwenden.",
+    "typeHelp": "Der Komponententyp Frage zeigt auszufüllende Felder an. Der Typ Text zeigt nur einen Text an, nützlich für Erklärungen.",
+    "typeRequired": "Der Typ ist erforderlich",
+    "value": "Wert",
+    "values": "Werte",
+    "valuesHelp": "Die Werte werden in einer Liste codiert, getrennt durch ; . Beispiel: cat; dog; mouse",
+    "valuesRequired": "Eine Liste muss mindestens einen Wert enthalten"
+  },
+  "surveyEditor": {
+    "addComponent": "Komponente hinzufügen",
+    "createFirstComponent": "Sie müssen Ihre erste Komponente erstellen!",
+    "title": "Fragebogen bearbeiten"
+  },
+  "surveyFillable": {
+    "loadError": "Fehler beim Abrufen der Fragebogenkomponenten: ",
+    "saved": "Der Fragebogen wurde gespeichert",
+    "updateError": "Der Fragebogen konnte nicht aktualisiert werden: ",
+    "updated": "Der Fragebogen wurde aktualisiert"
+  },
+  "surveyObjectType": {
+    "label": "Typ",
+    "question": "Frage",
+    "text": "Text"
+  },
+  "user": {
+    "add": "Benutzer hinzufügen",
+    "confirmDelete": "Möchten Sie diesen Benutzer wirklich löschen?",
+    "created": "Der Benutzer wurde erstellt",
+    "deleted": "Der Benutzer wurde gelöscht",
+    "email": "E-Mail",
+    "emailRequired": "Die E-Mail ist erforderlich",
+    "firstNameRequired": "Der Vorname ist erforderlich",
+    "label": "Benutzer",
+    "nameRequired": "Der Name ist erforderlich",
+    "password": "Passwort",
+    "passwordRequired": "Das Passwort ist erforderlich",
+    "saved": "Der Benutzer wurde gespeichert",
+    "username": "Benutzername",
+    "usernameRequired": "Der Benutzername ist erforderlich"
+  },
+  "version": {
+    "add": "Version hinzufügen",
+    "confirmDelete": "Möchten Sie diese Version wirklich löschen?",
+    "created": "Die Version wurde erstellt",
+    "label": "Version",
+    "nameRequired": "Der Name ist erforderlich",
+    "saved": "Die Version wurde gespeichert"
+  }
+}

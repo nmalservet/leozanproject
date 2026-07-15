@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import PatientFilter from '../components/business/PatientFilter.js';
@@ -14,12 +15,12 @@ import { useNavigate } from "react-router-dom";
  * @returns display the search filter with multiple dynamic fields
  */
 export default function ResponsesView() {
-
-	const columns = [{ "name": "id", "displayed": "Id" },{ "name": "patientLabel", "displayed": "Patient" }, 
+	const { t } = useTranslation();
+	const columns = [{ "name": "id", "displayed": "Id" },{ "name": "patientLabel", "displayed": t("patient.label") },
 	{ "name": "mrn", "displayed": "Mrn" },
-	{ "name": "project", "displayed": "Projet" },
-	{ "name": "surveyLabel", "displayed": "Questionnaire" },
-	{ "name": "updateDate", "displayed": "Mis à jour" },
+	{ "name": "project", "displayed": t("project.label") },
+	{ "name": "surveyLabel", "displayed": t("survey.label") },
+	{ "name": "updateDate", "displayed": t("common.updatedAt") },
 	{ "name": "uuid", "displayed": "Uuid" },];
 
 	//{ 'image': "file-sliders", 'action': 'chooseSurvey' },
@@ -99,9 +100,9 @@ export default function ResponsesView() {
 
 	return (
 		<div className="">
-			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Êtes-vous sûr de vouloir supprimer la réponse?" />
-			{editedAnswer&<div>Here we display the modal answer</div>}
+			<CollapsiblePanel title={t("common.filter")} children={<PatientFilter onApplyFilter={applyFilter} />} />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("response.confirmDelete")} />
+			{editedAnswer&<div>{t('response.displayModalPlaceholder')}</div>}
 			<Grid columns={columns} items={answers} onCall={onCallButton} buttons={buttons} />
 			{isLoading && <LoadingPanel />}
 		</div>

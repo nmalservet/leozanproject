@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import SelectList from '../common/SelectList';
-import Api from '../../Api.js';
-import { CurrentUserContext } from '../../context/user-context.js';
-import { ProjectsContext } from '../../context/projects-context.js';
+import { useTranslation } from 'react-i18next';
+import SelectList from '../../common/SelectList';
+import Api from '../../../Api.js';
+import { CurrentUserContext } from '../../../context/user-context.js';
+import { ProjectsContext } from '../../../context/projects-context.js';
 
 /**
  * select list for the projects used globally. used to set the project context global
@@ -10,7 +11,7 @@ import { ProjectsContext } from '../../context/projects-context.js';
  */
 
 export default function ProjectsGlobalSelectList() {
-
+	const { t } = useTranslation();
 	const [localProjects, setLocalProjects] = useState([]);
 	const {currentUser, setCurrentUser } = useContext(CurrentUserContext);
 	const  {projects}  = useContext(ProjectsContext);
@@ -30,7 +31,7 @@ export default function ProjectsGlobalSelectList() {
 		Api.getProjectsEnabled().then((response) => {
 			if (response !== undefined) {
 				var pMap = new Map();
-				pMap.set("","All projects");//we add the all projets items
+				pMap.set("",t('project.allProjects'));//we add the all projets items
 				response.data.forEach((project) => {
 					pMap.set(project.id, project.name)
 				})
@@ -39,7 +40,7 @@ export default function ProjectsGlobalSelectList() {
 		})
 		.catch((error) => { (console.error(error)) });
 	}
-	useEffect(() => { loadData({}); }, [projects]);
+	useEffect(() => { loadData({}); }, [projects, t]);
 
 	return (
 		<div>

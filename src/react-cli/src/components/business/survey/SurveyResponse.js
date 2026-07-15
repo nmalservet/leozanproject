@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import SurveyComponentFillable from "./SurveyComponentFillable";
 import Api from "../../../Api.js";
 import AlertsPanel from "../../common/AlertsPanel";
@@ -8,6 +9,7 @@ import ActionButton from "../../common/ActionButton.js";
  * main component to edit a survey == Copy of surveFillable
  */
 export default function SurveyResponse({ surveyResponse, readOnly }) {
+  const { t } = useTranslation();
   const [survey] = useState(surveyResponse.survey);
   const [surveyComponents,setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [patient] = useState(surveyResponse.patient);
@@ -88,7 +90,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
               //setSurveyAnswersId(response.data.id);
               setAlerts([
                 {
-                  message: "Le questionnaire a été mis à jour",
+                  message: t("surveyFillable.updated"),
                   type: "success",
                 },
               ]);
@@ -107,7 +109,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
               setId(response.data);
               setAlerts([
                 {
-                  message: "Le questionnaire a été enregistré",
+                  message: t("surveyFillable.saved"),
                   type: "success",
                 },
               ]);
@@ -136,15 +138,15 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
   }, []);
   return (
     <div className="m-3 w-full">
-      <h1>Questionnaire : {survey.name}</h1>
+      <h1>{t('survey.label')} : {survey.name}</h1>
       <div>
         <div className="m-3">
           <div>
-            <b>Responsable :</b>{" "}
-            {survey.responsible === 0 ? "Not yet defined" : survey.responsible}
+            <b>{t('project.responsible')} :</b>{" "}
+            {survey.responsible === 0 ? t('common.undefined') : survey.responsible}
           </div>
           <div>
-            <b>Identifiant unique :</b> {survey.id}
+            <b>{t('common.uniqueId')} :</b> {survey.id}
           </div>
         </div>
         <hr />
@@ -154,7 +156,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
       )}
       {(surveyComponents == null || surveyComponents.length === 0) && (
         <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
-          You must add your first component!
+          {t('surveyEditor.createFirstComponent')}
         </div>
       )}
       {surveyComponents != null &&
@@ -165,7 +167,7 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
       {readOnly === false && (
         <ActionButton
           name={"saveForm"}
-          text={"Enregistrer"}
+          text={t('common.save')}
           onClick={() => saveForm()}
         />
       )}

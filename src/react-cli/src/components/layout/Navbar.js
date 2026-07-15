@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { ScanHeart } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { CurrentUserContext } from '../../context/user-context.js';
 import ActionButton from '../common/ActionButton.js';
+import LanguageSelectList from '../common/LanguageSelectList.js';
 import Api from '../../Api.js';
 
 
 function Navbar() {
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 	function login() { navigate('/login'); }
 
@@ -37,9 +40,10 @@ function Navbar() {
 
 					{/* Right side nav items */}
 					<div className="hidden md:flex items-center space-x-4">
-						{currentUser == null && <ActionButton name={"login"} text={"Log in"} onClick={() => login()} />}
+						<LanguageSelectList />
+						{currentUser == null && <ActionButton name={"login"} text={t('nav.login')} onClick={() => login()} />}
 						{currentUser && <div className=""><span className="text-white">{currentUser.username}</span>
-							<div><ActionButton name={"logout"} text={"Se déconnecter"} onClick={logout} /></div>
+							<div><ActionButton name={"logout"} text={t('nav.logout')} onClick={logout} /></div>
 						</div>
 						}
 					</div>

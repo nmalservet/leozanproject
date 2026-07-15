@@ -1,5 +1,6 @@
 import React, { useState,memo } from "react";
 import { CheckSquare, Square, ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 /**
  * select list component to display an select list. When the value is selected trigger an event
  * NB : using forEach on Map will not display anything, due to the JSX interpretation.
@@ -9,6 +10,7 @@ import { CheckSquare, Square, ChevronDown, ChevronUp } from 'lucide-react';
  * @returns select list component.
  */
 function SelectListMultiple({ label, values,  handleSelection,inline }) {
+	const { t } = useTranslation();
 
 	const [selectedStatuses, setSelectedStatuses] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +40,7 @@ function SelectListMultiple({ label, values,  handleSelection,inline }) {
 			<div className="max-w-md mx-auto w-full">
 				<button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between text-xl font-semibold text-gray-800 mb-2 hover:text-blue-600 transition-colors bg-gray-50 p-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 					<span className="text-sm text-gray-400">
-						{selectedStatuses.length === 0 ? 'None' : displayInlineStatuses(selectedStatuses)} 
+						{selectedStatuses.length === 0 ? t('common.none') : displayInlineStatuses(selectedStatuses)}
 					</span>
 					{isOpen ? (<ChevronUp className="h-5 w-5" />) : (<ChevronDown className="h-5 w-5" />)}
 				</button>

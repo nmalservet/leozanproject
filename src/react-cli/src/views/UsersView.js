@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import { Modal } from '../components/common/Modal.js';
@@ -6,13 +7,13 @@ import UserModal from '../components/business/users/UserModal.js';
 import ActionButton from '../components/common/ActionButton.js';
 import AlertsPanel from '../components/common/AlertsPanel';
 /**
- * 
+ *
  * @returns display the search filter with multiple dynamic fields
  */
 export default function UsersView() {
-
-	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": "Nom" }, { "name": "firstName", "displayed": "Prénom" }, { "name": "username", "displayed": "Utilisateur" },
-	{ "name": "email", "displayed": "Email" }, { "name": "roleLabel", "displayed": "Rôle" }, { "name": "disabled", "displayed": "Inactif" }];
+	const { t } = useTranslation();
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": t("common.name") }, { "name": "firstName", "displayed": t("patient.firstName") }, { "name": "username", "displayed": t("user.username") },
+	{ "name": "email", "displayed": t("user.email") }, { "name": "roleLabel", "displayed": t("role.label") }, { "name": "disabled", "displayed": t("common.disabled") }];
 	const [userId, setUserId] = useState(null);//current project, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [users, setUsers] = useState([]);
@@ -26,7 +27,7 @@ export default function UsersView() {
 			if (response) {
 				setIsModalOpen(false);
 				loadData();
-				setAlerts([{ message: "L utilisateur a été supprimé", type: "success" }]);
+				setAlerts([{ message: t("user.deleted"), type: "success" }]);
 			}
 		})
 
@@ -99,9 +100,9 @@ export default function UsersView() {
 		<div className="">
 			{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 			{editedUser!=null&&<UserModal user={editedUser} onClose={() => closeUserModal()} />}
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Êtes-vous sûr de vouloir supprimer l'utilisateur?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("user.confirmDelete")} />
 			<Grid columns={columns} items={users} onCall={onCallButton} buttons={buttons} withFilter={true}/>
-			<ActionButton name={"addUser"} text={"Ajouter un utilisateur"} onClick={()=>addUser()}/>
+			<ActionButton name={"addUser"} text={t("user.add")} onClick={()=>addUser()}/>
 		</div>
 	);
 }

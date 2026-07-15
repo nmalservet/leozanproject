@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectListMultiple from '../common/SelectListMultiple';
 import Api from '../../Api.js';
 
@@ -6,7 +7,7 @@ import Api from '../../Api.js';
  * select list for the statuses. Reusable component
  */
 export default function PrioritiesSelectListMultiple({ selected, onSelection,inline }) {
-
+	const { t } = useTranslation();
 	const [statuses, setStatuses] = useState([]);
 
 	function loadData() {
@@ -23,5 +24,5 @@ export default function PrioritiesSelectListMultiple({ selected, onSelection,inl
 	}
 	useEffect(() => { loadData({}); }, []);
 
-	return (<SelectListMultiple label={"Priority"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={inline}/>);
+	return (<SelectListMultiple label={t('priority.label')} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={inline}/>);
 }

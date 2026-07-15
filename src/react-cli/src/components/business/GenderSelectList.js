@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../common/SelectList';
 
 /**
@@ -6,22 +7,22 @@ import SelectList from '../common/SelectList';
  */
 
 export default function GenderSelectList({ selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [statuses, setStatuses] = useState([]);
 
 	function loadData() {
 		var pMap = new Map();
-		pMap.set('M', 'Male');
-		pMap.set('F', 'Female');
-		pMap.set('U', 'Unknown');
-		pMap.set('O', 'Other');
+		pMap.set('M', t('gender.male'));
+		pMap.set('F', t('gender.female'));
+		pMap.set('U', t('gender.unknown'));
+		pMap.set('O', t('gender.other'));
 		setStatuses(pMap);
 
 	}
-	useEffect(() => { loadData({}); }, []);
+	useEffect(() => { loadData({}); }, [t]);
 	return (
 		<>
-			<SelectList label={"Genre"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={t('gender.label')} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

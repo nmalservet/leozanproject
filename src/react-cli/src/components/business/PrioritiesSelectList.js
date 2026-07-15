@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../common/SelectList';
 import Api from '../../Api.js';
 
@@ -7,7 +8,7 @@ import Api from '../../Api.js';
  */
 
 export default function PrioritiesSelectList({ selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [priorities, setPriorities] = useState([]);
 
 	function loadData() {
@@ -27,7 +28,7 @@ export default function PrioritiesSelectList({ selected, onSelection }) {
 	return (
 		<>
 			<div >
-				<SelectList label={"Priority"} values={priorities} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+				<SelectList label={t('priority.label')} values={priorities} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 			</div>
 		</>
 	);

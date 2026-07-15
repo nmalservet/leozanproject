@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import SurveyComponentFillable from "./SurveyComponentFillable";
 import Api from "../../../Api.js";
 import AlertsPanel from "../../common/AlertsPanel";
@@ -7,6 +8,7 @@ import ActionButton from "../../common/ActionButton.js";
  * main component to edit a survey
  */
 function SurveyFillable({ survey, patientUuid }) {
+  const { t } = useTranslation();
   const [surveyComponents, setSurveyComponents] = useState([]); //array of survey objects for the survey
   const [answers, setAnswers] = useState(new Map()); //answers is a map [surveyComponentId:answer]}
   const [id, setId] = useState(null); //surveyAnswerId, unset until the first save creates it
@@ -25,7 +27,7 @@ function SurveyFillable({ survey, patientUuid }) {
         }
       })
       .catch((error) => {
-        setAlerts([{ message: "Erreur de recupération des composants du questionnaire:" + error, type: "error" }]);
+        setAlerts([{ message: t("surveyFillable.loadError") + error, type: "error" }]);
       });
   }
 
@@ -57,11 +59,11 @@ function SurveyFillable({ survey, patientUuid }) {
           .then((response) => {
             console.log("update answers");
             if (response !== undefined) {
-              setAlerts([{ message: "Le questionnaire a été mis à jour", type: "success" }]);
+              setAlerts([{ message: t("surveyFillable.updated"), type: "success" }]);
             }
           })
           .catch((error) => {
-            setAlerts([{ message: "Le questionnaire n'a pas été mis à jour:" + error, type: "error" }]);
+            setAlerts([{ message: t("surveyFillable.updateError") + error, type: "error" }]);
           });
       } else {
         Api.saveAnswers(surveyAnswers)
@@ -72,7 +74,7 @@ function SurveyFillable({ survey, patientUuid }) {
               setId(response.data);
               setAlerts([
                 {
-                  message: "Le questionnaire a été enregistré",
+                  message: t("surveyFillable.saved"),
                   type: "success",
                 },
               ]);
@@ -87,21 +89,21 @@ function SurveyFillable({ survey, patientUuid }) {
 
   return (
     <div className="m-3 w-full">
-      <h1>Questionnaire : {survey.name}</h1>
+      <h1>{t('survey.label')} : {survey.name}</h1>
       <div>
         <hr />
         <div className="m-3">
-          <div> <b>Responsable :</b> {survey.responsible === 0 ? "Not yet defined" : survey.responsible}</div>
-          <div><b>Identifiant unique :</b> {survey.id}</div>
+          <div> <b>{t('project.responsible')} :</b> {survey.responsible === 0 ? t('common.undefined') : survey.responsible}</div>
+          <div><b>{t('common.uniqueId')} :</b> {survey.id}</div>
         </div>
         <hr />
       </div>
       {hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
       {(surveyComponents == null || surveyComponents.length === 0) && (
-        <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">You must add your first component!</div>
+        <div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">{t('surveyEditor.createFirstComponent')}</div>
       )}
       {surveyComponents != null && surveyComponents.map((comp) => <SurveyComponentFillable key={comp.id} surveyComponent={comp} onValueChange={onValueChange} />)}
-      <ActionButton name={"saveForm"} text={"Enregistrer"} onClick={() => saveForm()} />
+      <ActionButton name={"saveForm"} text={t('common.save')} onClick={() => saveForm()} />
     </div>
   );
 }

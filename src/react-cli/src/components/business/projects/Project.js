@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Api from '../../../Api.js';
 import AlertsPanel from '../../common/AlertsPanel.js';
 import InputText from '../../common/InputText.js';
@@ -10,7 +11,7 @@ import QuillTextArea from '../../common/QuillTextArea.js';
  * project component, to create or edit a projects
  */
 function Project({ initialProject, readOnly }) {
-
+	const { t } = useTranslation();
 	const [project] = useState(initialProject);
 	const [disabled, setDisabled] = useState(false);
 	const [name, setName] = useState(initialProject.name);
@@ -45,11 +46,11 @@ function Project({ initialProject, readOnly }) {
 			project.responsible = responsible;
 		project.disabled = disabled;
 		if (!project.name|| project.name.length === 0) {
-					setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
+					setAlerts([{ message: t("project.nameRequired"), type: "error" }]);
 					errorsForm++;
 				}
 		if (!project.description|| project.description.length === 0) {
-					setAlerts([{ message: "La description est obligatoire", type: "error" }]);
+					setAlerts([{ message: t("project.descriptionRequired"), type: "error" }]);
 					errorsForm++;
 				}
 		if (errorsForm === 0) {
@@ -57,13 +58,13 @@ function Project({ initialProject, readOnly }) {
 				Api.addProject(project).then(response => {
 					if (response) {
 						project.id = response.data;
-						setAlerts([{ message: "Le projet a été créé", type: "success" }]);
+						setAlerts([{ message: t("project.created"), type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateProject(project).then(response => {
 					if (response)
-						setAlerts([{ message: "Le projet a été enregistré", type: "success" }]);
+						setAlerts([{ message: t("project.saved"), type: "success" }]);
 				})
 			}
 		}
@@ -81,19 +82,19 @@ function Project({ initialProject, readOnly }) {
 			<form >
 				<div className="grid grid-col-1 gap-1 m-2">
 					<div className="" >
-						{project.author && <label className="">créé par <i>{project.author}</i></label>}
+						{project.author && <label className="">{t("common.createdBy")} <i>{project.author}</i></label>}
 					</div>
-					<InputText name={"Nom"} text={name} onTextChange={setName}/>
-					<UsersSelectList label={"Responsable"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
-					<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
+					<InputText name={t("common.name")} text={name} onTextChange={setName}/>
+					<UsersSelectList label={t("project.responsible")} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
+					<QuillTextArea name={t("common.description")} text={description} onTextChange={setDescription} readOnly={readOnly} />
 					<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
-					<Checkbox name={"Inactif"} value={disabled} onValueChange={setDisabled}/>
+					<Checkbox name={t("common.disabled")} value={disabled} onValueChange={setDisabled}/>
 				</div>
 			</form>
 			<hr/>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Annuler</button>}
-				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Enregistrer</button>}
+				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>{t("common.cancel")}</button>}
+				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>{t("common.save")}</button>}
 			</div>
 		</div>);
 }

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function Modal({ isOpen, onClose, onYes, onNo, title, message }) {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -27,14 +29,14 @@ export function Modal({ isOpen, onClose, onYes, onNo, title, message }) {
               className="btn btn-secondary" 
               onClick={onNo}
             >
-              No
+              {t('common.no')}
             </button>
-            <button 
-              type="button" 
-              className="btn btn-primary" 
+            <button
+              type="button"
+              className="btn btn-primary"
               onClick={onYes}
             >
-              Yes
+              {t('common.yes')}
             </button>
           </div>
         </div>

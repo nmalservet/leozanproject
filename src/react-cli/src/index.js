@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import App from './App';
 import axios from 'axios';
+import './i18n';
 
 /**
  * set axios interceptor to manage exception

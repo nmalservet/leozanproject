@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../../common/SelectList';
 import Api from '../../../Api.js';
 
@@ -7,7 +8,7 @@ import Api from '../../../Api.js';
  */
 
 export default function ProjectsSelectList({selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [projects, setProjects] = useState([]);
 
 	function loadData() {
@@ -26,7 +27,7 @@ export default function ProjectsSelectList({selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Projet"} values={projects} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={t('project.label')} values={projects} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

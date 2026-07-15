@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Project from './Project';
 /**
  * Display the task into a modal box
  */
 export default function ProjectModal({ project,  onClose }) {
+	const { t } = useTranslation();
 	if (project===undefined||project==null) return null;
 
 	return (
@@ -11,7 +13,7 @@ export default function ProjectModal({ project,  onClose }) {
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Projet #{project.id}</h5>
+						<h5 className="modal-title">{t('project.label')} #{project.id}</h5>
 						<button
 							type="button"
 							className="btn-close"

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Api from '../../../Api.js';
 import AlertsPanel from '../../common/AlertsPanel';
 import InputText from '../../common/InputText.js';
@@ -12,7 +13,7 @@ import QuillTextArea from '../../common/QuillTextArea.js';
  * survey component, to create or edit a surveys
  */
 function Survey({ initialSurvey, readOnly }) {
-
+	const { t } = useTranslation();
 	const [id, setId] = useState(initialSurvey?initialSurvey.id:null);
 	const [name, setName] = useState(initialSurvey?initialSurvey.name:'');
 	const [status, setStatus] = useState(initialSurvey?initialSurvey.status:'');
@@ -50,11 +51,11 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 		if (project)
 			survey.project = project;
 		if (!survey.name || survey.name.length === 0) {
-			setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
+			setAlerts([{ message: t("survey.nameRequired"), type: "error" }]);
 			errorsForm++;
 		}
 		if (!survey.project || survey.project.length === 0) {
-			setAlerts([{ message: "Le projet est obligatoire", type: "error" }]);
+			setAlerts([{ message: t("survey.projectRequired"), type: "error" }]);
 			errorsForm++;
 		}
 		if (errorsForm === 0) {
@@ -62,13 +63,13 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 				Api.addSurvey(survey).then(response => {
 					if (response) {
 						setId(response.data);
-						setAlerts([{ message: "Le questionnaire a été créé", type: "success" }]);
+						setAlerts([{ message: t("survey.created"), type: "success" }]);
 					}
 				})
 			} else {
 				Api.updateSurvey(survey).then(response => {
 					if (response)
-						setAlerts([{ message: "Le questionnaire a été enregistré", type: "success" }]);
+						setAlerts([{ message: t("survey.saved"), type: "success" }]);
 				})
 			}
 		}
@@ -82,17 +83,17 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 
 	return (
 		<div className="max-w-2xl">
-				<h1>Questionnaire #{id}</h1>
+				<h1>{t('survey.label')} #{id}</h1>
 				{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
 				<form >
 					<div className="grid grid-col-1 gap-1 m-2">
 						<div className="" >
-							{author && <label className="">created by <i>{author}</i></label>}
+							{author && <label className="">{t('common.createdBy')} <i>{author}</i></label>}
 						</div>
-						<InputText name={"Nom"} text={name} onTextChange={setName} />
-						<QuillTextArea name={"Description"} text={description} onTextChange={setDescription} readOnly={readOnly} />
+						<InputText name={t('common.name')} text={name} onTextChange={setName} />
+						<QuillTextArea name={t('common.description')} text={description} onTextChange={setDescription} readOnly={readOnly} />
 						<div className="grid grid-col-2 gap-1 m-1">
-							<UsersSelectList label={"Responsable"} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
+							<UsersSelectList label={t('project.responsible')} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
 							<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
 							<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
 						</div>
@@ -100,8 +101,8 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 				</form>
 				<hr />
 				<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-					{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Annuler</button>}
-					{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Enregistrer</button>}
+					{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>{t('common.cancel')}</button>}
+					{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>{t('common.save')}</button>}
 				</div>
 
 		</div>);

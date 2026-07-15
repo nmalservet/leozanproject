@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../common/SelectList';
 import Api from '../../Api.js';
 
@@ -7,7 +8,7 @@ import Api from '../../Api.js';
  */
 
 export default function StatusSelectList({ selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [statuses, setStatuses] = useState([]);
 
 	function loadData() {
@@ -26,7 +27,7 @@ export default function StatusSelectList({ selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Statut"} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
+			<SelectList label={t('status.label')} values={statuses} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
 		</>
 	);
 }

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import { Modal } from '../components/common/Modal.js';
 import VersionModal from '../components/business/VersionModal.js';
 import ActionButton from '../components/common/ActionButton.js';
 /**
- * 
+ *
  * @returns display the search filter with multiple dynamic fields
  */
 export default function VersionsView({ projectId}) {
-
-	const columns = [{ "name": "id", "displayed": "id" }, { "name": "name", "displayed": "name" },
-	{ "name": "statusLabel", "displayed": "status" }, { "name": "disabled", "displayed": "disabled" }];
+	const { t } = useTranslation();
+	const columns = [{ "name": "id", "displayed": "id" }, { "name": "name", "displayed": t("common.name") },
+	{ "name": "statusLabel", "displayed": t("status.label") }, { "name": "disabled", "displayed": t("common.disabled") }];
 	const buttons = [{ 'image': "pencil", 'action': 'edit' }, { 'image': "trash", 'action': 'delete' }];
 	const [VersionId, setVersionId] = useState(null);//current Version, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,9 +90,9 @@ export default function VersionsView({ projectId}) {
 	return (
 		<div className="">
 			<VersionModal version={editedVersion} isOpen={editedVersion != null} onClose={() => closeVersionModal()} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the Version?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("version.confirmDelete")} />
 			<Grid columns={columns} items={Versions} buttons={buttons} onCall={onCallButton} ></Grid>
-			<ActionButton name={"addVersion"} text={"Add a Version"} onClick={()=>addVersion()}/>
+			<ActionButton name={"addVersion"} text={t("version.add")} onClick={()=>addVersion()}/>
 		</div>
 	);
 }

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import User from './User';
 /**
  * Display the task into a modal box
  */
 export default function UserModal({ user,onClose }) {
+	const { t } = useTranslation();
 	if (user===undefined||user==null) return <div>ok</div>;
 
 	return (
@@ -11,7 +13,7 @@ export default function UserModal({ user,onClose }) {
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Utilisateur #{user.id}</h5>
+						<h5 className="modal-title">{t('user.label')} #{user.id}</h5>
 						<button
 							type="button"
 							className="btn-close"

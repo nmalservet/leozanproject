@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import '../css/login.css';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import Api from '../Api.js';
 import AlertsPanel from '../components/common/AlertsPanel';
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,7 @@ import { isEmpty } from '../utils/StringUtils.js'
  * setCurrentUser callback function to parent
  */
 export default function LoginView() {
+	const { t } = useTranslation();
 	//const [userState,setUserState] = useUserContext();
 	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 	const [alerts, setAlerts] = useState([]);
@@ -23,10 +25,10 @@ export default function LoginView() {
 		// Prevent the browser from reloading the page
 		//read the form
 		if (isEmpty(username))
-			setAlerts([{ message: "Le nom d'utilisateur est obligatoire", type: "error" }])
+			setAlerts([{ message: t("login.usernameRequired"), type: "error" }])
 		else
 			if (isEmpty(password))
-				setAlerts([{ message: "Le mot de passe est obligatoire", type: "error" }])
+				setAlerts([{ message: t("login.passwordRequired"), type: "error" }])
 			else {
 				const data = { username: username, password: password }
 				loginAction(data);
@@ -48,27 +50,27 @@ export default function LoginView() {
 					//console.log("go to tasks");
 					navigate('/surveys');
 				} else {
-					setAlerts([{ message: "Response invalid from the server", type: "error" }]);
+					setAlerts([{ message: t("login.invalidResponse"), type: "error" }]);
 				}
 			})
 			.catch((error) => {
-				setAlerts([{ message: "An error occured" + error, type: "error" }]);
+				setAlerts([{ message: t("login.error") + error, type: "error" }]);
 			});
 
 	}
 	return (
 		<div className="login-wrapper">
-			<h1>Connexion</h1>
+			<h1>{t("login.title")}</h1>
 			<AlertsPanel alerts={alerts}></AlertsPanel>
 			<div className='mb-3'>
-				<label htmlFor='userName' className='form-label'>Nom d'utilisateur</label>
+				<label htmlFor='userName' className='form-label'>{t("login.username")}</label>
 				<input type='text' className='form-control' id='username' name='username' value={username} onChange={e => setUsername(e.target.value)} />
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='password' className='form-label'>Mot de passe</label>
+				<label htmlFor='password' className='form-label'>{t("login.password")}</label>
 				<input type='password' className='form-control' id='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
 			</div>
-			<ActionButton name={"signin"} text={"Se connecter"} onClick={submitLogin} />
+			<ActionButton name={"signin"} text={t("login.signIn")} onClick={submitLogin} />
 		</div>
 	)
 }

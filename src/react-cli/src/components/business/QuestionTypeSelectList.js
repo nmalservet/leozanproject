@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../common/SelectList';
 
 /**
@@ -7,27 +8,27 @@ import SelectList from '../common/SelectList';
  */
 
 export default function QuestionTypeSelectList({ selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [types, setTypes] = useState([]);
 
 	function loadData() {
-		
+
 				var pMap = new Map();
-				pMap.set("0", "Text");
-				pMap.set("1", "Text area");
-				pMap.set("2", "Select list");
-				pMap.set("3", "Checkbox");
-				pMap.set("4", "Date");
-				pMap.set("5", "Radio buttons");
-				pMap.set("6", "File");
+				pMap.set("0", t('questionType.text'));
+				pMap.set("1", t('questionType.textArea'));
+				pMap.set("2", t('questionType.selectList'));
+				pMap.set("3", t('questionType.checkbox'));
+				pMap.set("4", t('questionType.date'));
+				pMap.set("5", t('questionType.radioButtons'));
+				pMap.set("6", t('questionType.file'));
 				setTypes(pMap);
-			
+
 	}
-	useEffect(() => { loadData({}); }, []);
+	useEffect(() => { loadData({}); }, [t]);
 
 	return (
 		<>
-			<SelectList label={"Type de question"} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
+			<SelectList label={t('questionType.label')} values={types} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} inline={true}/>
 		</>
 	);
 }

@@ -2,28 +2,30 @@ import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import { Notebook, BarChart2Icon, Settings, Users, List, FileText, CircleUser, BookText } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function LeftMenuPanel() {
+	const { t } = useTranslation();
 	const location = useLocation();
 	const [isMenuOpen, setIsMenuOpen] = useState(true);
 	return (
 		<div>
 			<div className="bg-white">
 				{/* Header Section */}
-				<MenuTitle icon={<Notebook size={20} />} text="Plan" isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+				<MenuTitle icon={<Notebook size={20} />} text={t('menu.plan')} isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
 				<nav className="flex-1">
 
-					<MenuItem icon={<List size={20} />} text="Questionnaires" isOpen={isMenuOpen} link={"/surveys"} location={location.pathname} />
-					<MenuItem icon={<CircleUser size={20} />} text="Patients" isOpen={isMenuOpen} link={"/patients"} location={location.pathname} />
-					<MenuItem icon={<BookText size={20} />} text="Réponses" isOpen={isMenuOpen} link={"/responses"} location={location.pathname} />
-				
+					<MenuItem icon={<List size={20} />} text={t('menu.surveys')} isOpen={isMenuOpen} link={"/surveys"} location={location.pathname} />
+					<MenuItem icon={<CircleUser size={20} />} text={t('menu.patients')} isOpen={isMenuOpen} link={"/patients"} location={location.pathname} />
+					<MenuItem icon={<BookText size={20} />} text={t('menu.responses')} isOpen={isMenuOpen} link={"/responses"} location={location.pathname} />
+
 				</nav>
 
-				<MenuTitle icon={<BarChart2Icon size={20} />} text="Analyse" isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-				<MenuTitle icon={<Settings size={20} />} text="Paramètres" isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+				<MenuTitle icon={<BarChart2Icon size={20} />} text={t('menu.analysis')} isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+				<MenuTitle icon={<Settings size={20} />} text={t('menu.settings')} isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
 				<nav className="flex-1">
-					<MenuItem icon={<FileText size={20} />} text="Projets" isOpen={isMenuOpen} link={"/projects"} location={location.pathname} />
-					<MenuItem icon={<Users size={20} />} text="Utilisateurs" isOpen={isMenuOpen} link={"/users"} location={location.pathname} />
+					<MenuItem icon={<FileText size={20} />} text={t('menu.projects')} isOpen={isMenuOpen} link={"/projects"} location={location.pathname} />
+					<MenuItem icon={<Users size={20} />} text={t('menu.users')} isOpen={isMenuOpen} link={"/users"} location={location.pathname} />
 				</nav>
 			</div>
 		</div>

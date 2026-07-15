@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import InputText from '../common/InputText.js';
 import ActionButton from '../common/ActionButton.js';
 import SecondaryActionButton from '../common/SecondaryActionButton.js';
@@ -7,6 +8,7 @@ import SecondaryActionButton from '../common/SecondaryActionButton.js';
  * filter to be apply on patients
  */
 function SurveyFilter({ onApplyFilter }) {
+	const { t } = useTranslation();
 	//we set the messages to an empty array if clicked.
 	const [id, setId] = useState('');
 	const [topic, setTopic] = useState('');
@@ -43,14 +45,14 @@ function SurveyFilter({ onApplyFilter }) {
 	return (
 		<div className="h-40 overflow-y-auto">
 			<div className="grid grid-cols-4 content-start gap-4 ">
-				<InputText name={"Id"} text={id} onTextChange={setId} inline={true}></InputText>
-				<InputText name={"Topic"} text={topic} onTextChange={setTopic} inline={true}></InputText>
-				<InputText name={"Description"} text={""} onTextChange={setDescription} inline={true}></InputText>
+				<InputText name={t("common.id")} text={id} onTextChange={setId} inline={true}></InputText>
+				<InputText name={t("survey.topic")} text={topic} onTextChange={setTopic} inline={true}></InputText>
+				<InputText name={t("common.description")} text={""} onTextChange={setDescription} inline={true}></InputText>
 			</div>
 			<div className="flex  m-2 items-center">
-				<SecondaryActionButton text={"Reset filter"} onClick={() => reset()}/>
+				<SecondaryActionButton text={t("common.resetFilter")} onClick={() => reset()}/>
 				<div className="ml-10">
-				<ActionButton text={"Search"} onClick={() => search()}/>
+				<ActionButton text={t("common.search")} onClick={() => search()}/>
 				</div>
 			</div>
 		</div>

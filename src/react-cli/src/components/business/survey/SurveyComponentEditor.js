@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import SurveyComponent from "./SurveyComponent";
 import InputText from '../../common/InputText.js';
 import InputDate from '../../common/InputDate.js';
@@ -17,6 +18,7 @@ import Api from '../../../Api.js';
  * onSave : action called triggered when saved provided by the parent
  */
 function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
+	const { t } = useTranslation();
 	const [editMode, setEditMode] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -73,23 +75,23 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 		return <div className="ml-10 grid grid-col-1 gap-1 m-2">
 			<table class="table-auto">
 				<thead>
-					<tr><th>Attribute</th><th>Value</th></tr></thead>
+					<tr><th>{t('surveyComponent.attribute')}</th><th>{t('surveyComponent.value')}</th></tr></thead>
 				<tbody>
 					<tr><td>id:</td><td>{surveyComponent.id}</td></tr>
-					<tr><td>name:</td><td>{surveyComponent.name}</td></tr>
-					<tr><td>style:</td><td>{surveyComponent.style}</td></tr>
-					<tr><td>type:</td><td>{surveyComponent.type}</td></tr>
-					<tr><td>Question type:</td><td>{surveyComponent.questionType}</td></tr>
-					<tr><td>values:</td><td>{surveyComponent.values}</td></tr>
-					<tr><td>position:</td><td>{surveyComponent.position}</td></tr>
-					<tr><td>status:</td><td>{surveyComponent.status}</td></tr>
+					<tr><td>{t('common.name')}:</td><td>{surveyComponent.name}</td></tr>
+					<tr><td>{t('surveyComponent.style')}:</td><td>{surveyComponent.style}</td></tr>
+					<tr><td>{t('surveyObjectType.label')}:</td><td>{surveyComponent.type}</td></tr>
+					<tr><td>{t('questionType.label')}:</td><td>{surveyComponent.questionType}</td></tr>
+					<tr><td>{t('surveyComponent.values')}:</td><td>{surveyComponent.values}</td></tr>
+					<tr><td>{t('surveyComponent.position')}:</td><td>{surveyComponent.position}</td></tr>
+					<tr><td>{t('status.label')}:</td><td>{surveyComponent.status}</td></tr>
 				</tbody></table>
 		</div>;
 	}
 
 	return (
 		<div className="">
-		<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the component?" />
+		<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t('common.confirmation')} message={t('surveyComponent.confirmDelete')} />
 			
 			{!editMode &&
 				<div className="flex">

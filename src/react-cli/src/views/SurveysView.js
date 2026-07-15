@@ -1,4 +1,5 @@
 import React, { useState, useEffect ,useCallback} from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import SurveyFilter from '../components/business/SurveyFilter.js';
@@ -16,10 +17,10 @@ import AlertsPanel from '../components/common/AlertsPanel';
  * @returns display the search filter with multiple dynamic fields
  */
 export default function SurveysView({ projectId }) {
-
-	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "projectName", "displayed": "Projet" },
-	{ "name": "name", "displayed": "Sujet" }, { "name": "statusLabel", "displayed": "Statut" }
-		, { "name": "responsible", "displayed": "Responsable" }];
+	const { t } = useTranslation();
+	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "projectName", "displayed": t("project.label") },
+	{ "name": "name", "displayed": t("survey.topic") }, { "name": "statusLabel", "displayed": t("status.label") }
+		, { "name": "responsible", "displayed": t("project.responsible") }];
 	const buttons = [{ 'image': "eye", 'action': 'view' },{ 'image': "pencil", 'action': 'edit' },  { 'image': "brick-wall", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
 	const [surveys, setSurveys] = useState([]);
 	const [editedSurvey, setEditedSurvey] = useState(null);
@@ -36,11 +37,11 @@ export default function SurveysView({ projectId }) {
 		Api.deleteSurvey(surveyId).then((response) => {
 			if (response) {
 				setIsModalOpen(false);
-				setAlerts([{ message: "Le questionnaire a été supprimé", type: "success" }]);
+				setAlerts([{ message: t("survey.deleted"), type: "success" }]);
 				fetchData(filter,projectId);
 			}
 		}).catch((error)=>{
-			setAlerts([{ message: "An error occured during survey deletion"+error, type: "error" }]);
+			setAlerts([{ message: t("survey.deleteError")+error, type: "error" }]);
 		})
 
 	};
@@ -152,12 +153,12 @@ export default function SurveysView({ projectId }) {
 	return (
 		<div className="">
 		{hiddenAlert === false && <AlertsPanel alerts={alerts} onClose={() => closeAlert()}></AlertsPanel>}
-			<CollapsiblePanel title={"Filtrer"} children={<SurveyFilter onApplyFilter={applyFilter} />} />
+			<CollapsiblePanel title={t("common.filter")} children={<SurveyFilter onApplyFilter={applyFilter} />} />
 			<SurveyModal survey={editedSurvey} isOpen={editedSurvey != null} onClose={() => closeSurveyModal()} readOnly={editedSurvey != null && editedSurvey.readOnly === true} />
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the survey?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("survey.confirmDelete")} />
 			<Grid columns={columns} items={surveys} onCall={onCallButton} buttons={buttons} />
 			{isLoading&&<LoadingPanel/>}
-			<ActionButton name={"addSurvey"} text={"Ajouter un questionnaire"} onClick={()=>addSurvey()}/>
+			<ActionButton name={"addSurvey"} text={t("survey.add")} onClick={()=>addSurvey()}/>
 		</div>
 	);
 }

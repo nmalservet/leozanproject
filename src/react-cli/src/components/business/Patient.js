@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Api from "../../Api.js";
 import AlertsPanel from "../common/AlertsPanel";
 import InputText from "../common/InputText.js";
@@ -10,6 +11,7 @@ import GenderSelectList from "./GenderSelectList.js";
  * patientcomponent, to create or edit a tasks
  */
 function Patient({ initialPatient, readOnly }) {
+  const { t } = useTranslation();
   const [id, setId] = useState(initialPatient ? initialPatient.id : null);
   const [name, setName] = useState(initialPatient ? initialPatient.name : "");
   const [firstName, setFirstName] = useState(
@@ -46,19 +48,19 @@ function Patient({ initialPatient, readOnly }) {
 
     var errorsForm = 0;
     if (!patient.mrn === undefined || patient.mrn.length === 0) {
-      setAlerts([{ message: "Le mrn est obligatoire", type: "error" }]);
+      setAlerts([{ message: t("patient.mrnRequired"), type: "error" }]);
       errorsForm++;
     }
     if (!patient.name === undefined || patient.name.length === 0) {
-      setAlerts([{ message: "Le nom est obligatoire", type: "error" }]);
+      setAlerts([{ message: t("patient.nameRequired"), type: "error" }]);
       errorsForm++;
     }
     if (!patient.firstName === undefined || patient.firstName.length === 0) {
-      setAlerts([{ message: "Le prénom est obligatoire", type: "error" }]);
+      setAlerts([{ message: t("patient.firstNameRequired"), type: "error" }]);
       errorsForm++;
     }
     if (!patient.birthdate === undefined || patient.birthdate.length === 0) {
-      setAlerts([{ message: "La date de naissance est obligatoire", type: "error" }]);
+      setAlerts([{ message: t("patient.birthdateRequired"), type: "error" }]);
       errorsForm++;
     }
 
@@ -68,7 +70,7 @@ function Patient({ initialPatient, readOnly }) {
           if (response) {
             setId(response.data);
             setAlerts([
-              { message: "Le patient a été créé", type: "success" },
+              { message: t("patient.created"), type: "success" },
             ]);
           }
         });
@@ -76,7 +78,7 @@ function Patient({ initialPatient, readOnly }) {
         Api.updatePatient(patient).then((response) => {
           if (response)
             setAlerts([
-              { message: "Le patient a été enregistré.", type: "success" },
+              { message: t("patient.saved"), type: "success" },
             ]);
         });
       }
@@ -103,14 +105,14 @@ function Patient({ initialPatient, readOnly }) {
               </label>
             )}
           </div>
-          <InputText name={"Nom"} text={name} onTextChange={setName} />
+          <InputText name={t("patient.name")} text={name} onTextChange={setName} />
           <InputText
-            name={"Prénom"}
+            name={t("patient.firstName")}
             text={firstName}
             onTextChange={setFirstName}
           />
           <InputDate
-            name={"Date de naissance"}
+            name={t("patient.birthdate")}
             text={birthdate}
             onTextChange={setBirthdate}
           />
@@ -128,12 +130,12 @@ function Patient({ initialPatient, readOnly }) {
             className="btn btn-outline-secondary ml-10"
             onClick={() => cancel()}
           >
-            Annuler
+            {t("common.cancel")}
           </button>
         )}
         {readOnly !== true && (
           <button className="btn btn-outline-primary" onClick={() => save()}>
-            Enregistrer
+            {t("common.save")}
           </button>
         )}
       </div>

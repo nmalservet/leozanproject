@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { memo } from "react";
+import { useTranslation } from 'react-i18next';
 /**
  * select list component to display an select list. When the value is selected trigger an event
  * NB : using forEach on Map will not display anything, due to the JSX interpretation.
@@ -10,6 +11,7 @@ import { memo } from "react";
  * @returns select list component.
  */
  function SelectList({label,values,selected,handleSelection,withFirstItem,emptyAllowed,inline,readOnly}) {
+    const { t } = useTranslation();
     const [firstItem, setFirstItem] = useState(withFirstItem);
 
     /**
@@ -40,7 +42,7 @@ import { memo } from "react";
                         {}
                     </select>   
                 }
-                {(values===undefined||values===null||values.size===0)&&<div className="col-7"><span >{values}Aucune valeur</span></div>}
+                {(values===undefined||values===null||values.size===0)&&<div className="col-7"><span >{values}{t('common.noValue')}</span></div>}
         </div>
     );
 }

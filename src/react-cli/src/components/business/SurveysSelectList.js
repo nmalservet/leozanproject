@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SelectList from '../common/SelectList';
 import Api from '../../Api.js';
 
@@ -8,7 +9,7 @@ import Api from '../../Api.js';
  */
 
 export default function SurveysSelectList({projectId,selected, onSelection }) {
-
+	const { t } = useTranslation();
 	const [surveys, setSurveys] = useState([]);
 
 	function loadData() {
@@ -34,7 +35,7 @@ export default function SurveysSelectList({projectId,selected, onSelection }) {
 
 	return (
 		<>
-			<SelectList label={"Survey"} values={surveys} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
+			<SelectList label={t('survey.label')} values={surveys} selected={selected} handleSelection={onSelection} withFirstItem={true} emptyAllowed={true} />
 		</>
 	);
 }

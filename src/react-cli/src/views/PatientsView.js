@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import PatientFilter from '../components/business/PatientFilter.js';
@@ -15,10 +16,10 @@ import { useNavigate } from "react-router-dom";
  * @returns display the search filter with multiple dynamic fields
  */
 export default function PatientsView() {
-
-	const columns = [{ "name": "name", "displayed": "Nom" }, { "name": "firstName", "displayed": "Prénom" },
-	{ "name": "birthdate", "displayed": "Date de naissance" },
-	{ "name": "gender", "displayed": "Genre" },
+	const { t } = useTranslation();
+	const columns = [{ "name": "name", "displayed": t("common.name") }, { "name": "firstName", "displayed": t("patient.firstName") },
+	{ "name": "birthdate", "displayed": t("patient.birthdate") },
+	{ "name": "gender", "displayed": t("gender.label") },
 	{ "name": "mrn", "displayed": "Mrn" },{ "name": "ssn", "displayed": "Ssn" },
 	{ "name": "uuid", "displayed": "Uuid" },];
 
@@ -143,12 +144,12 @@ export default function PatientsView() {
 
 	return (
 		<div className="">
-			<CollapsiblePanel title={"Filter"} children={<PatientFilter onApplyFilter={applyFilter} />} />
+			<CollapsiblePanel title={t("common.filter")} children={<PatientFilter onApplyFilter={applyFilter} />} />
 			{editedPatient !== undefined && editedPatient !== null && <PatientModal patient={editedPatient} onClose={() => closePatientModal()} readOnly={editedPatient != null && editedPatient.readOnly === true} />}
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title="Confirmation" message="Are you sure you want to delete the patient?" />
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onYes={handleYes} onNo={handleNo} title={t("common.confirmation")} message={t("patient.confirmDelete")} />
 			<Grid columns={columns} items={patients} onCall={onCallButton} buttons={buttons} />
 			{isLoading && <LoadingPanel />}
-			<ActionButton name={"addPatient"} text={"Ajouter un patient"} onClick={() => addPatient()} />
+			<ActionButton name={"addPatient"} text={t("patient.add")} onClick={() => addPatient()} />
 		</div>
 	);
 }

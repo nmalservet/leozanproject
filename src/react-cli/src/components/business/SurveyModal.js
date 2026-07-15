@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Survey from './survey/Survey';
 /**
  * Display the task into a modal box
  */
 export default function SurveyModal({ survey,  onClose }) {
+	const { t } = useTranslation();
 	if (survey===undefined||survey==null) return null;
 
 	return (
@@ -11,7 +13,7 @@ export default function SurveyModal({ survey,  onClose }) {
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Questionnaire #{survey.id}</h5>
+						<h5 className="modal-title">{t('survey.label')} #{survey.id}</h5>
 						<button
 							type="button"
 							className="btn-close"

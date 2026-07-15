@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, ArrowUp, ArrowDown, ArrowUpDown} from 'lucide-react';
 import { DynamicIcon } from 'lucide-react/dynamic';
 
@@ -14,6 +15,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
  */
 
 function Grid({ items, columns, onCall, buttons, withFilter }) {
+	const { t } = useTranslation();
 	//Used to display from initial items list
 	const [currentPage, setCurrentPage] = useState(1);
 	const maxPerPage = 15;
@@ -96,7 +98,7 @@ function Grid({ items, columns, onCall, buttons, withFilter }) {
 				<div className="flex justify-center space-x-2 mt-6">
 					{currentPage !== 1 && <button className="px-4 py-2" onClick={() => setCurrentPage(1)}><ArrowLeftToLine size={16} /></button>}
 					{currentPage > 1 && <button className="px-4 py-2" onClick={() => setCurrentPage(currentPage - 1)}><ArrowLeft size={16} /></button>}
-					<div className="px-4 py-2 font-bold">Page {currentPage} of {computeCountPages(items.length)}</div>
+					<div className="px-4 py-2 font-bold">{t('common.pageOf', { current: currentPage, total: computeCountPages(items.length) })}</div>
 					{currentPage < computeCountPages(items.length) && <button className="px-4 py-2 " onClick={() => setCurrentPage(currentPage + 1)}><ArrowRight size={16} /></button>}
 					{currentPage !== computeCountPages(items.length) && <button className="px-4 py-2 " onClick={() => setCurrentPage(computeCountPages(items.length))}><ArrowRightToLine size={16} /></button>}
 				</div>

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+	<changeSet id="1" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="project"/></not>
+		</preConditions>
+		<comment>project</comment>
+		<createTable tableName="project">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(250)"/>
+			<column name="description" type="text"/>
+			<column name="status" type="int" defaultValueNumeric="0"/>
+			<column name="disabled" type="boolean" defaultValueBoolean="false"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="2" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="role"/></not>
+		</preConditions>
+		<comment>role</comment>
+		<createTable tableName="role">
+			<column name="id" type="int">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)"/>
+			<column name="description" type="varchar(300)"/>
+			<column name="ldap_dn" type="varchar(500)"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="3" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="feature"/></not>
+		</preConditions>
+		<comment>feature</comment>
+		<createTable tableName="feature">
+			<column name="id" type="int">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)"/>
+			<column name="description" type="varchar(300)"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="4" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="role_authorization"/></not>
+		</preConditions>
+		<comment>role_authorization</comment>
+		<createTable tableName="role_authorization">
+			<column name="id" type="int">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="role_id" type="int"/>
+			<column name="feature_id" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="5" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="user_session"/></not>
+		</preConditions>
+		<comment>manage session from users internal or external</comment>
+		<createTable tableName="user_session">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="internal_user_id" type="int"/>
+			<column name="login" type="varchar(10)"/>
+			<column name="token" type="varchar(200)">
+				<constraints unique="true"/>
+			</column>
+			<column name="creation_date" type="timestamp"/>
+			<column name="last_activity" type="timestamp"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="6" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="user_internal"/></not>
+		</preConditions>
+		<comment>user is a reserved word in postgres, hence user_internal</comment>
+		<createTable tableName="user_internal">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="email" type="varchar(100)"/>
+			<column name="username" type="varchar(10)">
+				<constraints unique="true"/>
+			</column>
+			<column name="name" type="varchar(200)"/>
+			<column name="first_name" type="varchar(100)"/>
+			<column name="password" type="varchar(100)"/>
+			<column name="role" type="int"/>
+			<column name="token" type="varchar(200)">
+				<constraints unique="true"/>
+			</column>
+			<column name="disabled" type="boolean" defaultValueBoolean="false"/>
+			<column name="filter" type="varchar(500)"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="7" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="select_list"/></not>
+		</preConditions>
+		<comment>select_list</comment>
+		<createTable tableName="select_list">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="text"/>
+			<column name="label" type="varchar(30)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="8" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="select_list_option"/></not>
+		</preConditions>
+		<comment>select_list_option</comment>
+		<createTable tableName="select_list_option">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="label" type="varchar(30)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="key" type="varchar(10)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="display_order" type="int"/>
+			<column name="select_list_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="select_list_option_group_id" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="9" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="select_list_option_group"/></not>
+		</preConditions>
+		<comment>select_list_option_group</comment>
+		<createTable tableName="select_list_option_group">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="label" type="varchar(30)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="select_list_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="display_order" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="10" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="audit_trail"/></not>
+		</preConditions>
+		<comment>audit_trail</comment>
+		<createTable tableName="audit_trail">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="username" type="varchar(10)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="operation_type" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="insert_date" type="timestamp">
+				<constraints nullable="false"/>
+			</column>
+			<column name="object_type" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="object_id" type="int"/>
+			<column name="source_json" type="text"/>
+			<column name="target_json" type="text"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="11" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="version"/></not>
+		</preConditions>
+		<comment>version by project. if disabled the version is not shown</comment>
+		<createTable tableName="version">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(250)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="text"/>
+			<column name="status" type="int" defaultValueNumeric="0"/>
+			<column name="project_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="disabled" type="boolean" defaultValueBoolean="false"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="12" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><foreignKeyConstraintExists foreignKeyTableName="version" foreignKeyName="fk_project"/></not>
+		</preConditions>
+		<comment>foreign key</comment>
+		<addForeignKeyConstraint
+			baseTableName="version" baseColumnNames="project_id"
+			constraintName="fk_project"
+			referencedTableName="project" referencedColumnNames="id"/>
+	</changeSet>
+
+	<changeSet id="13" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><columnExists tableName="project" columnName="responsible"/></not>
+		</preConditions>
+		<comment>add project responsible</comment>
+		<addColumn tableName="project">
+			<column name="responsible" type="int"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="14" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="config_property"/></not>
+		</preConditions>
+		<comment>if disabled the property is not used, like a comment</comment>
+		<createTable tableName="config_property">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="key_name" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="value" type="varchar(250)"/>
+			<column name="disabled" type="boolean" defaultValueBoolean="false"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="15" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="personne"/></not>
+		</preConditions>
+		<comment>personne</comment>
+		<createTable tableName="personne">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="nom" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="prenom" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="nom_naissance" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="sexe" type="varchar(10)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="nationalite" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="date_naissance" type="varchar(12)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_num" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_rue" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_compl_num" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_ville" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_cp" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="adresse_pays" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="16" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="survey"/></not>
+		</preConditions>
+		<comment>survey</comment>
+		<createTable tableName="survey">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="responsible" type="int"/>
+			<column name="description" type="text"/>
+			<column name="uuid" type="varchar(100)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+			<column name="target_object" type="varchar(20)"/>
+			<column name="status" type="int"/>
+			<column name="project" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="17" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="survey_object"/></not>
+		</preConditions>
+		<comment>survey object is a part of a survey to display some data.
+			type can be : 0 = text, 1=question.
+			style can be a string corresponding to an html style : h1, h2, h3, label etc.
+			values, array of string separated by ;</comment>
+		<createTable tableName="survey_object">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="question_type" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="style" type="varchar(250)"/>
+			<column name="translation_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="survey_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="int"/>
+			<column name="position" type="int"/>
+			<column name="values" type="varchar"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="18" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="question"/></not>
+		</preConditions>
+		<comment>question is a part of survey</comment>
+		<createTable tableName="question">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="type" type="varchar(10)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="survey_object_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="translation_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="position" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="19" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="value"/></not>
+		</preConditions>
+		<comment>value</comment>
+		<createTable tableName="value">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="question_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="position" type="int"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="20" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="survey_answer"/></not>
+		</preConditions>
+		<comment>created_by : user id creator. updated_by : user_id updator</comment>
+		<createTable tableName="survey_answer">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="uuid" type="varchar(100)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="survey_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="patient_id" type="int"/>
+			<column name="created_by" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="updated_by" type="int"/>
+			<column name="creation_date" type="timestamp"/>
+			<column name="update_date" type="timestamp"/>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="21" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="answer"/></not>
+		</preConditions>
+		<comment>answer</comment>
+		<createTable tableName="answer">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="survey_object_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="value" type="text"/>
+			<column name="survey_answer_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="22" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="translation"/></not>
+		</preConditions>
+		<comment>table to manage the translations</comment>
+		<createTable tableName="translation">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="lb" type="text">
+				<constraints nullable="false"/>
+			</column>
+			<column name="fr" type="text">
+				<constraints nullable="false"/>
+			</column>
+			<column name="de" type="text">
+				<constraints nullable="false"/>
+			</column>
+			<column name="en" type="text">
+				<constraints nullable="false"/>
+			</column>
+			<column name="pt" type="text">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="23" author="nmalservet">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="patient"/></not>
+		</preConditions>
+		<comment>creation_date : only for traceability, when the insert is done.
+			update date when the patient is updated.
+			ssn can be null or empty at the creation.
+			uuid to be used as external id.
+			mrn to be used as internal id if provided.</comment>
+		<createTable tableName="patient">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="uuid" type="varchar(100)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+			<column name="mrn" type="varchar(100)">
+				<constraints unique="true"/>
+			</column>
+			<column name="name" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="first_name" type="varchar(200)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="gender" type="varchar(1)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="birthdate" type="date">
+				<constraints nullable="false"/>
+			</column>
+			<column name="creation_date" type="timestamp"/>
+			<column name="update_date" type="timestamp"/>
+			<column name="ssn" type="varchar(15)"/>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>

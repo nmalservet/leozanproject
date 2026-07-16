@@ -7,14 +7,31 @@ Web Application to manage studies related to the association Leozan
 
      create user leozan with encrypted password 'leozan';
      create database leozan owner leozan;
-     
- Apply the schema and init scripts
- 	
-    psql -U leozan -d leozan < schema.sql
-    psql -U leozan -d leozan < init.sql
- 	
- 	
- 
+
+The schema and reference data are no longer applied manually: Liquibase now manages them
+automatically on application startup, from the changesets in
+`src/main/resources/db/changelog/` (see `db.changelog-master.xml`). Just create the empty
+database above and start the app; Liquibase creates every table and the initial roles/status
+options for you.
+
+### Existing database created before this change
+
+Every changeset carries a precondition (table/column/constraint doesn't already exist, or the
+seed row isn't already there) with `onFail="MARK_RAN"`. So if your database already has the
+schema applied the old way (via `sql/schema.sql` and `sql/init.sql`), Liquibase detects each
+table/row is already there, marks that changeset as run without touching it, and moves on — no
+manual step needed, startup just works.
+
+If you'd rather bookkeep it explicitly yourself instead of relying on the preconditions (e.g. to
+double check what Liquibase considers already applied), you can still run this once instead:
+
+    mvn liquibase:changelogSync \
+        -Dliquibase.url=jdbc:postgresql://localhost:5432/leozan \
+        -Dliquibase.username=leozan -Dliquibase.password=leozan
+
+That records every existing changeset as already applied without touching your data or schema;
+any changeset added after this point will run normally.
+
 ## Start the Application server
 
 

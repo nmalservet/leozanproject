@@ -130,6 +130,12 @@
   "status": {
     "label": "Status"
   },
+  "surveyStatus": {
+    "new": "Neu",
+    "validated": "Validiert",
+    "deployed": "Bereitgestellt",
+    "disabled": "Deaktiviert"
+  },
   "survey": {
     "add": "Fragebogen hinzufügen",
     "confirmDelete": "Möchten Sie diesen Fragebogen wirklich löschen?",

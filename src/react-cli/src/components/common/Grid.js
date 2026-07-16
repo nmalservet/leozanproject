@@ -7,7 +7,8 @@ import { DynamicIcon } from 'lucide-react/dynamic';
  * Component to display items in a grid.
  * Params : 
  *  - items :               Items to display
- *  - columns :    columns as json array a column is a json : {"name":"colName","displayed":"translatedName"}
+ *  - columns :    columns as json array a column is a json : {"name":"colName","displayed":"translatedName","render":(item)=>ReactNode}
+ *    render is optional, if provided it's used instead of the raw item[column.name] value
  *  - buttons: list of buttons like : const buttons = [{'image':"pencil",'action':'edit'},{'image':"trash",'action':'delete'}]
  * - onCall : implement a function to be called that will receive as parameters the action name and the row id. ex : function onCallButton(action,id)
  * -withFilter : display the column filter, if true display it otherwise it's not displayed
@@ -115,12 +116,14 @@ function Rows({ rows, columns, currentPage, maxPerPage, onCall, buttons }) {
 				<tr key={'row-' + itemIndex}>
 					{columns.map((column, columnIndex) => (
 						<td key={'row-' + itemIndex + '-' + columnIndex} >
-							{(item[column.name] !== undefined && item[column.name] !== null) && '' + item[column.name]}
+							{column.render
+								? column.render(item)
+								: (item[column.name] !== undefined && item[column.name] !== null) && '' + item[column.name]}
 						</td>
 					))}
 					<td className="items-end">
-						{buttons.map((button, buttonIndex) => (<button onClick={() => onCall(button.action, item.id)}>
-							<DynamicIcon key={'row-' + itemIndex + '-b-' + buttonIndex} name={button.image} size={18} className="ml-4" />
+						{buttons.map((button, buttonIndex) => (<button key={'row-' + itemIndex + '-b-' + buttonIndex} onClick={() => onCall(button.action, item.id)}>
+							<DynamicIcon name={button.image} size={18} className="ml-4" />
 						</button>))}
 					</td>
 				</tr>

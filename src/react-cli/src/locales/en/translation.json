@@ -130,6 +130,12 @@
   "status": {
     "label": "Status"
   },
+  "surveyStatus": {
+    "new": "New",
+    "validated": "Validated",
+    "deployed": "Deployed",
+    "disabled": "Disabled"
+  },
   "survey": {
     "add": "Add a survey",
     "confirmDelete": "Are you sure you want to delete this survey?",

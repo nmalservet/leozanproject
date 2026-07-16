@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Grid from "../components/common/Grid.js";
 import Api from '../Api.js';
 import SurveyFilter from '../components/business/SurveyFilter.js';
+import SurveyStatusLabel from '../components/business/survey/SurveyStatusLabel.js';
 import { Modal } from '../components/common/Modal.js';
 import { CollapsiblePanel } from "../components/common/CollapsiblePanel.jsx";
 import SurveyModal from '../components/business/SurveyModal.js';
@@ -19,7 +20,7 @@ import AlertsPanel from '../components/common/AlertsPanel';
 export default function SurveysView({ projectId }) {
 	const { t } = useTranslation();
 	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "projectName", "displayed": t("project.label") },
-	{ "name": "name", "displayed": t("survey.topic") }, { "name": "statusLabel", "displayed": t("status.label") }
+	{ "name": "name", "displayed": t("survey.topic") }, { "name": "statusLabel", "displayed": t("status.label"), "render": (item) => <SurveyStatusLabel status={item.statusLabel} /> }
 		, { "name": "responsible", "displayed": t("project.responsible") }];
 	const buttons = [{ 'image': "eye", 'action': 'view' },{ 'image': "pencil", 'action': 'edit' },  { 'image': "brick-wall", 'action': 'editorMode' }, { 'image': "trash", 'action': 'delete' }];//
 	const [surveys, setSurveys] = useState([]);

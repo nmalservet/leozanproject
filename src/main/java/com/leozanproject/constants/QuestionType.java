@@ -7,7 +7,7 @@ package com.leozanproject.constants;
  *
  */
 public enum QuestionType {
-	INPUT(0), TEXT_AREA(1), SELECT_LIST(2), CHECKBOX(3), DATE(4),RADIO(5),FILE(6);
+	INPUT(0), TEXT_AREA(1), SELECT_LIST(2), CHECKBOX(3), DATE(4),RADIO(5),FILE(6),IMAGE(7);
 
 	private final int value;
 
@@ -41,6 +41,8 @@ public enum QuestionType {
 			return RADIO;
 		case 6:
 			return FILE;
+		case 7:
+			return IMAGE;
 		}
 		return INPUT;
 	}

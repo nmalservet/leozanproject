@@ -104,10 +104,17 @@
     "responsible": "Verantwortlich",
     "saved": "Das Projekt wurde gespeichert"
   },
+  "inputFile": {
+    "tooLarge": "Die Datei ist zu groß (max. 5 MB)"
+  },
+  "inputImage": {
+    "tooLarge": "Das Bild ist zu groß (max. 2 MB)"
+  },
   "questionType": {
     "checkbox": "Kontrollkästchen",
     "date": "Datum",
     "file": "Datei",
+    "image": "Bild",
     "label": "Fragetyp",
     "radioButtons": "Optionsfelder",
     "selectList": "Auswahlliste",

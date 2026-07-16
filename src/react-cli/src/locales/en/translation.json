@@ -104,10 +104,17 @@
     "responsible": "Responsible",
     "saved": "The project has been saved"
   },
+  "inputFile": {
+    "tooLarge": "The file is too large (max 5 MB)"
+  },
+  "inputImage": {
+    "tooLarge": "The image is too large (max 2 MB)"
+  },
   "questionType": {
     "checkbox": "Checkbox",
     "date": "Date",
     "file": "File",
+    "image": "Image",
     "label": "Question type",
     "radioButtons": "Radio buttons",
     "selectList": "Select list",

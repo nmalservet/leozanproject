@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputText from "../../common/InputText.js";
 import InputDate from "../../common/InputDate.js";
 import InputFile from "../../common/InputFile.js";
+import InputImage from "../../common/InputImage.js";
 import QuillTextArea from "../../common/QuillTextArea.js";
 import SelectList from "../../common/SelectList.js";
 import Checkbox from "../../common/Checkbox.js";
@@ -56,7 +57,8 @@ function SurveyComponentFillable({ surveyComponent, onValueChange, readOnly }) {
             {surveyComponent.type === 0 && surveyComponent.questionType == 5 && surveyComponent.values && (
               <RadioButtons label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} selected={answer} handleSelection={onChange} inline={true} readOnly={readOnly} />
             )}
-            {true===false&&surveyComponent.type === 0 && surveyComponent.questionType === 6  && <div>Question File : Coming soon<InputFile name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} /></div>}
+            {surveyComponent.type === 0 && surveyComponent.questionType == 6 && <InputFile name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} />}
+            {surveyComponent.type === 0 && surveyComponent.questionType == 7 && <InputImage name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} />}
             {surveyComponent.type === 1 && <div className={surveyComponent.style}>{surveyComponent.name}</div>}
           </div>
         </div>

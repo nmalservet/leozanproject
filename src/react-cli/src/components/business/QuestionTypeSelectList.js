@@ -21,6 +21,7 @@ export default function QuestionTypeSelectList({ selected, onSelection }) {
 				pMap.set("4", t('questionType.date'));
 				pMap.set("5", t('questionType.radioButtons'));
 				pMap.set("6", t('questionType.file'));
+				pMap.set("7", t('questionType.image'));
 				setTypes(pMap);
 
 	}

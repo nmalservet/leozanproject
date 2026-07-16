@@ -104,10 +104,17 @@
     "responsible": "Responsable",
     "saved": "Le projet a été enregistré"
   },
+  "inputFile": {
+    "tooLarge": "Le fichier est trop volumineux (max 5 Mo)"
+  },
+  "inputImage": {
+    "tooLarge": "L'image est trop volumineuse (max 2 Mo)"
+  },
   "questionType": {
     "checkbox": "Case à cocher",
     "date": "Date",
     "file": "Fichier",
+    "image": "Image",
     "label": "Type de question",
     "radioButtons": "Boutons radio",
     "selectList": "Liste déroulante",

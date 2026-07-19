@@ -20,9 +20,6 @@ import com.leozanproject.resource.domain.SurveyAnswersRequestDTO;
 import com.leozanproject.resource.domain.SurveyResponse;
 import com.leozanproject.service.AnswerService;
 
-import io.swagger.annotations.Api;
-
-@Api(value = "Application")
 @RestController
 @Validated
 @RequestMapping("/api/v1/answers")

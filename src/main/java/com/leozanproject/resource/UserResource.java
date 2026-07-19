@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +28,6 @@ import com.leozanproject.model.User;
 import com.leozanproject.repository.UserRepository;
 import com.leozanproject.resource.domain.UserAccountDTO;
 import com.leozanproject.service.UserService;
-
-import io.swagger.annotations.ApiOperation;
 
 /**
  * Rest controller to expose API to manage internal users<br>
@@ -125,7 +121,6 @@ public class UserResource {
 	 * 
 	 * @return
 	 */
-	@ApiOperation(value = "get the user account info", response = UserAccountDTO.class)
 	@GetMapping(path = "/getAccount", produces = "application/json")
 	public UserAccountDTO getAccount(@RequestHeader Map<String, String> headers) {
 		UserAccountDTO result = null;
@@ -172,7 +167,6 @@ public class UserResource {
 	 * 
 	 * @return
 	 */
-	@ApiOperation(value = "logout the user", response = Boolean.class)
 	@GetMapping(path = "/logout", produces = "application/json")
 	public Boolean logout(@RequestHeader Map<String, String> headers) {
 		String token = headers.get("authorization");

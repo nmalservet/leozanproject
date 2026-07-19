@@ -1,6 +1,6 @@
 package com.leozanproject.repository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,7 +12,7 @@ import com.leozanproject.model.UserSession;
 @Repository
 public interface UserSessionRepository extends JpaRepository<UserSession, Integer> {
 
-	UserSession findByInternalUserId(String userId);
+	UserSession findByInternalUserId(int userId);
 
 	UserSession findByToken(String token);
 

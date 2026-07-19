@@ -5,6 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,7 +26,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		String error = "Malformed JSON request";
 		return buildResponseEntity(new ErrorResponseDTO(HttpStatus.BAD_REQUEST, error, ""));
 	}
@@ -49,13 +50,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	// TODO get the value by parameter
 	/**
-	 * payload too large.
-	 * 
+	 * payload too large. Spring 6's ResponseEntityExceptionHandler now has its own
+	 * final catch-all for this exception type, so we override its protected hook
+	 * instead of declaring a competing @ExceptionHandler (which would be ambiguous).
+	 *
 	 * @param ex
 	 * @return
 	 */
-	@ExceptionHandler(MaxUploadSizeExceededException.class)
-	protected ResponseEntity<Object> handleMaximumUploadConstraint(MaxUploadSizeExceededException ex) {
+	@Override
+	protected ResponseEntity<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex,
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		ErrorResponseDTO apiError = new ErrorResponseDTO(HttpStatus.PAYLOAD_TOO_LARGE, "1", "2");
 		apiError.setMessage("File is too large, accepted < " + (int) (ex.getMaxUploadSize() / 1000) + " MB");
 		return buildResponseEntity(apiError);

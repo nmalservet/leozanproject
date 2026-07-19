@@ -21,13 +21,11 @@ import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.resource.domain.SurveyObjectDTO;
 import com.leozanproject.service.SurveyObjectService;
 
-import io.swagger.annotations.Api;
 /**
  * API to manage survey objects
  * @author nicolas malservet
  *
  */
-@Api(value = "Application")
 @RestController
 @Validated
 @RequestMapping("/api/v1/surveycomponents")

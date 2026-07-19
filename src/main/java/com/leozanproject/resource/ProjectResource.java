@@ -20,9 +20,6 @@ import com.leozanproject.exceptions.MissingParameterException;
 import com.leozanproject.resource.domain.ProjectDTO;
 import com.leozanproject.service.ProjectService;
 
-import io.swagger.annotations.Api;
-
-@Api(value = "Application")
 @RestController
 @Validated
 @RequestMapping("/api/v1/projects")

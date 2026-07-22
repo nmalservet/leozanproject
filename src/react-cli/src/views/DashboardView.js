@@ -8,6 +8,6 @@ import { useTranslation } from 'react-i18next';
 export default function DashboardView  ()  {
     const { t } = useTranslation();
     return (
-        <div className="row" >{t('dashboard.placeholder')}</div>
+        <div className="flex flex-wrap -mx-4" >{t('dashboard.placeholder')}</div>
 );
 }

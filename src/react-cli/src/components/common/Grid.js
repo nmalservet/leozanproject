@@ -72,11 +72,11 @@ function Grid({ items, columns, onCall, buttons, withFilter }) {
 
 	return (items ?
 		<>
-			<table className="table table-striped table-bordered">
-				<thead className="thead-light">
+			<table className="w-full text-sm border-collapse border border-gray-200">
+				<thead className="bg-gray-100">
 					<tr>
 						{columns.map((column, columnIndex) => (
-							<th scope='col' key={columnIndex} >
+							<th scope='col' key={columnIndex} className="border border-gray-200">
 								<button className="datagrid-header-button" onClick={() => handleSort(column.name)}>
 									<span>{column.displayed} </span>
 									{getSortIndicator(column.name)}
@@ -86,7 +86,7 @@ function Grid({ items, columns, onCall, buttons, withFilter }) {
 					</tr>
 					{withFilter === true && <tr>
 						{columns.map((column, columnIndex) => (
-							<th scope='col' key={columnIndex} >
+							<th scope='col' key={columnIndex} className="border border-gray-200">
 								<input type='text' className='block w-full p-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 									id={'filter' + columnIndex} name={'filter-' + column.name} onChange={(e) => filter(column.name, e.target.value)} />
 							</th>
@@ -110,18 +110,18 @@ function Grid({ items, columns, onCall, buttons, withFilter }) {
 
 function Rows({ rows, columns, currentPage, maxPerPage, onCall, buttons }) {
 	return (
-		<tbody className="table-group-divider">
+		<tbody className="divide-y divide-gray-200">
 			{rows.map((item, itemIndex) => (
 				(itemIndex >= (currentPage - 1) * maxPerPage) && (itemIndex < currentPage * maxPerPage) &&
-				<tr key={'row-' + itemIndex}>
+				<tr key={'row-' + itemIndex} className="even:bg-gray-50">
 					{columns.map((column, columnIndex) => (
-						<td key={'row-' + itemIndex + '-' + columnIndex} >
+						<td key={'row-' + itemIndex + '-' + columnIndex} className="border border-gray-200 px-2 py-1">
 							{column.render
 								? column.render(item)
 								: (item[column.name] !== undefined && item[column.name] !== null) && '' + item[column.name]}
 						</td>
 					))}
-					<td className="items-end">
+					<td className="items-end border border-gray-200 px-2 py-1">
 						{buttons.map((button, buttonIndex) => (<button key={'row-' + itemIndex + '-b-' + buttonIndex} onClick={() => onCall(button.action, item.id)}>
 							<DynamicIcon name={button.image} size={18} className="ml-4" />
 						</button>))}

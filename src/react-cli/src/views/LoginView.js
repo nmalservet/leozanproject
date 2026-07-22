@@ -63,12 +63,12 @@ export default function LoginView() {
 			<h1>{t("login.title")}</h1>
 			<AlertsPanel alerts={alerts}></AlertsPanel>
 			<div className='mb-3'>
-				<label htmlFor='userName' className='form-label'>{t("login.username")}</label>
-				<input type='text' className='form-control' id='username' name='username' value={username} onChange={e => setUsername(e.target.value)} />
+				<label htmlFor='userName' className='mb-2 inline-block'>{t("login.username")}</label>
+				<input type='text' className='block w-full rounded-md border border-gray-300 px-3 py-1.5 text-base focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500' id='username' name='username' value={username} onChange={e => setUsername(e.target.value)} />
 			</div>
 			<div className='mb-3'>
-				<label htmlFor='password' className='form-label'>{t("login.password")}</label>
-				<input type='password' className='form-control' id='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
+				<label htmlFor='password' className='mb-2 inline-block'>{t("login.password")}</label>
+				<input type='password' className='block w-full rounded-md border border-gray-300 px-3 py-1.5 text-base focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500' id='password' name='password' value={password} onChange={e => setPassword(e.target.value)} />
 			</div>
 			<ActionButton name={"signin"} text={t("login.signIn")} onClick={submitLogin} />
 		</div>

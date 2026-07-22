@@ -39,7 +39,7 @@ function RadioButtons({ label,selected, values, handleSelection, inline ,readOnl
 					})
 					return options;
 				})()}
-				{(values === undefined || values === null || values.size === 0) && <div className="col-7"><span >{values}{t('common.noValue')}</span></div>}
+				{(values === undefined || values === null || values.size === 0) && <div className="w-7/12"><span >{values}{t('common.noValue')}</span></div>}
 			</fieldset>
 		</div>
 	);

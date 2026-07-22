@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { X } from 'lucide-react';
 import Patient from './Patient';
 /**
  * Display the patient into a modal box
@@ -9,19 +10,19 @@ export default function PatientModal({ patient, onClose,readOnly }) {
 	if (patient===undefined||patient==null) return null;
 
 	return (
-		<div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-			<div className="modal-dialog modal-dialog-centered">
-				<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title">{t('patient.label')} </h5>
+		<div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+			<div className="w-full max-w-lg mx-4">
+				<div className="bg-white rounded-lg shadow-lg">
+					<div className="flex items-center justify-between p-4 border-b border-gray-200">
+						<h5 className="text-lg font-semibold">{t('patient.label')} </h5>
 						<button
 							type="button"
-							className="btn-close"
+							className="text-gray-400 hover:text-gray-600"
 							onClick={onClose}
 							aria-label="Close"
-						></button>
+						><X size={20} /></button>
 					</div>
-					<div className="modal-body">
+					<div className="p-4">
 						<Patient initialPatient={patient} readOnly={readOnly}></Patient>
 					</div>
 				</div>

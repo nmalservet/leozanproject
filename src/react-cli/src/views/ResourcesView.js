@@ -8,6 +8,6 @@ import { useTranslation } from 'react-i18next';
 export default function ResourcesView  ()  {
     const { t } = useTranslation();
     return (
-        <div className="row" >{t('resources.placeholder')}</div>
+        <div className="flex flex-wrap -mx-4" >{t('resources.placeholder')}</div>
 );
 }

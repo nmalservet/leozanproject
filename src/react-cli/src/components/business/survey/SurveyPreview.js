@@ -27,7 +27,7 @@ function SurveyPreview({ survey}) {
 	
 		return (
 		<div >
-				<h1>Survey #{survey.id}</h1><button className="btn btn-outline-secondary ml-10" onClick={() => refreshPreview()}>Refresh preview</button>
+				<h1>Survey #{survey.id}</h1><button className="border border-gray-400 text-gray-700 hover:bg-gray-100 font-bold py-1 px-3 rounded ml-10" onClick={() => refreshPreview()}>Refresh preview</button>
 				<div>Responsible :{survey.responsible}</div>
 				{surveyComponents!=null&&surveyComponents.map(comp=><SurveyComponentPreview surveyComponent={comp}/>)}
 		</div>);

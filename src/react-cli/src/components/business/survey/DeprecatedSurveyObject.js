@@ -95,8 +95,8 @@ function SurveyObject({ initialSurveyObject,surveyId, readOnly }) {
 			</div>
 			<hr/>
 			<div v-if="readOnly==false" className="grid justify-items-center grid-cols-2">
-				{readOnly !== true && <button className="btn btn-outline-secondary ml-10" onClick={() => cancel()}>Cancel</button>}
-				{readOnly !== true && <button className="btn btn-outline-primary" onClick={() => save()}>Save</button>}
+				{readOnly !== true && <button className="border border-gray-400 text-gray-700 hover:bg-gray-100 font-bold py-1 px-3 rounded ml-10" onClick={() => cancel()}>Cancel</button>}
+				{readOnly !== true && <button className="border border-primary-700 text-primary-700 hover:bg-primary-50 font-bold py-1 px-3 rounded" onClick={() => save()}>Save</button>}
 			</div>
 		</div>);
 }

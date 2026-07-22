@@ -42,7 +42,7 @@ import { useTranslation } from 'react-i18next';
                         {}
                     </select>   
                 }
-                {(values===undefined||values===null||values.size===0)&&<div className="col-7"><span >{values}{t('common.noValue')}</span></div>}
+                {(values===undefined||values===null||values.size===0)&&<div className="w-7/12"><span >{values}{t('common.noValue')}</span></div>}
         </div>
     );
 }

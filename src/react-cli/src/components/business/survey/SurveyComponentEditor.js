@@ -97,7 +97,7 @@ function SurveyComponentEditor({ surveyComponent,onSave,onDelete }) {
 			{!editMode &&
 				<div className="flex">
 					<div className="flex">
-						<div className="w-[1024px]" >
+						<div className={"w-[1024px]" + (surveyComponent.style ? " " + surveyComponent.style : "")} >
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 0) && <InputText name={surveyComponent.name} text={""} onTextChange={""} inline={true} />}
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 1) && <QuillTextArea name={surveyComponent.name} text={""}  inline={true} />}
 							{(surveyComponent.type === 0) && (surveyComponent.questionType == 2) && surveyComponent.values&&<SelectList label={surveyComponent.name} values={valuesToMap(surveyComponent.values)} text={""} onTextChange={""} inline={true} />}

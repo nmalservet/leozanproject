@@ -84,12 +84,16 @@ function SurveyComponent({ surveyComponent, surveyId, readOnly, onSave, onCancel
 					setAlerts([{ message: t("surveyComponent.created"), type: "success" }]);
 					onSave();
 				}
+			}).catch((error) => {
+				setAlerts([{ message: t("surveyComponent.createError") + error, type: "error" }]);
 			})
 		} else {
 			Api.updateSurveyObject(sc).then(response => {
 				if (response)
 					setAlerts([{ message: t("surveyComponent.saved"), type: "success" }]);
 				onSave();
+			}).catch((error) => {
+				setAlerts([{ message: t("surveyComponent.saveError") + error, type: "error" }]);
 			})
 		}
 

@@ -9,5 +9,7 @@
 	<include file="db/changelog/changes/001-initial-schema.xml" relativeToChangelogFile="false"/>
 	<!-- converted from sql/init.sql : reference data (roles, survey status select list) -->
 	<include file="db/changelog/changes/002-init-data.xml" relativeToChangelogFile="false"/>
+	<!-- widen survey_object.style to text -->
+	<include file="db/changelog/changes/003-survey-object-style-text.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

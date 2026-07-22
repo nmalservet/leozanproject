@@ -46,7 +46,7 @@ function SurveyComponentFillable({ surveyComponent, onValueChange, readOnly }) {
     <div className="">
       <div className="flex">
         <div className="flex">
-          <div className="w-[850px] m-1">
+          <div className={"w-[850px] m-1" + (surveyComponent.style ? " " + surveyComponent.style : "")}>
             {surveyComponent.type === 0 && surveyComponent.questionType == 0 && <InputText name={surveyComponent.name} text={answer} onTextChange={onChange} inline={true} readOnly={readOnly} />}
             {surveyComponent.type === 0 && surveyComponent.questionType == 1 && <QuillTextArea name={surveyComponent.name} text={answer} onTextChange={onChange} readOnly={readOnly} height={"300"} />}
             {surveyComponent.type === 0 && surveyComponent.questionType == 2 && surveyComponent.values && (

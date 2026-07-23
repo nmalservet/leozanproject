@@ -128,7 +128,9 @@
   },
   "response": {
     "confirmDelete": "Möchten Sie diese Antwort wirklich löschen?",
-    "displayModalPlaceholder": "Antwortanzeige hier"
+    "displayModalPlaceholder": "Antwortanzeige hier",
+    "downloadError": "Das PDF konnte nicht erstellt werden: ",
+    "downloadPdf": "PDF herunterladen"
   },
   "role": {
     "administrator": "Administrator",

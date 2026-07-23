@@ -5,6 +5,7 @@ import Api from "../../../Api.js";
 import AlertsPanel from "../../common/AlertsPanel";
 
 import ActionButton from "../../common/ActionButton.js";
+import SecondaryActionButton from "../../common/SecondaryActionButton.js";
 /**
  * main component to edit a survey == Copy of surveFillable
  */
@@ -122,6 +123,27 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
     }
   }
 
+  /**
+   * download the current response as a PDF file.
+   */
+  function downloadPdf() {
+    setHiddenAlert(false);
+    Api.exportSurveyResponsePdf(id)
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data], { type: "application/pdf" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "survey-response-" + id + ".pdf");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        setAlerts([{ message: t("response.downloadError") + error, type: "error" }]);
+      });
+  }
+
   useEffect(() => {
     console.log("load answers:");
     //var ans = arrayToMap(surveyResponse.answers);
@@ -164,13 +186,24 @@ export default function SurveyResponse({ surveyResponse, readOnly }) {
           <SurveyComponentFillable key={comp.id} surveyComponent={comp} onValueChange={onValueChange} readOnly={readOnly}/>
         ))}
 
-      {readOnly === false && (
-        <ActionButton
-          name={"saveForm"}
-          text={t('common.save')}
-          onClick={() => saveForm()}
-        />
-      )}
+      <div className="flex items-center">
+        {readOnly === false && (
+          <ActionButton
+            name={"saveForm"}
+            text={t('common.save')}
+            onClick={() => saveForm()}
+          />
+        )}
+        {id != null && (
+          <div className="ml-10">
+            <SecondaryActionButton
+              name={"downloadPdf"}
+              text={t('response.downloadPdf')}
+              onClick={() => downloadPdf()}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

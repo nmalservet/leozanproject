@@ -60,6 +60,7 @@ export default class Api {
 	static updateAnswers(answers){return axios.put('/api/v1/answers',answers);}
 	static getSurveyResponse(id){return axios.get('/api/v1/answers/'+id);}//get a survey response (answers+ patient)
 	static deleteSurveyResponse(id){return axios.delete('/api/v1/answers/'+id);}
+	static exportSurveyResponsePdf(id){return axios.get('/api/v1/answers/'+id+'/pdf',{responseType:'blob'});}
 	
 	/**
 	 * User management

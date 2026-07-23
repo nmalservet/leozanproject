@@ -128,7 +128,9 @@
   },
   "response": {
     "confirmDelete": "Are you sure you want to delete the response?",
-    "displayModalPlaceholder": "Response display here"
+    "displayModalPlaceholder": "Response display here",
+    "downloadError": "The PDF could not be generated: ",
+    "downloadPdf": "Download PDF"
   },
   "role": {
     "administrator": "Administrator",

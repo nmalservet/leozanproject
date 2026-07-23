@@ -158,6 +158,7 @@
     "nameRequired": "The name is required",
     "projectRequired": "The project is required",
     "saved": "The survey has been saved",
+    "statusTip": "The survey will be visible for patients only if it's deployed",
     "topic": "Topic"
   },
   "surveyComponent": {

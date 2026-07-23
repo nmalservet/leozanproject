@@ -158,6 +158,7 @@
     "nameRequired": "Der Name ist erforderlich",
     "projectRequired": "Das Projekt ist erforderlich",
     "saved": "Der Fragebogen wurde gespeichert",
+    "statusTip": "Der Fragebogen ist für Patienten nur sichtbar, wenn er bereitgestellt ist",
     "topic": "Thema"
   },
   "surveyComponent": {

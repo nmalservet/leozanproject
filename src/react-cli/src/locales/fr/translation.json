@@ -158,6 +158,7 @@
     "nameRequired": "Le nom est obligatoire",
     "projectRequired": "Le projet est obligatoire",
     "saved": "Le questionnaire a été enregistré",
+    "statusTip": "Le questionnaire ne sera visible pour les patients que s'il est déployé",
     "topic": "Sujet"
   },
   "surveyComponent": {

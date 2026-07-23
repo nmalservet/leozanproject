@@ -8,6 +8,7 @@ import StatusSelectList from '../StatusSelectList.js';
 import ProjectsSelectList from '../projects/ProjectsSelectList.js';
 import UsersSelectList from '../users/UsersSelectList.js';
 import QuillTextArea from '../../common/QuillTextArea.js';
+import Tooltip from '../../common/Tooltip.js';
 
 /**
  * survey component, to create or edit a surveys
@@ -94,7 +95,10 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 						<QuillTextArea name={t('common.description')} text={description} onTextChange={setDescription} readOnly={readOnly} />
 						<div className="grid grid-col-2 gap-1 m-1">
 							<UsersSelectList label={t('project.responsible')} selected={responsible} onSelection={setResponsible} readOnly={readOnly} />
-							<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
+							<div className="flex items-center gap-1">
+								<StatusSelectList selected={status} onSelection={setStatus} readOnly={readOnly} />
+								<Tooltip name="statusTip" content={t('survey.statusTip')} />
+							</div>
 							<ProjectsSelectList selected={project} onSelection={setProject} readOnly={readOnly} />
 						</div>
 					</div>

@@ -20,6 +20,7 @@ import ViewPatientView from './views/ViewPatientView';
 import AdministrationView from './views/AdministrationView';
 import ProjectsView from './views/ProjectsView';
 import UsersView from './views/UsersView';
+import StatisticsView from './views/StatisticsView';
 import ProtectedRoutes from './ProtectedRoutes';
 import NotFoundView from './NotFoundView';
 import LogoutView from './views/LogoutView';
@@ -50,6 +51,7 @@ function App() {
 				{ path: 'editResponse/:surveyResponseId', element: <EditResponseView /> },
 				{ path: 'projects', element: <ProjectsView /> },
 				{ path: 'users', element: <UsersView /> },
+				{ path: 'statistics', element: <StatisticsView /> },
 				{
 					//role='manager||administrator'
 					element: <ProtectedRoutes />,

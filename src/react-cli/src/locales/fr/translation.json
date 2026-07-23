@@ -66,6 +66,7 @@
     "projects": "Projets",
     "responses": "Réponses",
     "settings": "Paramètres",
+    "statistics": "Statistiques",
     "surveys": "Questionnaires",
     "users": "Utilisateurs"
   },
@@ -141,6 +142,22 @@
   },
   "status": {
     "label": "Statut"
+  },
+  "statistics": {
+    "hideTable": "Masquer le tableau",
+    "historySubtitle": "Nombre de réponses enregistrées par projet, par mois",
+    "historyTitle": "Historique des réponses",
+    "label": "Statistiques",
+    "loadError": "Les statistiques n'ont pas pu être chargées : ",
+    "month": "Mois",
+    "noData": "Aucune donnée disponible pour le moment",
+    "otherProjects": "Autres projets",
+    "otherProjectsHint": "Les projets ayant le moins de réponses sont regroupés dans « Autres projets »",
+    "repartitionSubtitle": "Nombre de réponses enregistrées par projet",
+    "repartitionTitle": "Réponses par projet",
+    "responsesCount": "Réponses",
+    "showTable": "Afficher sous forme de tableau",
+    "unknownProject": "Projet inconnu"
   },
   "surveyStatus": {
     "new": "Nouveau",

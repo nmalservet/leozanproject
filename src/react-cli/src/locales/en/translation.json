@@ -66,6 +66,7 @@
     "projects": "Projects",
     "responses": "Responses",
     "settings": "Settings",
+    "statistics": "Statistics",
     "surveys": "Surveys",
     "users": "Users"
   },
@@ -141,6 +142,22 @@
   },
   "status": {
     "label": "Status"
+  },
+  "statistics": {
+    "hideTable": "Hide table",
+    "historySubtitle": "Number of responses saved per project, per month",
+    "historyTitle": "Responses history",
+    "label": "Statistics",
+    "loadError": "The statistics could not be loaded: ",
+    "month": "Month",
+    "noData": "No data available yet",
+    "otherProjects": "Other projects",
+    "otherProjectsHint": "Projects with the fewest responses are grouped into \"Other projects\"",
+    "repartitionSubtitle": "Number of responses saved per project",
+    "repartitionTitle": "Responses per project",
+    "responsesCount": "Responses",
+    "showTable": "Show as table",
+    "unknownProject": "Unknown project"
   },
   "surveyStatus": {
     "new": "New",

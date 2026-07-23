@@ -17,6 +17,6 @@ public interface SurveyAnswerRepository extends JpaRepository<SurveyAnswer, Inte
 
 	public List<SurveyAnswer> findAllByOrderByIdDesc();
 
-	
+	public boolean existsByCreatedBy(Integer createdBy);
 
 }

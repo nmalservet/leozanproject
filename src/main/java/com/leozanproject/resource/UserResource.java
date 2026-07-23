@@ -27,6 +27,7 @@ import com.leozanproject.exceptions.UnicityConstraintParameterException;
 import com.leozanproject.model.User;
 import com.leozanproject.repository.UserRepository;
 import com.leozanproject.resource.domain.UserAccountDTO;
+import com.leozanproject.resource.domain.UserDeletionResultDTO;
 import com.leozanproject.service.UserService;
 
 /**
@@ -94,7 +95,7 @@ public class UserResource {
 	}
 
 	@DeleteMapping(path = "/{id}", produces = "application/json")
-	public boolean delete(@PathVariable int id) throws MissingParameterException, InvalidParameterException {
+	public UserDeletionResultDTO delete(@PathVariable int id) throws MissingParameterException, InvalidParameterException {
 		return service.delete(id);
 	}
 

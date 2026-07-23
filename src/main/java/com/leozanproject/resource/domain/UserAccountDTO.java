@@ -31,6 +31,8 @@ public class UserAccountDTO {
 	
 	private boolean disabled;
 
+	private boolean archived;
+
 	public String getUsername() {
 		return username;
 	}
@@ -107,6 +109,14 @@ public class UserAccountDTO {
 
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
 	}
 	
 	

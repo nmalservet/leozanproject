@@ -8,6 +8,7 @@
     "fillSurvey": "Fill in the survey"
   },
   "common": {
+    "archived": "Archived",
     "cancel": "Cancel",
     "confirmation": "Confirmation",
     "createdBy": "created by",
@@ -201,6 +202,7 @@
   },
   "user": {
     "add": "Add a user",
+    "archived": "This user already has data attached and has been archived instead of deleted",
     "confirmDelete": "Are you sure you want to delete this user?",
     "created": "The user has been created",
     "deleted": "The user has been deleted",

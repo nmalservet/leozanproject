@@ -33,6 +33,7 @@ public class UserAccountMapper {
 			dto.setName(entity.getName());
 			dto.setId(entity.getId());
 			dto.setDisabled(entity.isDisabled());
+			dto.setArchived(entity.isArchived());
 			if (entity.getRole() != null) {
 				dto.setRole(entity.getRole());
 				dto.setRoleLabel(UserRole.getValue(entity.getRole()).name());

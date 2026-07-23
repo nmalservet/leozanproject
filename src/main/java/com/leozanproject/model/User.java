@@ -43,6 +43,12 @@ public class User {
 	@Column(name = "disabled")
 	private boolean disabled;
 
+	/**
+	 * set instead of a hard delete when the user already has data attached (e.g. survey responses).
+	 */
+	@Column(name = "archived")
+	private boolean archived;
+
 	public String getUsername() {
 		return username;
 	}
@@ -105,6 +111,14 @@ public class User {
 
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
 	}
 
 }

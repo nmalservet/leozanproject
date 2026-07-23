@@ -13,7 +13,7 @@ import AlertsPanel from '../components/common/AlertsPanel';
 export default function UsersView() {
 	const { t } = useTranslation();
 	const columns = [{ "name": "id", "displayed": "Id" }, { "name": "name", "displayed": t("common.name") }, { "name": "firstName", "displayed": t("patient.firstName") }, { "name": "username", "displayed": t("user.username") },
-	{ "name": "email", "displayed": t("user.email") }, { "name": "roleLabel", "displayed": t("role.label") }, { "name": "disabled", "displayed": t("common.disabled") }];
+	{ "name": "email", "displayed": t("user.email") }, { "name": "roleLabel", "displayed": t("role.label") }, { "name": "disabled", "displayed": t("common.disabled") }, { "name": "archived", "displayed": t("common.archived") }];
 	const [userId, setUserId] = useState(null);//current project, now for delete
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [users, setUsers] = useState([]);
@@ -27,7 +27,10 @@ export default function UsersView() {
 			if (response) {
 				setIsModalOpen(false);
 				loadData();
-				setAlerts([{ message: t("user.deleted"), type: "success" }]);
+				if (response.data && response.data.archived)
+					setAlerts([{ message: t("user.archived"), type: "success" }]);
+				else
+					setAlerts([{ message: t("user.deleted"), type: "success" }]);
 			}
 		})
 

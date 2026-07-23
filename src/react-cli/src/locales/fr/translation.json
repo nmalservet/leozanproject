@@ -8,6 +8,7 @@
     "fillSurvey": "Renseigner le questionnaire"
   },
   "common": {
+    "archived": "Archivé",
     "cancel": "Annuler",
     "confirmation": "Confirmation",
     "createdBy": "créé par",
@@ -201,6 +202,7 @@
   },
   "user": {
     "add": "Ajouter un utilisateur",
+    "archived": "Cet utilisateur a déjà des données associées et a été archivé au lieu d'être supprimé",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
     "created": "L'utilisateur a été créé",
     "deleted": "L'utilisateur a été supprimé",

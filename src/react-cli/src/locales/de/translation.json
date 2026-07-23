@@ -8,6 +8,7 @@
     "fillSurvey": "Fragebogen ausfüllen"
   },
   "common": {
+    "archived": "Archiviert",
     "cancel": "Abbrechen",
     "confirmation": "Bestätigung",
     "createdBy": "erstellt von",
@@ -201,6 +202,7 @@
   },
   "user": {
     "add": "Benutzer hinzufügen",
+    "archived": "Dieser Benutzer hat bereits verknüpfte Daten und wurde archiviert statt gelöscht",
     "confirmDelete": "Möchten Sie diesen Benutzer wirklich löschen?",
     "created": "Der Benutzer wurde erstellt",
     "deleted": "Der Benutzer wurde gelöscht",

@@ -11,5 +11,7 @@
 	<include file="db/changelog/changes/002-init-data.xml" relativeToChangelogFile="false"/>
 	<!-- widen survey_object.style to text -->
 	<include file="db/changelog/changes/003-survey-object-style-text.xml" relativeToChangelogFile="false"/>
+	<!-- add user_internal.archived, used to archive instead of delete users with existing data -->
+	<include file="db/changelog/changes/004-user-archived.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

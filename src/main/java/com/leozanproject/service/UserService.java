@@ -18,9 +18,11 @@ import com.leozanproject.exceptions.UnicityConstraintParameterException;
 import com.leozanproject.mapper.UserAccountMapper;
 import com.leozanproject.model.User;
 import com.leozanproject.model.UserSession;
+import com.leozanproject.repository.SurveyAnswerRepository;
 import com.leozanproject.repository.UserRepository;
 import com.leozanproject.repository.UserSessionRepository;
 import com.leozanproject.resource.domain.UserAccountDTO;
+import com.leozanproject.resource.domain.UserDeletionResultDTO;
 import com.leozanproject.tools.EncryptionTool;
 import com.leozanproject.tools.ParametersChecker;
 
@@ -41,6 +43,9 @@ public class UserService {
 
 	@Autowired
 	UserRepository uRepository;
+
+	@Autowired
+	SurveyAnswerRepository surveyAnswerRepository;
 
 	@Autowired
 	UserAccountMapper mapper;
@@ -332,20 +337,39 @@ public class UserService {
 	}
 
 	/**
-	 * delete a user.
-	 * 
+	 * archive a user instead of deleting it.
+	 *
+	 */
+	public void archive(int id) {
+		Optional<User> opt = uRepository.findById(id);
+		if (opt.isPresent()) {
+			User u = opt.get();
+			u.setArchived(true);
+			uRepository.save(u);
+		}
+	}
+
+	/**
+	 * delete a user, unless it already has data attached (e.g. survey responses),
+	 * in which case it is archived instead so the historical data keeps a valid owner.
+	 *
 	 * @param id
 	 * @return
 	 * @throws MissingParameterException
 	 */
-	public boolean delete(int id) throws MissingParameterException {
+	public UserDeletionResultDTO delete(int id) throws MissingParameterException {
 		if (id <= 0)
 			throw new MissingParameterException("id");
 
 		Optional<User> opt = uRepository.findById(id);
 		if (opt.isPresent()) {
+			if (surveyAnswerRepository.existsByCreatedBy(id)) {
+				archive(id);
+				return new UserDeletionResultDTO(false, true);
+			}
 			uRepository.deleteById(id);
+			return new UserDeletionResultDTO(true, false);
 		}
-		return false;
+		return new UserDeletionResultDTO(false, false);
 	}
 }

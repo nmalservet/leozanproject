@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import Api from '../../../Api.js';
 import AlertsPanel from '../../common/AlertsPanel';
 import InputText from '../../common/InputText.js';
@@ -9,12 +10,14 @@ import ProjectsSelectList from '../projects/ProjectsSelectList.js';
 import UsersSelectList from '../users/UsersSelectList.js';
 import QuillTextArea from '../../common/QuillTextArea.js';
 import Tooltip from '../../common/Tooltip.js';
+import ActionButton from '../../common/ActionButton.js';
 
 /**
  * survey component, to create or edit a surveys
  */
 function Survey({ initialSurvey, readOnly }) {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 	const [id, setId] = useState(initialSurvey?initialSurvey.id:null);
 	const [name, setName] = useState(initialSurvey?initialSurvey.name:'');
 	const [status, setStatus] = useState(initialSurvey?initialSurvey.status:'');
@@ -24,6 +27,17 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 	const [hiddenAlert, setHiddenAlert] = useState(false);
 	const [description, setDescription] = useState(initialSurvey?initialSurvey.description:'');
 	const [responsible, setResponsible] = useState(initialSurvey?initialSurvey.responsible:'');
+	//only relevant when creating a survey (no id yet): block creation if no project exists
+	const [noProjectAvailable, setNoProjectAvailable] = useState(false);
+
+	useEffect(() => {
+		if (!id) {
+			Api.getProjectsEnabled().then((response) => {
+				if (response !== undefined)
+					setNoProjectAvailable(response.data.length === 0);
+			}).catch((error) => { (console.error(error)) });
+		}
+	}, [id]);
 
 	/**
 	 * call back if alert to be hidden.
@@ -81,6 +95,16 @@ const [author, setAuthor] = useState(initialSurvey?initialSurvey.author:'');
 		console.log("cancel, what to do?");
 	}
 
+	if (!id && noProjectAvailable) {
+		return (
+			<div className="max-w-2xl">
+				<div className="w-50 m-10 p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
+					{t('survey.noProjectAvailable')}
+				</div>
+				<ActionButton name={"goToProjects"} text={t('survey.goToProjects')} onClick={() => navigate('/projects')} />
+			</div>
+		);
+	}
 
 	return (
 		<div className="max-w-2xl">
